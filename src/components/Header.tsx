@@ -5,24 +5,37 @@ import {useCart} from '../context/CartContext'
 import {usePathname} from 'next/navigation'
 import {Button} from './ui/button'
 import {Search, Menu} from 'lucide-react'
+import {useEffect, useState} from 'react'
+import Logo from './Logo'
 
 export default function Header() {
     const {totalItems} = useCart()
     const pathname = usePathname()
     const isHome = pathname === '/'
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    useEffect(() => {
+        const onScroll = () => setIsScrolled(window.scrollY > 0)
+        onScroll()
+        window.addEventListener('scroll', onScroll, {passive: true})
+        return () => window.removeEventListener('scroll', onScroll)
+    }, [])
 
     return (
         <header
             className={
                 isHome
-                    ? 'fixed top-0 left-0 right-0 bg-gradient-to-l to-rose-200 from-rose-100 text-gray-800 z-40'
-                    : 'w-full border-b border-zinc/10 bg-gradient-to-l to-rose-200 from-rose-100 sticky top-0 z-40'
+                    ? 'container-full fixed top-0 left-0 right-0 text-foreground-900 z-40'
+                    : 'container-full fixed top-0 left-0 right-0 text-foreground-900 z-40'
             }>
             <div
                 className={
-                    isHome
-                        ? 'max-w-7xl mx-auto py-4 px-4 flex items-center justify-between'
-                        : 'max-w-5xl mx-auto py-4 px-4 flex items-center justify-between'
+                    (isHome
+                        ? 'container mx-auto my-1 px-4 flex items-center justify-between'
+                        : 'container mx-auto my-1 px-4 flex items-center justify-between') +
+                    (isScrolled
+                        ? 'flex items-center justify-between bg-background/60 backdrop-blur-xl py-3 rounded-xl shadow-xl transition-all duration-300 ease-out'
+                        : 'container mx-auto my-1 px-4 flex items-center justify-between py-6 transition-all duration-300 ease-out')
                 }>
                 <Link
                     href="/"
@@ -31,39 +44,41 @@ export default function Header() {
                             ? 'text-3xl font-bold'
                             : 'text-xl font-semibold tracking-wide'
                     }>
-                    nailart
+                    <span className="text-primary">
+                        <Logo className="h-10 w-auto" />
+                    </span>
                 </Link>
                 {isHome ? (
                     <>
                         <nav className="hidden md:flex items-center space-x-8">
                             <Link
                                 href="/"
-                                className="text-gray-700 hover:text-zinc font-medium">
+                                className="text-gray-700 hover:text-foreground font-medium">
                                 Home
                             </Link>
                             <Link
                                 href="/shop"
-                                className="text-gray-700 hover:text-zinc">
+                                className="text-gray-700 hover:text-foreground">
                                 Shop
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-700 hover:text-zinc">
+                                className="text-gray-700 hover:text-foreground">
                                 Category
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-700 hover:text-zinc">
+                                className="text-gray-700 hover:text-foreground">
                                 Our Story
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-700 hover:text-zinc">
+                                className="text-gray-700 hover:text-foreground">
                                 Contact
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-700 hover:text-zinc">
+                                className="text-gray-700 hover:text-foreground">
                                 Learn & Support
                             </Link>
                         </nav>

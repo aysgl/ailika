@@ -65,7 +65,7 @@ export default function CartSidebar() {
                     <SidebarContent>
                         <div className="divide-y">
                             {items.length === 0 ? (
-                                <div className="p-6 text-sm text-zinc-600">
+                                <div className="p-6 text-sm text-foreground-600">
                                     Sepetiniz boş.
                                 </div>
                             ) : (
@@ -83,10 +83,10 @@ export default function CartSidebar() {
                                                     onClick={() =>
                                                         removeFromCart(p.id)
                                                     }
-                                                    className="text-red-600 hover:text-zinc-900">
+                                                    className="text-primary hover:text-foreground-900">
                                                     <Trash className="w-4 h-4" />
                                                 </Button>
-                                                <div className="relative w-20 h-24 shrink-0 overflow-hidden rounded-md bg-zinc-100">
+                                                <div className="relative w-20 h-24 shrink-0 overflow-hidden rounded-md bg-foreground-100">
                                                     <Image
                                                         src={
                                                             p.image ||
@@ -155,10 +155,10 @@ export default function CartSidebar() {
                         <div className="p-4 space-y-2">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <span className="text-sm font-bold text-zinc-600">
+                                    <span className="text-sm font-bold text-foreground-600">
                                         Subtotal
                                     </span>
-                                    <p className="text-sm text-zinc-500">
+                                    <p className="text-sm text-foreground-500">
                                         Taxes and shipping calculated at
                                         checkout.
                                     </p>
@@ -181,12 +181,12 @@ export default function CartSidebar() {
                                 <Button>Checkout Now</Button>
                             </div>
                         </div>
-                        <div className="border-red-600 border-dotted border-t-3 p-4 space-y-3">
+                        <div className="border-primary border-dotted border-t-3 p-4 space-y-3">
                             <h4 className="font-semibold">
                                 We Recommend {recommended.length}
                             </h4>
                             {recommended.length === 0 ? (
-                                <div className="text-sm text-zinc-600">
+                                <div className="text-sm text-foreground-600">
                                     Loading...
                                 </div>
                             ) : (
@@ -195,7 +195,7 @@ export default function CartSidebar() {
                                         <div
                                             key={r.id}
                                             className="flex items-center gap-3">
-                                            <div className="relative w-14 h-16 shrink-0 overflow-hidden rounded-md bg-zinc-100">
+                                            <div className="relative w-14 h-16 shrink-0 overflow-hidden rounded-md bg-foreground-100">
                                                 <Image
                                                     src={r.image || '/next.svg'}
                                                     alt={r.name}
@@ -209,13 +209,13 @@ export default function CartSidebar() {
                                                 </div>
                                                 <div className="flex items-baseline gap-2 text-sm">
                                                     {r.oldPrice && (
-                                                        <span className="line-through text-zinc-400">
+                                                        <span className="line-through text-foreground-400">
                                                             {formatCents(
                                                                 r.oldPrice
                                                             )}
                                                         </span>
                                                     )}
-                                                    <span className="font-semibold text-red-600">
+                                                    <span className="font-semibold text-primary">
                                                         {formatCents(r.price)}
                                                     </span>
                                                     {r.oldPrice && (

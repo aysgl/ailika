@@ -26,7 +26,7 @@ export default function CartPage() {
         <div className="py-8 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
             <div className="space-y-4">
                 {loading && (
-                    <div className="text-sm text-zinc/60">
+                    <div className="text-sm text-foreground">
                         Ürünler yükleniyor...
                     </div>
                 )}
@@ -36,7 +36,7 @@ export default function CartPage() {
                     return (
                         <div
                             key={it.productId}
-                            className="flex items-center gap-4 border border-zinc/10 rounded-lg p-3 bg-white">
+                            className="flex items-center gap-4 shadow-xl rounded-lg p-3 bg-white">
                             <div className="relative w-20 h-20">
                                 <Image
                                     src={product.image || '/next.svg'}
@@ -49,7 +49,7 @@ export default function CartPage() {
                                 <div className="font-medium">
                                     {product.name}
                                 </div>
-                                <div className="text-sm text-zinc/60">
+                                <div className="text-sm text-foreground/60">
                                     {formatCents(product.price)}
                                 </div>
                             </div>
@@ -87,14 +87,14 @@ export default function CartPage() {
                     )
                 })}
             </div>
-            <aside className="border border-zinc/10 rounded-lg p-4 h-max bg-white">
+            <aside className="border border-foreground/10 rounded-lg p-4 h-max bg-white">
                 <div className="flex items-center justify-between">
                     <span>Ara toplam</span>
                     <strong>{formatCents(subtotalCents)}</strong>
                 </div>
                 <Button className="mt-4 w-full">Ödeme (Demo)</Button>
                 <button
-                    className="mt-2 w-full text-sm underline text-zinc/70"
+                    className="mt-2 w-full text-sm underline text-foreground/70"
                     onClick={clearCart}>
                     Sepeti temizle
                 </button>

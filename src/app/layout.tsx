@@ -25,7 +25,7 @@ export default function RootLayout({
     return (
         <html lang="tr">
             <body
-                className={`${outfit.variable} antialiased bg-gradient-to-l to-rose-200 from-red-100`}>
+                className={`${outfit.variable} antialiased bg-gradient-to-l to-blue-100/80 from-indigo-200/80`}>
                 <CartProvider>
                     <Header />
                     <main className="container-full mx-auto">{children}</main>

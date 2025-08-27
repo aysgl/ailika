@@ -4,7 +4,7 @@ import TitleWave from '../TitleWave'
 export default function CtaBanner() {
     return (
         <section className="container mx-auto py-26">
-            <div className="rounded-3xl bg-zinc-900 text-white p-10 flex items-center justify-center gap-10">
+            <div className="rounded-3xl bg-primary text-white p-10 flex items-center justify-center gap-10">
                 <div className="flex flex-col items-center justify-center gap-4">
                     <TitleWave
                         title="Become A DND Super Star!"
@@ -17,7 +17,8 @@ export default function CtaBanner() {
                     <Button
                         asChild
                         size="lg"
-                        className="bg-white text-zinc-900 hover:bg-white/90">
+                        variant={'secondary'}
+                        className=" hover:bg-white/90">
                         <a href="/shop">Mağazaya Git</a>
                     </Button>
                 </div>

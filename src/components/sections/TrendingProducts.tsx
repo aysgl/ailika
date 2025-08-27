@@ -22,7 +22,7 @@ export default function TrendingProducts() {
             <TitleWave
                 title="Trending"
                 headingLevel={2}
-                bandClass="text-red-600"
+                bandClass="text-primary"
             />
 
             <div className="mt-6">

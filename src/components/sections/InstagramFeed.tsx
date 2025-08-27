@@ -11,7 +11,7 @@ export default function InstagramFeed() {
                 {items.map((src, idx) => (
                     <div
                         key={idx}
-                        className="aspect-square rounded-lg overflow-hidden bg-zinc/5">
+                        className="aspect-square rounded-lg overflow-hidden bg-foreground/5">
                         <Image
                             src={src}
                             alt={`IG ${idx + 1}`}

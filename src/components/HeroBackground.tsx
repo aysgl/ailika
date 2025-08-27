@@ -13,7 +13,7 @@ export default function HeroBackground() {
                         backgroundImage: `url('/placeholder.svg?height=400&width=600')`
                     }}>
                     {/* Gradient overlay for better text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc/70 via-zinc/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
 
                     {/* Top badge */}
                     <div className="absolute top-4 left-4">
@@ -58,7 +58,7 @@ export default function HeroBackground() {
                                     per person
                                 </span>
                             </div>
-                            <Button className="bg-white text-zinc hover:bg-white/90">
+                            <Button className="bg-white text-foreground hover:bg-white/90">
                                 Book Now
                             </Button>
                         </div>

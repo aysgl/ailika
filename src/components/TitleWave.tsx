@@ -7,7 +7,7 @@ type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 export default function TitleWave({
     title,
     headingLevel = 2,
-    bandClass = 'text-zinc/20',
+    bandClass = 'text-foreground/20',
     titleClass = 'font-bold flex justify-center'
 }: {
     title?: string

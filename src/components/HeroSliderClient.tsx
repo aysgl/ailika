@@ -3,7 +3,7 @@
 import {useEffect, useMemo, useState} from 'react'
 import Image from 'next/image'
 import {Button} from './ui/button'
-import {ArrowRight, ChevronLeft, ChevronRight} from 'lucide-react'
+import {ArrowLeft, ArrowRight} from 'lucide-react'
 import type {HeroSlide} from '../types/hero'
 import WavyTextBanner from './WavyTextBanner'
 
@@ -20,12 +20,12 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     const current = useMemo(() => slides[index], [slides, index])
 
     return (
-        <div className="container mx-auto min-h-[70vh] bg-gradient-to-l to-rose-200 from-red-100 relative mt-17">
+        <div className="container mx-auto min-h-[70vh] relative mt-24">
             <div className="bg-white/40 backdrop-blur-sm rounded-3xl relative overflow-hidden">
                 <main className="px-20 relative">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[70vh]">
                         <div className="space-y-6">
-                            <h1 className="text-5xl md:text-6xl font-bold text-zinc leading-tight">
+                            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
                                 {current.title}
                             </h1>
                             {current.description && (
@@ -130,27 +130,27 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                     {count > 1 && (
                         <div className="absolute right-8 top-1/2 transform -translate-y-1/2 space-y-4">
                             <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
-                                className="rounded-full bg-white/60 backdrop-blur-sm"
+                                className="rounded-full bg-white/60 backdrop-blur-sm me-1"
                                 onClick={() =>
                                     setIndex(i => (i - 1 + count) % count)
                                 }>
-                                <ChevronLeft className="w-5 h-5" />
+                                <ArrowLeft className="w-5 h-5" />
                             </Button>
                             <Button
-                                variant="outline"
+                                variant="ghost"
                                 size="icon"
                                 className="rounded-full bg-white/60 backdrop-blur-sm"
                                 onClick={() => setIndex(i => (i + 1) % count)}>
-                                <ChevronRight className="w-5 h-5" />
+                                <ArrowRight className="w-5 h-5" />
                             </Button>
                         </div>
                     )}
 
                     {count > 1 && (
                         <div className="mt-8 flex items-center justify-center">
-                            <span className="text-sm text-zinc/80">
+                            <span className="text-sm text-foreground/80">
                                 {index + 1}/{count}
                             </span>
                         </div>

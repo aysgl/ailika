@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'pastelshop.com',
+                hostname: 'www.ellisan.com',
                 pathname: '/**'
             },
             {

@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import TitleWave from '../TitleWave'
 import ProductCard from '@/components/ProductCard'
 import HorizontalSlider from '@/components/HorizontalSlider'
@@ -22,7 +22,7 @@ export default function FavoriteProducts() {
             <TitleWave
                 title="Favorite products"
                 headingLevel={2}
-                bandClass="text-red-600"
+                bandClass="text-blue-600"
             />
 
             <div className="mt-6">

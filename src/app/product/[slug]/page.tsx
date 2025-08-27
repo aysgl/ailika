@@ -25,7 +25,7 @@ export default async function ProductPage({params}: Props) {
 
     return (
         <div className="py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative aspect-square bg-white border border-zinc/10 rounded-lg overflow-hidden">
+            <div className="relative aspect-square bg-white border border-foreground/10 rounded-lg overflow-hidden">
                 <Image
                     src={product.image || '/next.svg'}
                     alt={product.name}
@@ -38,7 +38,7 @@ export default async function ProductPage({params}: Props) {
                 <div className="text-xl font-bold">
                     {formatCents(product.price)}
                 </div>
-                <p className="text-zinc/70">{product.description}</p>
+                <p className="text-foreground/70">{product.description}</p>
                 {product.colors && product.colors.length > 0 && (
                     <div className="flex items-center gap-2 pt-2">
                         {product.colors.map(c => (

@@ -19,7 +19,7 @@ export function SidebarHeader({className, ...props}: DivProps) {
     return (
         <div
             className={cn(
-                'px-4 py-3 border-red-600 border-dotted border-b-3 flex items-center',
+                'px-4 py-3 border-primary border-dotted border-b-3 flex items-center',
                 className
             )}
             {...props}

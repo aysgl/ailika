@@ -66,7 +66,7 @@ export default function HorizontalSlider({
 
             <div
                 ref={listRef}
-                className={`flex gap-4 overflow-x-auto overflow-y-visible scroll-smooth ${snapClass} ${contentPaddingX} ${contentPaddingY} [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
+                className={`flex gap-8 overflow-x-auto overflow-y-visible scroll-smooth ${snapClass} ${contentPaddingX} ${contentPaddingY} [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
                 {children}
             </div>
         </div>

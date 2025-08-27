@@ -53,7 +53,7 @@ export default function Categories() {
             <TitleWave
                 title="Categories"
                 headingLevel={2}
-                bandClass="text-red-600"
+                bandClass="text-primary"
             />
 
             <div className="mt-6">
