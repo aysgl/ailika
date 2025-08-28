@@ -5,7 +5,7 @@ type LogoProps = {
     title?: string
 }
 
-export default function Logo({className, title = 'Nailart'}: LogoProps) {
+export default function Logo({className, title = 'Ailika'}: LogoProps) {
     return (
         <svg
             viewBox="0 0 406 119.49"
