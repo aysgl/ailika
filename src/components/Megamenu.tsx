@@ -377,7 +377,7 @@ export default function MegaMenu({className}: MegaMenuProps) {
                                                             <Link
                                                                 key={index}
                                                                 href={item.href}
-                                                                className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/50 transition-colors group">
+                                                                className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/40 transition-colors group">
                                                                 <img
                                                                     src={
                                                                         item.image ||

@@ -3,6 +3,7 @@ import TitleWave from '@/components/TitleWave'
 import {Card, CardContent} from '@/components/ui/card'
 import {Award, Heart, Sparkles, Star, Users} from 'lucide-react'
 import InstagramGallery from '@/components/InstagramGallery'
+import Image from 'next/image'
 
 export const dynamic = 'force-static'
 
@@ -63,7 +64,7 @@ export default function AboutPage() {
                     <div className="aspect-square bg-white/40 rounded-3xl overflow-hidden p-2">
                         <InstagramGallery limit={9} />
                     </div>
-                    <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl">
+                    <div className="absolute -bottom-12 -left-12 bg-white p-6 rounded-2xl shadow-xl">
                         <div className="flex items-center space-x-3">
                             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
                                 <Heart className="w-6 h-6 text-white" />
@@ -95,7 +96,7 @@ export default function AboutPage() {
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary"></div>
 
                 {/* Timeline Items */}
-                <div className="space-y-16">
+                <div className="space-y-12">
                     {[
                         {
                             year: '2015',
@@ -140,7 +141,9 @@ export default function AboutPage() {
                     ].map((item, index) => (
                         <div key={index} className="relative flex items-center">
                             {/* Timeline Dot */}
-                            <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg z-10"></div>
+                            <div className="absolute left-1/2 transform -translate-x-1/2 bg-primary rounded-full w-12 h-12 flex items-center justify-center text-white shadow-lg z-10">
+                                {item.icon}
+                            </div>
 
                             {/* Content */}
                             <div
@@ -149,7 +152,7 @@ export default function AboutPage() {
                                         ? 'pr-12 text-right'
                                         : 'pl-12 ml-auto'
                                 }`}>
-                                <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <Card className="bg-white/10 border border-primary/10 transition-all duration-300 transform hover:-translate-y-2 shadow-none">
                                     <CardContent className="p-6">
                                         <div
                                             className={`flex items-center space-x-3 mb-4 ${
@@ -157,9 +160,6 @@ export default function AboutPage() {
                                                     ? 'justify-end'
                                                     : ''
                                             }`}>
-                                            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
-                                                {item.icon}
-                                            </div>
                                             <div>
                                                 <div className="text-2xl font-bold text-secondary">
                                                     {item.year}
@@ -187,7 +187,7 @@ export default function AboutPage() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-24">
                 {[
                     {
                         icon: <Heart className="w-8 h-8" />,
@@ -220,7 +220,7 @@ export default function AboutPage() {
                 ].map((value, index) => (
                     <Card
                         key={index}
-                        className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        className="bg-white shadow-xl hover:shadow-none transition-all duration-300 transform hover:-translate-y-2">
                         <CardContent className="p-8 text-center">
                             <div
                                 className={`w-16 h-16 bg-gradient-to-r ${value.color} rounded-full flex items-center justify-center text-white mx-auto mb-6`}>
@@ -237,7 +237,7 @@ export default function AboutPage() {
 
             {/* Team Section */}
 
-            <div className="text-center mb-16">
+            <div className="text-center mb-8">
                 <h2 className="text-4xl font-bold  mb-4">Ekibimiz</h2>
                 <p className="text-xl  max-w-2xl mx-auto">
                     Nail art dünyasında uzman olan ve tutkuyla çalışan
@@ -245,54 +245,117 @@ export default function AboutPage() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[
+            {(() => {
+                const team = [
                     {
                         name: 'Ayşe Demir',
                         role: 'Kurucu & CEO',
-                        image: '/placeholder.svg?height=300&width=300&text=Ayşe',
+                        image: '/images/hero-slider/profile1.jpg',
                         description:
                             '15 yıllık nail art deneyimi ile sektörün öncü isimlerinden.'
                     },
                     {
                         name: 'Elif Kaya',
                         role: 'Baş Tasarımcı',
-                        image: '/placeholder.svg?height=300&width=300&text=Elif',
+                        image: '/images/hero-slider/profile2.jpg',
                         description:
                             'Yaratıcı tasarımları ile nail art trendlerini belirleyen sanatçı.'
                     },
                     {
                         name: 'Zeynep Özkan',
                         role: 'Ürün Geliştirme',
-                        image: '/placeholder.svg?height=300&width=300&text=Zeynep',
+                        image: '/images/hero-slider/profile3.jpg',
+                        description:
+                            'İnovatif formüller geliştiren kimya mühendisi ve güzellik uzmanı.'
+                    },
+                    {
+                        name: 'Ayşe Demir',
+                        role: 'Kurucu & CEO',
+                        image: '/images/hero-slider/profile1.jpg',
+                        description:
+                            '15 yıllık nail art deneyimi ile sektörün öncü isimlerinden.'
+                    },
+                    {
+                        name: 'Elif Kaya',
+                        role: 'Baş Tasarımcı',
+                        image: '/images/hero-slider/profile2.jpg',
+                        description:
+                            'Yaratıcı tasarımları ile nail art trendlerini belirleyen sanatçı.'
+                    },
+                    {
+                        name: 'Zeynep Özkan',
+                        role: 'Ürün Geliştirme',
+                        image: '/images/hero-slider/profile3.jpg',
                         description:
                             'İnovatif formüller geliştiren kimya mühendisi ve güzellik uzmanı.'
                     }
-                ].map((member, index) => (
-                    <Card
-                        key={index}
-                        className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <CardContent className="p-0">
-                            <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 overflow-hidden">
-                                <img
-                                    src={member.image || '/placeholder.svg'}
-                                    alt={member.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold  mb-2">
-                                    {member.name}
-                                </h3>
-                                <div className="text-pink-600 font-medium mb-3">
-                                    {member.role}
-                                </div>
-                                <p className=" text-sm">{member.description}</p>
-                            </div>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
+                ]
+                const first = team[0]
+                const rest = team.slice(1)
+                return (
+                    <>
+                        {/* İlk üye tek sütun, geniş kart */}
+                        <div className="mb-10">
+                            <Card className="bg-transparent shadow-none">
+                                <CardContent className="">
+                                    <div className="text-center flex flex-col items-center justify-center">
+                                        <Image
+                                            width={180}
+                                            height={180}
+                                            src={first.image}
+                                            alt={first.name}
+                                            className="w-44 h-44 md:w-48 md:h-48 object-cover rounded-full"
+                                        />
+                                        <div className="md:col-span-2 p-6">
+                                            <h3 className="text-2xl font-bold mb-2">
+                                                {first.name}
+                                            </h3>
+                                            <div className="text-primary font-medium mb-3">
+                                                {first.role}
+                                            </div>
+                                            <p className="text-sm md:text-base">
+                                                {first.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
+
+                        {/* Kalan üyeler altta yan yana */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                            {rest.map((member, index) => (
+                                <Card
+                                    key={index}
+                                    className="bg-transparent transition-all duration-300 transform hover:-translate-y-2 shadow-none text-center">
+                                    <CardContent className="p-0">
+                                        <div className="overflow-hidden flex items-center justify-center">
+                                            <Image
+                                                width={100}
+                                                height={100}
+                                                src={member.image}
+                                                alt={member.name}
+                                                className="w-28 h-28 md:w-32 md:h-32 object-cover rounded-full"
+                                            />
+                                        </div>
+                                        <div className="p-6">
+                                            <h3 className="text-lg font-bold mb-2">
+                                                {member.name}
+                                            </h3>
+                                            <div className="text-primary font-medium mb-3">
+                                                {member.role}
+                                            </div>
+                                            <p className="text-sm">
+                                                {member.description}
+                                            </p>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </>
+                )
+            })()}
         </div>
     )
 }

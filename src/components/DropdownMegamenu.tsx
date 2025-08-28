@@ -145,7 +145,7 @@ export default function DropdownMegaMenu({
                                                     <Link
                                                         key={index}
                                                         href={item.href}
-                                                        className="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/50 transition-colors group">
+                                                        className="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/40 transition-colors group">
                                                         <div className="flex-1">
                                                             <div className="text-xs font-medium text-foreground group-hover:text-secondary">
                                                                 {item.name}

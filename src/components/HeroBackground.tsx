@@ -17,13 +17,13 @@ export default function HeroBackground() {
 
                     {/* Top badge */}
                     <div className="absolute top-4 left-4">
-                        <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                        <Badge className="bg-white/40 text-white border-white/30 backdrop-blur-sm">
                             Featured
                         </Badge>
                     </div>
 
                     {/* Rating */}
-                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/20 backdrop-blur-sm rounded-full px-2 py-1">
+                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/40 backdrop-blur-sm rounded-full px-2 py-1">
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
                         <span className="text-white text-sm font-medium">
                             4.8

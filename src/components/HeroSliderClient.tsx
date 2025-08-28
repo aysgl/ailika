@@ -49,7 +49,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                         <div className="flex justify-center relative mt-16">
                             <div className="relative">
                                 {/* Image stage with crossfade/scale animation */}
-                                <div className="relative w-90 h-90 bg-white/30 rounded-t-[26%] rounded-br-[26%] shadow-2xl  flex items-center justify-center">
+                                <div className="relative w-90 h-90 bg-white/40 rounded-t-[26%] rounded-br-[26%] shadow-2xl  flex items-center justify-center">
                                     {slides.map((s, i) => (
                                         <div
                                             key={s.id}
@@ -77,7 +77,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                 </div>
 
                                 {/* Reviews pill (md and up) */}
-                                <div className="hidden md:flex items-center space-x-4 mt-12 absolute bottom-16 -left-30 bg-white/60 backdrop-blur rounded-full p-4">
+                                <div className="hidden md:flex items-center space-x-4 mt-12 absolute bottom-16 -left-30 bg-white/40 backdrop-blur rounded-full p-4">
                                     <div className="flex -space-x-4">
                                         <div className="w-12 h-12 rounded-full  border-2 border-white overflow-hidden">
                                             <Image
@@ -118,7 +118,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                 </div>
 
                                 {current.badgeImage && (
-                                    <div className="absolute top-2 right-2 w-20 h-20 rounded-full flex items-center justify-center bg-white/60 backdrop-blur-sm">
+                                    <div className="absolute top-2 right-2 w-20 h-20 rounded-full flex items-center justify-center bg-white/40 backdrop-blur-sm">
                                         <div className="text-center">
                                             <Image
                                                 src={current.badgeImage}
@@ -139,7 +139,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-full bg-white/60 backdrop-blur-sm me-1"
+                                className="rounded-full bg-white/40 backdrop-blur-sm me-1"
                                 onClick={() =>
                                     setIndex(i => (i - 1 + count) % count)
                                 }>
@@ -148,7 +148,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="rounded-full bg-white/60 backdrop-blur-sm"
+                                className="rounded-full bg-white/40 backdrop-blur-sm"
                                 onClick={() => setIndex(i => (i + 1) % count)}>
                                 <ArrowRight className="w-5 h-5" />
                             </Button>

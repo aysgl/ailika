@@ -6,6 +6,31 @@ export async function GET(request: Request) {
     try {
         const {searchParams} = new URL(request.url)
         const limit = Number(searchParams.get('limit') || '9')
+        const mock = process.env.IG_MOCK === '1'
+        if (mock) {
+            const placeholders = [
+                '/images/instagram/1.png',
+                '/images/instagram/3.png',
+                '/images/instagram/4.png',
+                '/images/instagram/5.png',
+                '/images/instagram/6.png',
+                '/images/instagram/7.png',
+                '/images/instagram/1.png',
+                '/images/instagram/3.png',
+                '/images/instagram/4.png',
+                '/images/instagram/5.png',
+                '/images/instagram/6.png',
+                '/images/instagram/7.png'
+            ]
+                .slice(0, Math.max(1, Math.min(12, limit)))
+                .map((url, i) => ({
+                    id: `mock-${i}`,
+                    url,
+                    link: 'https://www.instagram.com/ailikaturkiye',
+                    caption: 'Instagram mock'
+                }))
+            return NextResponse.json({items: placeholders})
+        }
         const basicToken = process.env.INSTAGRAM_ACCESS_TOKEN
         const graphToken = process.env.IG_GRAPH_TOKEN
         const igUserId = process.env.IG_USER_ID
