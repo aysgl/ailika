@@ -22,7 +22,7 @@ export default function TrendingProducts() {
             <TitleWave
                 title="Trending"
                 headingLevel={2}
-                bandClass="text-primary"
+                bandClass="text-secondary"
             />
 
             <div className="mt-6">
@@ -30,8 +30,11 @@ export default function TrendingProducts() {
                     {items.map((p, i) => (
                         <div
                             key={`${p.id}-${i}`}
-                            className="snap-center min-w-[80%] sm:min-w-[50%] md:min-w-[33.3333%] lg:min-w-[25%]">
-                            <ProductCard product={p} />
+                            className="snap-center min-w-[80%] sm:min-w-[50%] md:min-w-[33.3333%] lg:min-w-[20%]">
+                            <ProductCard
+                                product={p}
+                                imageAspectClass="sm:aspect-[4/5] md:aspect-[1/1]"
+                            />
                         </div>
                     ))}
                 </HorizontalSlider>

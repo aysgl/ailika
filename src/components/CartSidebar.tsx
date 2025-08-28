@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {useMemo} from 'react'
 import {useCart, formatCents} from '@/context/CartContext'
 import {Button} from '@/components/ui/button'
-import {X, Plus, Minus, Trash} from 'lucide-react'
+import {X, Plus, Minus, Trash, ShoppingCart} from 'lucide-react'
 import {getProductById, products as allProducts} from '@/lib/products'
 import {
     Sheet,
@@ -19,13 +19,16 @@ import {
     SidebarContent,
     SidebarFooter
 } from '@/components/ui/sidebar'
+import HorizontalSlider from '@/components/HorizontalSlider'
+import ProductCard from '@/components/ProductCard'
+import type {Product} from '@/types/product'
+import EmptyState from './EmptyState'
 
 export default function CartSidebar() {
     const {
         items,
         updateQuantity,
         removeFromCart,
-        addToCart,
         subtotalCents,
         isCartOpen,
         closeCart
@@ -44,7 +47,7 @@ export default function CartSidebar() {
             onOpenChange={open => (open ? undefined : closeCart())}>
             <SheetContent
                 side="right"
-                className="p-2 rounded-2xl w-full sm:w-[420px] md:w-[45%] h-[calc(100dvh-1rem)]">
+                className="rounded-2xl w-full sm:w-[420px] md:w-[45%] h-[calc(100dvh-1rem)]">
                 <SheetTitle className="sr-only">Cart</SheetTitle>
                 <Sidebar className="h-full min-h-0">
                     <SidebarHeader>
@@ -65,8 +68,14 @@ export default function CartSidebar() {
                     <SidebarContent>
                         <div className="divide-y">
                             {items.length === 0 ? (
-                                <div className="p-6 text-sm text-foreground-600">
-                                    Sepetiniz boş.
+                                <div className="flex items-center justify-center h-full">
+                                    <EmptyState
+                                        icon={
+                                            <ShoppingCart className="w-10 h-10 text-primary" />
+                                        }
+                                        title="Your bag is empty"
+                                        description="Add items to your bag to get started."
+                                    />
                                 </div>
                             ) : (
                                 items.map(it => {
@@ -86,7 +95,7 @@ export default function CartSidebar() {
                                                     className="text-primary hover:text-foreground-900">
                                                     <Trash className="w-4 h-4" />
                                                 </Button>
-                                                <div className="relative w-20 h-24 shrink-0 overflow-hidden rounded-md bg-foreground-100">
+                                                <div className="relative w-20 h-20 shrink-0 overflow-hidden rounded-xl bg-foreground-100 shadow-xl aspect-[1/1]">
                                                     <Image
                                                         src={
                                                             p.image ||
@@ -105,9 +114,12 @@ export default function CartSidebar() {
                                                             {p.name}
                                                         </Link>
                                                     </SheetClose>
+                                                    <p className="text-sm text-foreground-500">
+                                                        Code: {p.code}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-2 bg-blue-50 p-1 rounded-xl">
                                                 <Button
                                                     variant="outline"
                                                     className="w-6 h-6"
@@ -150,6 +162,25 @@ export default function CartSidebar() {
                                 })
                             )}
                         </div>
+                        {items.length > 0 && recommended.length > 0 && (
+                            <div className="border-t">
+                                <h4 className="font-semibold p-4">
+                                    We Recommend ({recommended.length})
+                                </h4>
+                                <HorizontalSlider
+                                    pad
+                                    grid={{base: 4, sm: 4, md: 4, lg: 4}}>
+                                    {(recommended as Product[]).map(r => (
+                                        <ProductCard
+                                            small
+                                            key={r.id}
+                                            product={r}
+                                            imageAspectClass="aspect-[1/1]"
+                                        />
+                                    ))}
+                                </HorizontalSlider>
+                            </div>
+                        )}
                     </SidebarContent>
                     <SidebarFooter>
                         <div className="p-4 space-y-2">
@@ -180,63 +211,6 @@ export default function CartSidebar() {
                                 </SheetClose>
                                 <Button>Checkout Now</Button>
                             </div>
-                        </div>
-                        <div className="border-primary border-dotted border-t-3 p-4 space-y-3">
-                            <h4 className="font-semibold">
-                                We Recommend {recommended.length}
-                            </h4>
-                            {recommended.length === 0 ? (
-                                <div className="text-sm text-foreground-600">
-                                    Loading...
-                                </div>
-                            ) : (
-                                <div className="space-y-3">
-                                    {recommended.map(r => (
-                                        <div
-                                            key={r.id}
-                                            className="flex items-center gap-3">
-                                            <div className="relative w-14 h-16 shrink-0 overflow-hidden rounded-md bg-foreground-100">
-                                                <Image
-                                                    src={r.image || '/next.svg'}
-                                                    alt={r.name}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <div className="text-sm font-medium truncate">
-                                                    {r.name}
-                                                </div>
-                                                <div className="flex items-baseline gap-2 text-sm">
-                                                    {r.oldPrice && (
-                                                        <span className="line-through text-foreground-400">
-                                                            {formatCents(
-                                                                r.oldPrice
-                                                            )}
-                                                        </span>
-                                                    )}
-                                                    <span className="font-semibold text-primary">
-                                                        {formatCents(r.price)}
-                                                    </span>
-                                                    {r.oldPrice && (
-                                                        <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">
-                                                            Sale
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <Button
-                                                size="sm"
-                                                onClick={() =>
-                                                    addToCart(r.id, 1)
-                                                }
-                                                aria-label={`${r.name} sepete ekle`}>
-                                                Add to Bag
-                                            </Button>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
                         </div>
                     </SidebarFooter>
                 </Sidebar>

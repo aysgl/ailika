@@ -37,7 +37,12 @@ export function SidebarContent({className, ...props}: DivProps) {
 }
 
 export function SidebarFooter({className, ...props}: DivProps) {
-    return <div className={cn('border-t', className)} {...props} />
+    return (
+        <div
+            className={cn('border-primary border-dotted border-t-3', className)}
+            {...props}
+        />
+    )
 }
 
 export function SidebarGroup({className, ...props}: DivProps) {

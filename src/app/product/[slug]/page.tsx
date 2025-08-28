@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {api} from '../../../lib/api'
 import type {Product} from '../../../types/product'
 import AddToCartButton from '../../../components/AddToCartButton'
-import {formatCents} from '../../../context/CartContext'
+import {formatCentsServer} from '../../../lib/format'
 
 type Props = {params: {slug: string}}
 
@@ -24,7 +24,7 @@ export default async function ProductPage({params}: Props) {
     }
 
     return (
-        <div className="py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="relative aspect-square bg-white border border-foreground/10 rounded-lg overflow-hidden">
                 <Image
                     src={product.image || '/next.svg'}
@@ -36,7 +36,7 @@ export default async function ProductPage({params}: Props) {
             <div className="flex flex-col gap-4">
                 <h1 className="text-2xl font-semibold">{product.name}</h1>
                 <div className="text-xl font-bold">
-                    {formatCents(product.price)}
+                    {formatCentsServer(product.price)}
                 </div>
                 <p className="text-foreground/70">{product.description}</p>
                 {product.colors && product.colors.length > 0 && (

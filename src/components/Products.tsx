@@ -21,7 +21,7 @@ export default async function Products({
                 <div className="mb-4">
                     <TitleWave
                         title={title}
-                        bandClass="text-primary"
+                        bandClass="text-secondary"
                         headingLevel={2}
                     />
                 </div>

@@ -20,16 +20,16 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     const current = useMemo(() => slides[index], [slides, index])
 
     return (
-        <div className="container mx-auto min-h-[70vh] relative mt-24">
+        <div className="container mx-auto min-h-[70vh] relative mb-16">
             <div className="bg-white/40 backdrop-blur-sm rounded-3xl relative overflow-hidden">
                 <main className="px-20 relative">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[70vh]">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center min-h-[70vh]">
                         <div className="space-y-6">
-                            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+                            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight mt-24">
                                 {current.title}
                             </h1>
                             {current.description && (
-                                <p className="text-gray-600 text-lg max-w-md">
+                                <p className="text-foreground text-lg max-w-md">
                                     {current.description}
                                 </p>
                             )}
@@ -49,11 +49,11 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                         <div className="flex justify-center relative mt-16">
                             <div className="relative">
                                 {/* Image stage with crossfade/scale animation */}
-                                <div className="relative w-120 h-120 bg-white/30 rounded-t-[26%] rounded-br-[26%] shadow-2xl overflow-hidden flex items-center justify-center">
+                                <div className="relative w-90 h-90 bg-white/30 rounded-t-[26%] rounded-br-[26%] shadow-2xl  flex items-center justify-center">
                                     {slides.map((s, i) => (
                                         <div
                                             key={s.id}
-                                            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out ${
+                                            className={`absolute -mt-20 inset-0 flex items-center justify-center transition-all duration-500 ease-out ${
                                                 i === index
                                                     ? 'opacity-100 translate-y-0 scale-100'
                                                     : 'opacity-0 translate-y-2 scale-95'
@@ -61,16 +61,23 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                             <Image
                                                 src={s.image}
                                                 alt={s.title}
-                                                width={200}
+                                                width={160}
                                                 height={260}
-                                                className="object-contain"
+                                                className="object-contain mb-10"
                                             />
+                                            {count > 1 && (
+                                                <div className="absolute bottom-4 left-4 flex-1">
+                                                    <span className="text-sm text-foreground/80">
+                                                        {index + 1}/{count}
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* Reviews pill (md and up) */}
-                                <div className="hidden md:flex items-center space-x-4 mt-12 absolute bottom-10 -left-30 bg-white/60 backdrop-blur rounded-full p-4">
+                                <div className="hidden md:flex items-center space-x-4 mt-12 absolute bottom-16 -left-30 bg-white/60 backdrop-blur rounded-full p-4">
                                     <div className="flex -space-x-4">
                                         <div className="w-12 h-12 rounded-full  border-2 border-white overflow-hidden">
                                             <Image
@@ -104,7 +111,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                         <div className="font-bold text-xl">
                                             5.2k+
                                         </div>
-                                        <div className="text-xs text-gray-700">
+                                        <div className="text-xs text-foreground">
                                             from our clients
                                         </div>
                                     </div>
@@ -147,16 +154,8 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             </Button>
                         </div>
                     )}
-
-                    {count > 1 && (
-                        <div className="mt-8 flex items-center justify-center">
-                            <span className="text-sm text-foreground/80">
-                                {index + 1}/{count}
-                            </span>
-                        </div>
-                    )}
                 </main>
-                <div className="mt-2">
+                <div className="mt-8">
                     <WavyTextBanner
                         texts={[current.description || current.title]}
                         color="text-white"

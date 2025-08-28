@@ -15,7 +15,7 @@ export default function Categories() {
             image: 'https://www.dndgel.com/cdn/shop/collections/gel_art_liner.jpg?v=1717006411&width=1500'
         },
         {
-            name: 'DND Sheer Collection',
+            name: 'Ailika Sheer Collection',
             image: 'https://www.dndgel.com/cdn/shop/collections/2023-Sheer-Collection-Color-Chart-copy.jpg?v=1712682727&width=1500'
         },
         {
@@ -53,7 +53,7 @@ export default function Categories() {
             <TitleWave
                 title="Categories"
                 headingLevel={2}
-                bandClass="text-primary"
+                bandClass="text-secondary"
             />
 
             <div className="mt-6">

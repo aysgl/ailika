@@ -9,7 +9,9 @@ export const products: Product[] = [
         oldPrice: 1599,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
-        colors: ['#ffffff00']
+        colors: ['#ffffff00'],
+        code: '#ailika',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '2',
@@ -20,7 +22,9 @@ export const products: Product[] = [
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/Cateye_Oje-768x768.webp',
-        colors: ['#990315']
+        colors: ['#990315'],
+        code: '#cateye',
+        categories: ['Kedigözü Oje']
     },
     {
         id: '4',
@@ -29,7 +33,9 @@ export const products: Product[] = [
         price: 1299,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/001-768x768.webp',
-        colors: ['#e5efea']
+        colors: ['#e5efea'],
+        code: '#001',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '5',
@@ -39,7 +45,9 @@ export const products: Product[] = [
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/002-768x768.webp',
-        colors: ['#f3efdd']
+        colors: ['#f3efdd'],
+        code: '#002',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '6',
@@ -49,7 +57,9 @@ export const products: Product[] = [
         oldPrice: 1699,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/003-768x768.webp',
-        colors: ['rgb(245 227 218)']
+        colors: ['rgb(245 227 218)'],
+        code: '#003',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '7',
@@ -59,7 +69,9 @@ export const products: Product[] = [
         oldPrice: 1499,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/004-768x768.webp',
-        colors: ['rgb(243 178 178)']
+        colors: ['rgb(243 178 178)'],
+        code: '#004',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '8',
@@ -69,7 +81,9 @@ export const products: Product[] = [
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/005-768x768.webp',
-        colors: ['rgb(255 219 224)']
+        colors: ['rgb(255 219 224)'],
+        code: '#005',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '9',
@@ -78,7 +92,9 @@ export const products: Product[] = [
         price: 1399,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/006-768x768.webp',
-        colors: ['rgb(254 222 211)']
+        colors: ['rgb(254 222 211)'],
+        code: '#006',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '10',
@@ -87,7 +103,9 @@ export const products: Product[] = [
         price: 1299,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/007-768x768.webp',
-        colors: ['rgb(255 195 170)']
+        colors: ['rgb(255 195 170)'],
+        code: '#007',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '11',
@@ -97,7 +115,9 @@ export const products: Product[] = [
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/008-768x768.webp',
-        colors: ['rgb(254 199 179)']
+        colors: ['rgb(254 199 179)'],
+        code: '#008',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '12',
@@ -106,7 +126,9 @@ export const products: Product[] = [
         price: 1399,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/009-768x768.webp',
-        colors: ['rgb(251 184 159)']
+        colors: ['rgb(251 184 159)'],
+        code: '#009',
+        categories: ['Kalıcı Oje']
     },
     {
         id: '3',
@@ -115,7 +137,9 @@ export const products: Product[] = [
         price: 1399,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/010-768x768.webp',
-        colors: ['rgb(250 168 134)']
+        colors: ['rgb(250 168 134)'],
+        code: '#010',
+        categories: ['Kalıcı Oje']
     }
 ]
 

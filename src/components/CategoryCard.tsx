@@ -11,7 +11,7 @@ type CategoryCardProps = {
 
 export default function CategoryCard({name, image, href}: CategoryCardProps) {
     const content = (
-        <Card className="group p-0 h-75 rounded-t-[100%] rounded-b-4xl bg-white shadow-none overflow-hidden">
+        <Card className="group p-0 h-70 gap-8 rounded-t-[100%] rounded-b-4xl bg-white shadow-none overflow-hidden">
             <div className="relative h-full">
                 <Image src={image} alt={name} fill className="object-cover" />
                 <div className="absolute inset-0 bg-primary-900/20" />

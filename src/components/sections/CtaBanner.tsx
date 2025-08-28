@@ -7,7 +7,7 @@ export default function CtaBanner() {
             <div className="rounded-3xl bg-primary text-white p-10 flex items-center justify-center gap-10">
                 <div className="flex flex-col items-center justify-center gap-4">
                     <TitleWave
-                        title="Become A DND Super Star!"
+                        title="Become A Ailika Super Star!"
                         headingLevel={3}
                         bandClass="text-white"
                     />

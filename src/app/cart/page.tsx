@@ -23,7 +23,7 @@ export default function CartPage() {
     }
 
     return (
-        <div className="py-8 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
+        <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
             <div className="space-y-4">
                 {loading && (
                     <div className="text-sm text-foreground">
