@@ -13,7 +13,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-    title: 'NAILART - Oje Mağazası',
+    title: 'Ailika - Oje Mağazası',
     description: 'Şık ve kaliteli ojelerle online alışveriş.'
 }
 

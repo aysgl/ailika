@@ -9,9 +9,9 @@ type Props = {params: {slug: string}}
 export async function generateMetadata({params}: Props) {
     try {
         const product: Product = await api.getProduct(params.slug)
-        return {title: `${product.name} | NAILART`}
+        return {title: `${product.name} | Ailika`}
     } catch {
-        return {title: 'Ürün | NAILART'}
+        return {title: 'Ürün | Ailika'}
     }
 }
 

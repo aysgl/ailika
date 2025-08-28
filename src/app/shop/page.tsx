@@ -6,7 +6,7 @@ import {api} from '../../lib/api'
 import type {Product} from '../../types/product'
 
 export const metadata = {
-    title: 'Mağaza | NAILART'
+    title: 'Mağaza | Ailika'
 }
 
 export default async function ShopPage({
