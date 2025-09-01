@@ -26,20 +26,22 @@ SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 type SheetContentProps = React.ComponentPropsWithoutRef<
     typeof DialogPrimitive.Content
 > & {
-    side?: 'right' | 'left' | 'top' | 'bottom'
+    side?: 'right' | 'left' | 'top' | 'bottom' | 'center'
+    title?: string
 }
 
 const sideClasses: Record<NonNullable<SheetContentProps['side']>, string> = {
     right: 'right-0 inset-y-0 h-full w-full sm:w-[420px] md:w-[50%] translate-x-full data-[state=open]:translate-x-0',
     left: 'left-0 inset-y-0 h-full w-full sm:w-[420px] md:w-[50%] -translate-x-full data-[state=open]:translate-x-0',
     top: 'top-0 inset-x-0 w-full -translate-y-full data-[state=open]:translate-y-0',
-    bottom: 'bottom-0 inset-x-0 w-full translate-y-full data-[state=open]:translate-y-0'
+    bottom: 'bottom-0 inset-x-0 w-full translate-y-full data-[state=open]:translate-y-0',
+    center: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
 }
 
 const SheetContent = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Content>,
     SheetContentProps
->(({side = 'right', className, children, ...props}, ref) => (
+>(({side = 'right', className, children, title, ...props}, ref) => (
     <SheetPortal>
         <SheetOverlay />
         <DialogPrimitive.Content
@@ -50,6 +52,9 @@ const SheetContent = React.forwardRef<
                 className
             )}
             {...props}>
+            <DialogPrimitive.Title className="sr-only">
+                {title ?? 'Sheet'}
+            </DialogPrimitive.Title>
             {children}
         </DialogPrimitive.Content>
     </SheetPortal>

@@ -8,6 +8,8 @@ import {Card, CardContent, CardFooter} from './ui/card'
 import type {Product} from '../types/product'
 import type {CSSProperties} from 'react'
 import {Badge} from './ui/badge'
+import {Heart} from 'lucide-react'
+import {useFavorites} from '@/context/FavoritesContext'
 
 type ProductCardProps = {
     product: Product
@@ -23,36 +25,68 @@ export default function ProductCard({
     const {addToCart, removeFromCart, items, openCart} = useCart()
     const inCart = items.some(it => it.productId === product.id)
     const swatch = product.colors?.[0] ?? '#ccc'
+    const {isFavorite, toggleFavorite} = useFavorites()
+    const fav = isFavorite(product.id)
+    const hasColors = (product.colors?.length ?? 0) > 0
 
     return (
         <Card className="group transition-all py-0 bg-transparent shadow-none h-full">
             <div
                 className={`${imageAspectClass} relative rounded-3xl`}
-                style={{backgroundColor: swatch} as CSSProperties}>
-                <div
-                    className={`absolute inset-0 flex items-center justify-center ${
-                        small ? 'text-md' : 'text-2xl'
-                    }`}>
-                    {product.code}
-                </div>
+                style={
+                    {
+                        backgroundColor: hasColors ? swatch : ''
+                    } as CSSProperties
+                }>
+                {hasColors && (
+                    <>
+                        <div
+                            className={`absolute inset-0 flex items-center justify-center ${
+                                small ? 'text-md' : 'text-2xl'
+                            }`}>
+                            {product.code}
+                        </div>
+
+                        <div
+                            className={`absolute -top-6 -left-6 z-30 inline-block ${
+                                small ? 'w-12 h-12' : 'w-20 h-20'
+                            } rounded-full rounded-tl-none m-2 shadow-xl`}
+                            style={{backgroundColor: swatch} as CSSProperties}
+                        />
+                    </>
+                )}
                 <Image
                     src={product.image || '/next.svg'}
                     alt={product.name}
                     fill
-                    className="rounded-3xl object-cover transition-opacity duration-300 ease-out group-hover:opacity-0 shadow-xl"
+                    className={`rounded-3xl object-cover transition-all duration-300 ease-out group-hover:-translate-y-1 ${
+                        hasColors
+                            ? 'group-hover:opacity-0'
+                            : 'group-hover:shadow-none'
+                    } shadow-xl`}
                     sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute -top-4 -right-4 w-full h-full flex items-start justify-end z-20">
-                    <div
-                        className={`${
-                            small ? 'w-10 h-10' : 'w-20 h-20'
-                        } rounded-full rounded-tr-none m-2 shadow-xl`}
-                        style={{backgroundColor: swatch} as CSSProperties}
-                    />
+                <div className="absolute top-2 right-2 z-30">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={fav ? 'Favoriden çıkar' : 'Favoriye ekle'}
+                        className={`rounded-full bg-white/70 hover:bg-white/90 ${
+                            small ? 'w-7 h-7' : 'w-9 h-9'
+                        }`}
+                        onClick={() => toggleFavorite(product.id)}>
+                        <Heart
+                            className={`${small ? 'w-4 h-4' : 'w-5 h-5'}`}
+                            fill={fav ? 'var(--secondary)' : 'transparent'}
+                            stroke={
+                                fav ? 'var(--secondary)' : 'var(--foreground)'
+                            }
+                        />
+                    </Button>
                 </div>
             </div>
             <CardContent
-                className={`flex-1 flex flex-col gap-2 text-center ${
+                className={`flex-1 flex flex-col gap-2 text-center transition-all duration-300 ease-out group-hover:translate-y-1 ${
                     small ? 'text-xs px-0' : ''
                 }`}>
                 <Link
@@ -65,9 +99,11 @@ export default function ProductCard({
                 <div
                     className={`${
                         small ? 'text-xs' : 'text-sm'
-                    } text-foreground/70 line-clamp-2 gap-2`}>
-                    <Badge variant="ghost">{product.code}</Badge> &#x2022;
-                    <Badge variant="ghost">{product.categories}</Badge>
+                    } text-foreground/70 line-clamp-2 gap-2 flex flex-wrap items-center justify-center`}>
+                    <span>{product.code}</span> &#x2022;
+                    <Badge variant="ghost" className="p-0">
+                        {product.categories}
+                    </Badge>
                 </div>
             </CardContent>
             <CardFooter

@@ -9,7 +9,7 @@ export const dynamic = 'force-static'
 
 export default function AboutPage() {
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto pb-16">
             <div className="mb-8 space-y-2">
                 <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
                     <TitleWave title={'Hikayemiz'} bandClass="text-secondary" />
@@ -25,14 +25,14 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
                 <div className="space-y-8">
                     <div className="space-y-4">
-                        <h1 className="text-5xl font-bold  leading-tight">
+                        <h2 className="text-5xl font-bold  leading-tight">
                             Güzelliğin
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary/60 to-primary">
                                 {' '}
                                 Sanatsal{' '}
                             </span>
                             Yolculuğu
-                        </h1>
+                        </h2>
                         <p className="text-xl  leading-relaxed">
                             2015 yılından bu yana, her tırnağı bir sanat eserine
                             dönüştürme tutkusuyla yola çıktık. Bugün binlerce

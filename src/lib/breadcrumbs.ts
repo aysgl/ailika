@@ -3,57 +3,227 @@ type ShopContext = {
     brand?: string
 }
 
-// Map slugs to breadcrumb label arrays
-const CATEGORY_BREADCRUMBS: Record<string, string[]> = {
+export type CrumbItem = {label: string; href: string}
+
+// Map slugs to breadcrumb items with hrefs
+const CATEGORY_BREADCRUMBS: Record<string, CrumbItem[]> = {
     // Ojeler → Kalıcı Oje Koleksiyonu
-    'kirmizi-ojeler': ['Ojeler', 'Kalıcı Oje Koleksiyonu', 'Kırmızı Ojeler'],
-    'pembe-ojeler': ['Ojeler', 'Kalıcı Oje Koleksiyonu', 'Pembe Ojeler'],
-    'nude-ojeler': ['Ojeler', 'Kalıcı Oje Koleksiyonu', 'Nude Ojeler'],
-    'koyu-ojeler': ['Ojeler', 'Kalıcı Oje Koleksiyonu', 'Koyu Renkler'],
+    'kirmizi-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {
+            label: 'Kalıcı Oje Koleksiyonu',
+            href: '/ojeler/kalici-oje-koleksiyonu'
+        },
+        {label: 'Kırmızı Ojeler', href: '/shop?category=kirmizi-ojeler'}
+    ],
+    'pembe-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {
+            label: 'Kalıcı Oje Koleksiyonu',
+            href: '/ojeler/kalici-oje-koleksiyonu'
+        },
+        {label: 'Pembe Ojeler', href: '/shop?category=pembe-ojeler'}
+    ],
+    'nude-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {
+            label: 'Kalıcı Oje Koleksiyonu',
+            href: '/ojeler/kalici-oje-koleksiyonu'
+        },
+        {label: 'Nude Ojeler', href: '/shop?category=nude-ojeler'}
+    ],
+    'koyu-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {
+            label: 'Kalıcı Oje Koleksiyonu',
+            href: '/ojeler/kalici-oje-koleksiyonu'
+        },
+        {label: 'Koyu Renkler', href: '/shop?category=koyu-ojeler'}
+    ],
     // Ojeler → Jel Ojeler
-    'gel-ojeler': ['Ojeler', 'Jel Ojeler', 'Gel Ojeler'],
-    'matte-ojeler': ['Ojeler', 'Jel Ojeler', 'Matte Ojeler'],
-    'glitter-ojeler': ['Ojeler', 'Jel Ojeler', 'Glitter Ojeler'],
-    'chrome-ojeler': ['Ojeler', 'Jel Ojeler', 'Chrome Ojeler'],
+    'gel-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Jel Ojeler', href: '/ojeler/jel-ojeler'},
+        {label: 'Gel Ojeler', href: '/shop?category=gel-ojeler'}
+    ],
+    'matte-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Jel Ojeler', href: '/ojeler/jel-ojeler'},
+        {label: 'Matte Ojeler', href: '/shop?category=matte-ojeler'}
+    ],
+    'glitter-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Jel Ojeler', href: '/ojeler/jel-ojeler'},
+        {label: 'Glitter Ojeler', href: '/shop?category=glitter-ojeler'}
+    ],
+    'chrome-ojeler': [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Jel Ojeler', href: '/ojeler/jel-ojeler'},
+        {label: 'Chrome Ojeler', href: '/shop?category=chrome-ojeler'}
+    ],
     // Aksesuarlar
-    'french-sablonlar': ['Aksesuarlar', 'Şablonlar', 'French Şablonları'],
-    'nail-art-sablonlar': ['Aksesuarlar', 'Şablonlar', 'Nail Art Şablonları'],
-    'ombre-sablonlar': ['Aksesuarlar', 'Şablonlar', 'Ombre Şablonları'],
-    'geometrik-sablonlar': ['Aksesuarlar', 'Şablonlar', 'Geometrik Şablonlar'],
-    'cam-torpuler': ['Aksesuarlar', 'Törpüler', 'Cam Törpüler'],
-    'metal-torpuler': ['Aksesuarlar', 'Törpüler', 'Metal Törpüler'],
-    'emery-torpuler': ['Aksesuarlar', 'Törpüler', 'Emery Törpüler'],
-    'buffer-torpuler': ['Aksesuarlar', 'Törpüler', 'Buffer Törpüler'],
-    'nail-art-fircalar': ['Aksesuarlar', 'Fırçalar', 'Nail Art Fırçaları'],
-    'temizlik-fircalar': ['Aksesuarlar', 'Fırçalar', 'Temizlik Fırçaları'],
-    'detay-fircalar': ['Aksesuarlar', 'Fırçalar', 'Detay Fırçaları'],
-    'gradient-fircalar': ['Aksesuarlar', 'Fırçalar', 'Gradient Fırçaları'],
-    'seramik-uclar': ['Aksesuarlar', 'Freze Uçları', 'Seramik Uçlar'],
-    'metal-uclar': ['Aksesuarlar', 'Freze Uçları', 'Metal Uçlar'],
-    'elmas-uclar': ['Aksesuarlar', 'Freze Uçları', 'Elmas Uçlar'],
-    'karbur-uclar': ['Aksesuarlar', 'Freze Uçları', 'Karbür Uçlar'],
+    'french-sablonlar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Şablonlar', href: '/aksesuarlar/sablonlar'},
+        {label: 'French Şablonları', href: '/shop?category=french-sablonlar'}
+    ],
+    'nail-art-sablonlar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Şablonlar', href: '/aksesuarlar/sablonlar'},
+        {
+            label: 'Nail Art Şablonları',
+            href: '/shop?category=nail-art-sablonlar'
+        }
+    ],
+    'ombre-sablonlar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Şablonlar', href: '/aksesuarlar/sablonlar'},
+        {label: 'Ombre Şablonları', href: '/shop?category=ombre-sablonlar'}
+    ],
+    'geometrik-sablonlar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Şablonlar', href: '/aksesuarlar/sablonlar'},
+        {
+            label: 'Geometrik Şablonlar',
+            href: '/shop?category=geometrik-sablonlar'
+        }
+    ],
+    'cam-torpuler': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Törpüler', href: '/aksesuarlar/torpuler'},
+        {label: 'Cam Törpüler', href: '/shop?category=cam-torpuler'}
+    ],
+    'metal-torpuler': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Törpüler', href: '/aksesuarlar/torpuler'},
+        {label: 'Metal Törpüler', href: '/shop?category=metal-torpuler'}
+    ],
+    'emery-torpuler': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Törpüler', href: '/aksesuarlar/torpuler'},
+        {label: 'Emery Törpüler', href: '/shop?category=emery-torpuler'}
+    ],
+    'buffer-torpuler': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Törpüler', href: '/aksesuarlar/torpuler'},
+        {label: 'Buffer Törpüler', href: '/shop?category=buffer-torpuler'}
+    ],
+    'nail-art-fircalar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Fırçalar', href: '/aksesuarlar/fircalar'},
+        {label: 'Nail Art Fırçaları', href: '/shop?category=nail-art-fircalar'}
+    ],
+    'temizlik-fircalar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Fırçalar', href: '/aksesuarlar/fircalar'},
+        {label: 'Temizlik Fırçaları', href: '/shop?category=temizlik-fircalar'}
+    ],
+    'detay-fircalar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Fırçalar', href: '/aksesuarlar/fircalar'},
+        {label: 'Detay Fırçaları', href: '/shop?category=detay-fircalar'}
+    ],
+    'gradient-fircalar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Fırçalar', href: '/aksesuarlar/fircalar'},
+        {label: 'Gradient Fırçaları', href: '/shop?category=gradient-fircalar'}
+    ],
+    'seramik-uclar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Freze Uçları', href: '/aksesuarlar/freze-uclari'},
+        {label: 'Seramik Uçlar', href: '/shop?category=seramik-uclar'}
+    ],
+    'metal-uclar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Freze Uçları', href: '/aksesuarlar/freze-uclari'},
+        {label: 'Metal Uçlar', href: '/shop?category=metal-uclar'}
+    ],
+    'elmas-uclar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Freze Uçları', href: '/aksesuarlar/freze-uclari'},
+        {label: 'Elmas Uçlar', href: '/shop?category=elmas-uclar'}
+    ],
+    'karbur-uclar': [
+        {label: 'Aksesuarlar', href: '/aksesuarlar'},
+        {label: 'Freze Uçları', href: '/aksesuarlar/freze-uclari'},
+        {label: 'Karbür Uçlar', href: '/shop?category=karbur-uclar'}
+    ],
     // Cihazlar
-    'cuticle-oil': ['Cihazlar', 'Freze Makineleri', 'Cuticle Oil'],
-    'nail-strengthener': ['Cihazlar', 'Freze Makineleri', 'Nail Strengthener'],
-    'base-coat': ['Cihazlar', 'Freze Makineleri', 'Base Coat'],
-    'top-coat': ['Cihazlar', 'Freze Makineleri', 'Top Coat'],
-    'el-kremleri': ['Cihazlar', 'UV Kurutucular', 'El Kremleri'],
-    peeling: ['Cihazlar', 'UV Kurutucular', 'Peeling Ürünleri'],
-    maskeler: ['Cihazlar', 'UV Kurutucular', 'Maske Ürünleri'],
-    serumlar: ['Cihazlar', 'UV Kurutucular', 'Serum Ürünleri'],
-    // Diğer
-    solüsyonlar: ['Yardımcı Ürünler', 'Solüsyonlar'],
-    'baslangic-setleri': ['Setler', 'Başlangıç Setleri']
+    'cuticle-oil': [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'Freze Makineleri', href: '/cihazlar/freze-makineleri'},
+        {label: 'Cuticle Oil', href: '/shop?category=cuticle-oil'}
+    ],
+    'nail-strengthener': [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'Freze Makineleri', href: '/cihazlar/freze-makineleri'},
+        {label: 'Nail Strengthener', href: '/shop?category=nail-strengthener'}
+    ],
+    'base-coat': [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'Freze Makineleri', href: '/cihazlar/freze-makineleri'},
+        {label: 'Base Coat', href: '/shop?category=base-coat'}
+    ],
+    'top-coat': [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'Freze Makineleri', href: '/cihazlar/freze-makineleri'},
+        {label: 'Top Coat', href: '/shop?category=top-coat'}
+    ],
+    'el-kremleri': [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'UV Kurutucular', href: '/cihazlar/uv-kurutucular'},
+        {label: 'El Kremleri', href: '/shop?category=el-kremleri'}
+    ],
+    peeling: [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'UV Kurutucular', href: '/cihazlar/uv-kurutucular'},
+        {label: 'Peeling Ürünleri', href: '/shop?category=peeling'}
+    ],
+    maskeler: [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'UV Kurutucular', href: '/cihazlar/uv-kurutucular'},
+        {label: 'Maske Ürünleri', href: '/shop?category=maskeler'}
+    ],
+    serumlar: [
+        {label: 'Cihazlar', href: '/cihazlar'},
+        {label: 'UV Kurutucular', href: '/cihazlar/uv-kurutucular'},
+        {label: 'Serum Ürünleri', href: '/shop?category=serumlar'}
+    ],
+    // Diğer (örnek)
+    solüsyonlar: [
+        {label: 'Yardımcı Ürünler', href: '/shop?category=yardimci-urunler'},
+        {label: 'Solüsyonlar', href: '/shop?category=Sol%C3%BCsyonlar'}
+    ],
+    'baslangic-setleri': [
+        {label: 'Setler', href: '/sets'},
+        {label: 'Başlangıç Setleri', href: '/shop?category=baslangic-setleri'}
+    ]
 }
 
-const BRAND_BREADCRUMBS: Record<string, string[]> = {
-    premium: ['Ojeler', 'Top & Base Coat', 'Premium Collection'],
-    professional: ['Ojeler', 'Top & Base Coat', 'Professional Line'],
-    eco: ['Ojeler', 'Top & Base Coat', 'Eco-Friendly'],
-    limited: ['Ojeler', 'Top & Base Coat', 'Limited Edition']
+const BRAND_BREADCRUMBS: Record<string, CrumbItem[]> = {
+    premium: [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Top & Base Coat', href: '/ojeler/top-base-coat'},
+        {label: 'Premium Collection', href: '/shop?brand=premium'}
+    ],
+    professional: [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Top & Base Coat', href: '/ojeler/top-base-coat'},
+        {label: 'Professional Line', href: '/shop?brand=professional'}
+    ],
+    eco: [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Top & Base Coat', href: '/ojeler/top-base-coat'},
+        {label: 'Eco-Friendly', href: '/shop?brand=eco'}
+    ],
+    limited: [
+        {label: 'Ojeler', href: '/ojeler'},
+        {label: 'Top & Base Coat', href: '/ojeler/top-base-coat'},
+        {label: 'Limited Edition', href: '/shop?brand=limited'}
+    ]
 }
 
-export function getShopBreadcrumb(ctx: ShopContext): string[] | null {
+export function getShopBreadcrumb(ctx: ShopContext): CrumbItem[] | null {
     if (ctx.category) {
         const key = ctx.category.toLowerCase()
         if (CATEGORY_BREADCRUMBS[key]) return CATEGORY_BREADCRUMBS[key]
@@ -61,7 +231,7 @@ export function getShopBreadcrumb(ctx: ShopContext): string[] | null {
         const label = key
             .replace(/-/g, ' ')
             .replace(/\b\w/g, c => c.toUpperCase())
-        return ['Mağaza', label]
+        return [{label, href: `/shop?category=${encodeURIComponent(key)}`}]
     }
     if (ctx.brand) {
         const key = ctx.brand.toLowerCase()
@@ -69,7 +239,7 @@ export function getShopBreadcrumb(ctx: ShopContext): string[] | null {
         const label = key
             .replace(/-/g, ' ')
             .replace(/\b\w/g, c => c.toUpperCase())
-        return ['Mağaza', label]
+        return [{label, href: `/shop?brand=${encodeURIComponent(key)}`}]
     }
     return null
 }

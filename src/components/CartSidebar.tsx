@@ -1,11 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import {useMemo} from 'react'
 import {useCart, formatCents} from '@/context/CartContext'
 import {Button} from '@/components/ui/button'
-import {X, Plus, Minus, Trash, ShoppingCart} from 'lucide-react'
+import {X, ShoppingCart, Phone} from 'lucide-react'
 import {getProductById, products as allProducts} from '@/lib/products'
 import {
     Sheet,
@@ -23,6 +22,7 @@ import HorizontalSlider from '@/components/HorizontalSlider'
 import ProductCard from '@/components/ProductCard'
 import type {Product} from '@/types/product'
 import EmptyState from './EmptyState'
+import CartItemRow from './CartItemRow'
 
 export default function CartSidebar() {
     const {
@@ -82,82 +82,32 @@ export default function CartSidebar() {
                                     const p = getProductById(it.productId)
                                     if (!p) return null
                                     return (
-                                        <div
+                                        <CartItemRow
                                             key={it.productId}
-                                            className="flex gap-12 items-center justify-between p-4">
-                                            <div className="flex items-center gap-2 w-1/2">
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    onClick={() =>
-                                                        removeFromCart(p.id)
-                                                    }
-                                                    className="text-primary hover:text-foreground-900">
-                                                    <Trash className="w-4 h-4" />
-                                                </Button>
-                                                <div className="relative w-20 h-20 shrink-0 overflow-hidden rounded-xl bg-foreground-100 shadow-xl aspect-[1/1]">
-                                                    <Image
-                                                        src={
-                                                            p.image ||
-                                                            '/next.svg'
-                                                        }
-                                                        alt={p.name}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                                <div className="flex-1">
-                                                    <SheetClose asChild>
-                                                        <Link
-                                                            href={`/product/${p.slug}`}
-                                                            className="font-medium hover:underline">
-                                                            {p.name}
-                                                        </Link>
-                                                    </SheetClose>
-                                                    <p className="text-sm text-foreground-500">
-                                                        Code: {p.code}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="flex items-center gap-2 bg-blue-50 p-1 rounded-xl">
-                                                <Button
-                                                    variant="outline"
-                                                    className="w-6 h-6"
-                                                    size="icon"
-                                                    aria-label={`Azalt: ${p.name}`}
-                                                    onClick={() =>
-                                                        updateQuantity(
-                                                            p.id,
-                                                            it.quantity - 1
-                                                        )
-                                                    }>
-                                                    <Minus className="w-4 h-4" />
-                                                </Button>
-                                                <span className="w-6 text-center">
-                                                    {it.quantity}
-                                                </span>
-                                                <Button
-                                                    variant="outline"
-                                                    className="w-6 h-6"
-                                                    size="icon"
-                                                    aria-label={`Artır: ${p.name}`}
-                                                    onClick={() =>
-                                                        updateQuantity(
-                                                            p.id,
-                                                            it.quantity + 1
-                                                        )
-                                                    }>
-                                                    <Plus className="w-4 h-4" />
-                                                </Button>
-                                            </div>
-                                            <div>
-                                                <span className="text-xl font-semibold">
-                                                    {formatCents(
-                                                        p.price * it.quantity
-                                                    )}
-                                                </span>
-                                            </div>
-                                        </div>
+                                            slug={p.slug}
+                                            name={p.name}
+                                            code={p.code}
+                                            image={p.image}
+                                            priceCents={p.price}
+                                            quantity={it.quantity}
+                                            onRemove={() =>
+                                                removeFromCart(p.id)
+                                            }
+                                            onDecrease={() =>
+                                                updateQuantity(
+                                                    p.id,
+                                                    it.quantity - 1
+                                                )
+                                            }
+                                            onIncrease={() =>
+                                                updateQuantity(
+                                                    p.id,
+                                                    it.quantity + 1
+                                                )
+                                            }
+                                            formatCents={formatCents}
+                                            onNavigate={closeCart}
+                                        />
                                     )
                                 })
                             )}
@@ -205,11 +155,20 @@ export default function CartSidebar() {
                                         <Button
                                             variant="outline"
                                             className="w-full">
-                                            View Bag
+                                            Sepetim
                                         </Button>
                                     </Link>
                                 </SheetClose>
-                                <Button>Checkout Now</Button>
+                                <Link href="/#">
+                                    <Button variant="outline">
+                                        <Phone /> Whatsapp&apos;tan Sipariş
+                                    </Button>
+                                </Link>
+                                <Link href="/checkout">
+                                    <Button variant="secondary">
+                                        Hemen Öde
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </SidebarFooter>

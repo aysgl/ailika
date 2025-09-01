@@ -4,6 +4,8 @@ import './globals.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import {CartProvider} from '../context/CartContext'
+import {FavoritesProvider} from '../context/FavoritesContext'
+import {AuthProvider} from '../context/AuthContext'
 import CartSidebar from '../components/CartSidebar'
 
 const outfit = Outfit({
@@ -23,16 +25,19 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="tr">
-            <body
-                className={`${outfit.variable} antialiased bg-gradient-to-l to-blue-100/80 from-indigo-200/80`}>
+        <html lang="tr" data-theme="ocean">
+            <body className={`${outfit.variable} antialiased`}>
                 <CartProvider>
-                    <Header />
-                    <main className="container-full mx-auto mt-24">
-                        {children}
-                    </main>
-                    <CartSidebar />
-                    <Footer />
+                    <FavoritesProvider>
+                        <AuthProvider>
+                            <Header />
+                            <main className="container-full mx-auto mt-24">
+                                {children}
+                            </main>
+                            <CartSidebar />
+                            <Footer />
+                        </AuthProvider>
+                    </FavoritesProvider>
                 </CartProvider>
             </body>
         </html>

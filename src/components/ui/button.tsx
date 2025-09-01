@@ -17,13 +17,13 @@ const buttonVariants = cva(
                     'border bg-transparent border-primary text-primary hover:bg-primary/10 hover:text-primary shadow-xs dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
                 secondary:
                     'bg-secondary text-white shadow-xs hover:bg-secondary/80',
-                ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+                ghost: 'hover:bg-white/40 hover:text-accent-foreground dark:hover:bg-accent/50',
                 link: 'text-primary underline-offset-4'
             },
             size: {
                 default: 'h-9 px-6 py-2 has-[>svg]:px-3',
                 sm: 'h-8 gap-1.5 px-4 has-[>svg]:px-4 text-xs',
-                lg: 'h-14 px-10 has-[>svg]:px-10',
+                lg: 'h-12 px-10 has-[>svg]:px-10',
                 icon: 'size-9'
             }
         },
@@ -49,7 +49,7 @@ function Button({
     return (
         <Comp
             data-slot="button"
-            data-icon-shift={size !== 'icon' ? true : undefined}
+            data-icon-shift={size !== 'icon' ? 'true' : 'false'}
             className={cn(
                 buttonVariants({variant, size, className}),
                 'data-[icon-shift=true]:hover:[&_svg]:translate-x-0.5'

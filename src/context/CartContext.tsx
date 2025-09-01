@@ -55,6 +55,21 @@ export function CartProvider({children}: {children: React.ReactNode}) {
         }
     }, [items])
 
+    // Auto-clear cart if returning from a successful payment (status=paid)
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        try {
+            const url = new URL(window.location.href)
+            if (url.searchParams.get('status') === 'paid') {
+                setItems([])
+                url.searchParams.delete('status')
+                window.history.replaceState(null, '', url.toString())
+            }
+        } catch {
+            // ignore
+        }
+    }, [])
+
     const addToCart = useCallback((productId: string, quantity: number = 1) => {
         setItems(prev => {
             const existing = prev.find(it => it.productId === productId)

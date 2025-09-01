@@ -11,7 +11,13 @@ type IGItem = {
     caption: string
 }
 
-export default function InstagramGallery({limit = 9}: {limit?: number}) {
+export default function InstagramGallery({
+    limit = 9,
+    cols = 3
+}: {
+    limit?: number
+    cols?: number
+}) {
     const [items, setItems] = useState<IGItem[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -27,8 +33,20 @@ export default function InstagramGallery({limit = 9}: {limit?: number}) {
         return <div className="text-sm text-foreground-500">Yükleniyor…</div>
     if (items.length === 0) return null
 
+    // Build responsive grid classes based on requested columns (1..6)
+    const c = Math.min(6, Math.max(1, cols))
+    const classMap: Record<number, string> = {
+        1: 'grid-cols-1',
+        2: 'grid-cols-2',
+        3: 'grid-cols-2 md:grid-cols-3',
+        4: 'grid-cols-2 md:grid-cols-4',
+        5: 'grid-cols-2 md:grid-cols-5',
+        6: 'grid-cols-2 md:grid-cols-6'
+    }
+    const gridClasses = classMap[c]
+
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className={`grid ${gridClasses} gap-3`}>
             {items.map(item => (
                 <Link
                     key={item.id}

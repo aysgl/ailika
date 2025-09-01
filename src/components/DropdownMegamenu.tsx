@@ -12,6 +12,7 @@ interface DropdownMegaMenuProps {
     menuData: {
         categories: Array<{
             title: string
+            href: string
             items: Array<{
                 name: string
                 href: string
@@ -88,9 +89,11 @@ export default function DropdownMegaMenu({
                             <div className="grid grid-cols-2 gap-6">
                                 {menuData.categories.map((category, index) => (
                                     <div key={index} className="space-y-3">
-                                        <h3 className="font-bold text-base text-foreground">
+                                        <Link
+                                            href={category.href}
+                                            className="font-bold text-base text-foreground">
                                             {category.title}
-                                        </h3>
+                                        </Link>
                                         <ul className="space-y-2">
                                             {category.items.map(
                                                 (item, itemIndex) => (

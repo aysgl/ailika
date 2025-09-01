@@ -44,6 +44,8 @@
 }
 
 :root {
+  --bg-from: oklch(0.92 0.04 274);  
+  --bg-to:   oklch(0.94 0.05 235); 
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -79,6 +81,8 @@
 }
 
 .dark {
+  --bg-from: oklch(0.21 0.01 280);
+  --bg-to:   oklch(0.24 0.01 260);
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
@@ -112,6 +116,21 @@
   --sidebar-ring: oklch(0.488 0.243 264.376);
 }
 
+html[data-theme='ocean'] {
+  --bg-from: oklch(0.94 0.03 259.13);
+  --bg-to:   oklch(0.9 0.05 273.14);
+  --primary: oklch(0.546 0.245 262.881);
+  --secondary: oklch(59.2% 0.249 0.584);
+  --ring: var(--primary);
+}
+
+html[data-theme='rose'] {
+  --bg-from: oklch(89.2% 0.058 10.001);
+  --bg-to:   oklch(94.6% 0.033 307.174);
+  --primary: oklch(0.64 0.21 20);         
+  --secondary: oklch(54.6% 0.245 262.881);
+  --ring: var(--primary);
+}
 
 @layer base {
   * {
@@ -122,6 +141,19 @@
   }
 }
 
+@layer base {
+  body {
+    background-image: linear-gradient(to left, var(--bg-to), var(--bg-from));
+    background-color: var(--background); /* yedek */
+  }
+}
+
 .logo svg {
     fill: red !important;
+}
+
+
+#iyzico-container {
+  width: 70%;
+  margin: 0 auto;
 }
