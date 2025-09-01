@@ -139,6 +139,10 @@ html[data-theme='rose'] {
   body {
     @apply bg-background text-foreground font-sans;
   }
+  ::selection {
+    background: var(--secondary);
+    color: white;
+  }
 }
 
 @layer base {
