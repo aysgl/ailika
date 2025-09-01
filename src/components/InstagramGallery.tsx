@@ -59,6 +59,8 @@ export default function InstagramGallery({
                         src={item.url}
                         alt={item.caption || 'Instagram'}
                         className="object-cover w-full h-auto"
+                        referrerPolicy="no-referrer"
+                        crossOrigin="anonymous"
                     />
                 </Link>
             ))}
