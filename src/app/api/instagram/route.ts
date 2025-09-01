@@ -34,14 +34,31 @@ export async function GET(request: Request) {
         const basicToken = process.env.INSTAGRAM_ACCESS_TOKEN
         const graphToken = process.env.IG_GRAPH_TOKEN
         const igUserId = process.env.IG_USER_ID
-        if (!basicToken && !(graphToken && igUserId)) {
-            return NextResponse.json(
-                {
-                    items: [],
-                    error: 'Missing Instagram credentials. Set INSTAGRAM_ACCESS_TOKEN or IG_GRAPH_TOKEN and IG_USER_ID'
-                },
-                {status: 200}
-            )
+        const missingCreds = !basicToken && !(graphToken && igUserId)
+        if (missingCreds) {
+            // Fallback to local placeholders from public/images/instagram when no credentials in env
+            const placeholders = [
+                '/images/instagram/1.png',
+                '/images/instagram/3.png',
+                '/images/instagram/4.png',
+                '/images/instagram/5.png',
+                '/images/instagram/6.png',
+                '/images/instagram/7.png',
+                '/images/instagram/1.png',
+                '/images/instagram/3.png',
+                '/images/instagram/4.png',
+                '/images/instagram/5.png',
+                '/images/instagram/6.png',
+                '/images/instagram/7.png'
+            ]
+                .slice(0, Math.max(1, Math.min(12, limit)))
+                .map((url, i) => ({
+                    id: `local-${i}`,
+                    url,
+                    link: 'https://www.instagram.com/ailikaturkiye',
+                    caption: 'Instagram local'
+                }))
+            return NextResponse.json({items: placeholders})
         }
         const useGraph = Boolean(graphToken && igUserId)
         const url = useGraph
