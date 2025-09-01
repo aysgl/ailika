@@ -26,7 +26,7 @@ export default function TrendingProducts() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider>
+                <HorizontalSlider cols={5}>
                     {items.map((p, i) => (
                         <div
                             key={`${p.id}-${i}`}

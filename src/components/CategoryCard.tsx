@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import {useState} from 'react'
 import {Card, CardContent} from '@/components/ui/card'
 
 type CategoryCardProps = {
@@ -10,10 +11,28 @@ type CategoryCardProps = {
 }
 
 export default function CategoryCard({name, image, href}: CategoryCardProps) {
+    const [broken, setBroken] = useState(false)
     const content = (
         <Card className="group p-0 h-70 gap-8 rounded-t-[100%] rounded-b-4xl bg-white shadow-none overflow-hidden">
             <div className="relative h-full">
-                <Image src={image} alt={name} fill className="object-cover" />
+                {!broken ? (
+                    <Image
+                        src={image}
+                        alt={name}
+                        fill
+                        className="object-cover"
+                        onError={() => setBroken(true)}
+                        referrerPolicy="no-referrer"
+                    />
+                ) : (
+                    <Image
+                        src="/images/instagram/1.png"
+                        alt={name}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                )}
                 <div className="absolute inset-0 bg-primary-900/20" />
                 <CardContent className="absolute inset-0 flex items-center justify-center">
                     <div className="relative flex items-center justify-center">

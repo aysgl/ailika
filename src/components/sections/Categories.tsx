@@ -61,19 +61,16 @@ export default function Categories() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider>
+                <HorizontalSlider cols={5}>
                     {categories.map(c => (
-                        <div
+                        <CategoryCard
                             key={c.name}
-                            className="snap-center min-w-[80%] sm:min-w-[50%] md:min-w-[33.3333%] lg:min-w-[25%]">
-                            <CategoryCard
-                                name={c.name}
-                                image={c.image}
-                                href={`/shop?category=${encodeURIComponent(
-                                    c.name
-                                )}`}
-                            />
-                        </div>
+                            name={c.name}
+                            image={c.image}
+                            href={`/shop?category=${encodeURIComponent(
+                                c.name
+                            )}`}
+                        />
                     ))}
                 </HorizontalSlider>
             </div>
