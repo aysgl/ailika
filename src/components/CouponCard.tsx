@@ -37,8 +37,9 @@ export default function CouponCard({
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
         } catch (error) {
-            // eslint-disable-next-line no-console
-            console.error('Failed to copy:', error)
+            if (process.env.NODE_ENV !== 'production') {
+                console.error('Failed to copy:', error)
+            }
         }
     }
 

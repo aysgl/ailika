@@ -4,14 +4,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
 import EmptyState from '@/components/EmptyState'
 import {Button} from '@/components/ui/button'
 import Link from 'next/link'
-import {
-    Check,
-    CheckCircle,
-    Eye,
-    Package,
-    ShoppingBag,
-    Truck
-} from 'lucide-react'
+import {Check, CheckCircle, Package, ShoppingBag, Truck} from 'lucide-react'
 import AccountLayout from '@/components/AccountLayout'
 import {useCart} from '@/context/CartContext'
 import {Badge} from '@/components/ui/badge'

@@ -6,6 +6,7 @@ import {ChevronDown, ArrowRight, Star, Sparkles} from 'lucide-react'
 import {Button} from '@/components/ui/button'
 import {Card, CardContent} from '@/components/ui/card'
 import {Badge} from '@/components/ui/badge'
+import Image from 'next/image'
 
 interface MegaMenuProps {
     className?: string
@@ -378,7 +379,7 @@ export default function MegaMenu({className}: MegaMenuProps) {
                                                                 key={index}
                                                                 href={item.href}
                                                                 className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/40 transition-colors group">
-                                                                <img
+                                                                <Image
                                                                     src={
                                                                         item.image ||
                                                                         '/placeholder.svg'

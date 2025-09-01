@@ -1,11 +1,7 @@
-import Image from 'next/image'
 import InstagramGallery from '../InstagramGallery'
 import TitleWave from '../TitleWave'
 
 export default function InstagramFeed() {
-    const items = Array.from({length: 6}).map(
-        () => `/images/hero-slider/nail-polish.png`
-    )
     return (
         <section className="container mx-auto py-16">
             <TitleWave

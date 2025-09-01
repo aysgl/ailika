@@ -7,7 +7,6 @@ import {products, getProductBySlug} from '@/lib/products'
 import TitleWave from '@/components/TitleWave'
 import {Button} from '@/components/ui/button'
 import {Shuffle, XIcon} from 'lucide-react'
-import MoreButton from '../MoreButton'
 
 type ColorEntry = {
     color: string

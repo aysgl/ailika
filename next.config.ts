@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
     // Treat iyzipay as a server external dependency to avoid bundling issues
     serverExternalPackages: ['iyzipay'],
     images: {
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',
