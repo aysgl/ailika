@@ -1,5 +1,6 @@
 import {Button} from '@/components/ui/button'
 import TitleWave from '../TitleWave'
+import Link from 'next/link'
 
 export default function CtaBanner() {
     return (
@@ -19,7 +20,7 @@ export default function CtaBanner() {
                         size="lg"
                         variant={'secondary'}
                         className=" hover:bg-white/90">
-                        <a href="/shop">Mağazaya Git</a>
+                        <Link href="/shop">Mağazaya Git</Link>
                     </Button>
                 </div>
             </div>
