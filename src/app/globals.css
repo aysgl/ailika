@@ -44,8 +44,8 @@
 }
 
 :root {
-  --bg-from: oklch(0.92 0.04 274);  
-  --bg-to:   oklch(0.94 0.05 235); 
+  --bg-from: oklch(0.9 0.06 258.87);
+  --bg-to:   oklch(0.9 0.05 273.14);
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -77,7 +77,7 @@
   --sidebar-accent: oklch(59.2% 0.249 0.584);
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.47 0.32 263.78)
+  --sidebar-ring: oklch(0.47 0.32 263.78);
 }
 
 .dark {
@@ -117,19 +117,60 @@
 }
 
 html[data-theme='ocean'] {
-  --bg-from: oklch(0.94 0.03 259.13);
+  --bg-from: oklch(0.9 0.06 258.87);
   --bg-to:   oklch(0.9 0.05 273.14);
   --primary: oklch(0.546 0.245 262.881);
   --secondary: oklch(59.2% 0.249 0.584);
   --ring: var(--primary);
+  --destructive: oklch(59.2% 0.249 0.584);
 }
 
-html[data-theme='rose'] {
-  --bg-from: oklch(89.2% 0.058 10.001);
-  --bg-to:   oklch(94.6% 0.033 307.174);
-  --primary: oklch(0.64 0.21 20);         
-  --secondary: oklch(54.6% 0.245 262.881);
+html[data-theme='pastel'] {
+  --bg-from: oklch(0.55 0.24 262.76 / 0.19);
+  --bg-to:   oklch(0.55 0.24 262.76 / 0.19);
+  --primary: #203c8a;       
+  --secondary: oklch(0.8 0.12 20.02);
   --ring: var(--primary);
+  --destructive: oklch(0.8 0.12 20.02);
+  --radius: 0.4rem;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: calc(var(--radius) - 1px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 1px);
+  --radius-2xl: calc(var(--radius) + 2px);
+  --radius-3xl: calc(var(--radius) + 3px);
+}
+
+html[data-theme='midnight'] {
+  --bg-from: oklch(0.14 0.08 263.69);
+  --bg-to: oklch(0.24 0.16 263.65);
+  --primary: oklch(0.546 0.245 262.881);
+  --secondary: oklch(59.2% 0.249 0.584);
+  --ring: var(--primary);
+  --foreground: oklch(0.94 0.03 266.02);
+  --destructive: oklch(59.2% 0.249 0.584);
+}
+
+
+/* 🌙 Midnight override */
+html[data-theme='midnight'] .bg-white\/40 {
+   background-color: rgb(20 93 251 / 40%)
+}
+
+html[data-theme='midnight'] .bg-white\/60 {
+   background-color: rgb(20 93 251 / 60%)
+}
+
+html[data-theme='midnight'] .bg-white\/70 {
+   background-color: rgb(20 93 251 / 70%)
+}
+
+html[data-theme='midnight'] footer {
+  background-color: var(--bg-from)
+}
+
+html[data-theme='midnight'] header .text-primary, html[data-theme='midnight'] footer .text-primary {
+  color: rgb(255 255 255)
 }
 
 @layer base {
@@ -148,16 +189,14 @@ html[data-theme='rose'] {
 @layer base {
   body {
     background-image: linear-gradient(to left, var(--bg-to), var(--bg-from));
-    background-color: var(--background); /* yedek */
+    background-color: var(--background);
   }
 }
 
-.logo svg {
-    fill: red !important;
+html {
+  font-family: var(--font-outfit-sans);
 }
 
-
-#iyzico-container {
-  width: 70%;
-  margin: 0 auto;
+html[data-theme='pastel'] * {
+  font-family: var(--font-roboto-slab) !important;
 }

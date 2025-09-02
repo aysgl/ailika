@@ -91,7 +91,7 @@ export default function ProductCard({
                 }`}>
                 <Link
                     href={`/product/${product.slug}`}
-                    className={`font-bold hover:underline ${
+                    className={`font-bold text-foreground hover:underline ${
                         small ? 'text-sm' : 'text-base'
                     }`}>
                     {product.name}
@@ -115,7 +115,7 @@ export default function ProductCard({
                         <span
                             className={`${
                                 small ? 'text-xs' : 'text-sm'
-                            } line-through text-foreground-400`}>
+                            } text-foreground/60 line-through text-foreground-400`}>
                             {formatCents(product.oldPrice)}
                         </span>
                         <span

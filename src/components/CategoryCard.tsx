@@ -13,7 +13,7 @@ type CategoryCardProps = {
 export default function CategoryCard({name, image, href}: CategoryCardProps) {
     const [broken, setBroken] = useState(false)
     const content = (
-        <Card className="group p-0 h-70 gap-8 rounded-t-[100%] rounded-b-4xl bg-white shadow-none overflow-hidden">
+        <Card className="group p-0 h-60 gap-8 rounded-t-[100%] rounded-b-4xl bg-white shadow-none overflow-hidden">
             <div className="relative h-full">
                 {!broken ? (
                     <Image

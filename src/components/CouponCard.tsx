@@ -77,7 +77,7 @@ export default function CouponCard({
     return (
         <Card
             className={`relative overflow-hidden ${
-                status === 'expired' ? 'opacity-50' : 'bg-background'
+                status === 'expired' ? 'opacity-50' : 'bg-white'
             } ${className}`}>
             <CardHeader className="pb-6">
                 <div className="flex items-center justify-between">

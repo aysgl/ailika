@@ -13,7 +13,7 @@ import {
 export default function Footer() {
     const year = new Date().getFullYear()
     return (
-        <footer className="w-full border-t border-foreground/10 bg-white/60">
+        <footer className="w-full border-t border-foreground/10">
             <div className="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-10">
                 {/* Brand */}
                 <div className="md:col-span-4 space-y-4">

@@ -41,6 +41,7 @@ import {
 import {useFavorites} from '@/context/FavoritesContext'
 import {useAuth} from '@/context/AuthContext'
 import Image from 'next/image'
+import ThemeDropdown from './ThemeDropdown'
 
 export default function Header() {
     const {totalItems} = useCart()
@@ -303,19 +304,21 @@ export default function Header() {
                 'container-full fixed top-0 left-0 right-0 text-foreground-900 z-40'
             }>
             <div
-                className={`container mx-auto my-1 px-4 flex items-center justify-between ${
+                className={`container mx-auto my-1 px-0 flex items-center justify-between ${
                     isScrolled
-                        ? 'bg-background/60 backdrop-blur-xl py-3 rounded-xl shadow-xl transition-all duration-300 ease-out'
+                        ? 'bg-white/60 backdrop-blur-xl py-3 rounded-xl shadow-xl transition-all duration-300 ease-out'
                         : 'py-6 transition-all duration-300 ease-out'
                 }`}>
                 <Link
                     href="/"
-                    className={'text-xl font-semibold tracking-wide'}>
+                    className={'text-xl font-semibold tracking-wide ms-2'}>
                     <span className="text-primary">
                         <Logo className="h-10 w-auto" />
                     </span>
                 </Link>
                 <div className="hidden lg:flex items-center space-x-0">
+                    <ThemeDropdown />
+
                     <DropdownMegaMenu title="Ojeler" menuData={ojelerData} />
                     <DropdownMegaMenu
                         title="Aksesuarlar"
