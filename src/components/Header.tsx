@@ -311,7 +311,7 @@ export default function Header() {
                 }`}>
                 <Link
                     href="/"
-                    className={'text-xl font-semibold tracking-wide ms-2'}>
+                    className={'text-xl font-semibold tracking-wide ps-2'}>
                     <span className="text-primary">
                         <Logo className="h-10 w-auto" />
                     </span>
