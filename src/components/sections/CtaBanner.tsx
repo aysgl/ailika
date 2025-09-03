@@ -15,11 +15,7 @@ export default function CtaBanner() {
                     <p className="text-white/80 mt-1 text-lg">
                         Earn points & save. Join our loyalty rewards club.
                     </p>
-                    <Button
-                        asChild
-                        size="lg"
-                        variant={'secondary'}
-                        className=" hover:bg-white/90">
+                    <Button asChild size="lg" variant={'secondary'}>
                         <Link href="/shop">Mağazaya Git</Link>
                     </Button>
                 </div>

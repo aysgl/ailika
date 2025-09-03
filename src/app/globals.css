@@ -149,6 +149,7 @@ html[data-theme='midnight'] {
   --ring: var(--primary);
   --foreground: oklch(0.94 0.03 266.02);
   --destructive: oklch(59.2% 0.249 0.584);
+  --font-sans: var(--font-roboto-slab);
 }
 
 
@@ -197,6 +198,15 @@ html {
   font-family: var(--font-outfit-sans);
 }
 
+/* Theme-specific font overrides */
+html[data-theme='ocean'] * {
+  font-family: var(--font-outfit-sans) !important;
+}
+
 html[data-theme='pastel'] * {
+  font-family: var(--font-roboto-slab) !important;
+}
+
+html[data-theme='midnight'] * {
   font-family: var(--font-roboto-slab) !important;
 }

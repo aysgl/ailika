@@ -12,11 +12,12 @@ export const metadata = {
 export default async function ShopPage({
     searchParams
 }: {
-    searchParams: {category?: string; brand?: string}
+    searchParams: Promise<{category?: string; brand?: string}>
 }) {
     const products = (await api.listProducts()) as Product[]
-    const category = searchParams?.category?.trim()
-    const brand = searchParams?.brand?.trim()
+    const params = await searchParams
+    const category = params?.category?.trim()
+    const brand = params?.brand?.trim()
     const normalized = (s: string) => s.toLocaleLowerCase('tr-TR')
     const trToAscii = (s: string) =>
         s

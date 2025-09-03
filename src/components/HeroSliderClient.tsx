@@ -35,7 +35,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             )}
                             {current.ctaHref && current.ctaLabel && (
                                 <Button
-                                    variant={'destructive'}
+                                    variant={'secondary'}
                                     size={'lg'}
                                     className="text-white rounded-full text-lg"
                                     asChild>

@@ -3,14 +3,20 @@
 import TitleWave from '@/components/TitleWave'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import {Card, CardContent} from '@/components/ui/card'
-import {Input} from '@/components/ui/input'
 import Image from 'next/image'
-import AddToCartButton from '@/components/AddToCartButton'
+
 import {products} from '@/lib/products'
+import {Clock, Heart, ShieldHalf, Truck} from 'lucide-react'
+import {Button} from '@/components/ui/button'
+import QuantityControl from '@/components/QuantityControl'
+import React, {useState} from 'react'
+import {useCart} from '@/context/CartContext'
+import ColorSelect, {ColorOption} from '@/components/ColorSelect'
+import {Separator} from '@radix-ui/react-dropdown-menu'
 
 export default function SetsLandingPage() {
-    // Şimdilik tek ürün üzerinden bir landing render ediyoruz
     const featured = products[0]
+    const {addToCart, items, updateQuantity, removeFromCart} = useCart()
     const setItems: {name: string; qty: string; priceText: string}[] = [
         {name: 'Renk (Renk Seçiniz)', qty: '1 Adet', priceText: '399,00 ₺'},
         {
@@ -59,6 +65,14 @@ export default function SetsLandingPage() {
         {name: 'Borthe Moistening Oil', qty: '1 Adet', priceText: '135,00 ₺'}
     ]
 
+    // Cart'taki gerçek quantity'yi al, yoksa 1 olarak başla
+    const cartItem = items.find(item => item.productId === featured.id)
+    const quantity = cartItem?.quantity || 1
+
+    // Renk seçimi state'i
+    const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null)
+    const [showDetails, setShowDetails] = useState(false)
+
     return (
         <div className="container mx-auto pb-16">
             <div className="mb-8 space-y-2">
@@ -70,15 +84,14 @@ export default function SetsLandingPage() {
                     <Breadcrumbs
                         items={[
                             {label: 'Anasayfa', href: '/'},
-                            {label: 'Başlangıç Setleri', href: '/sets'},
                             {label: featured.name}
                         ]}
                     />
                 </div>
             </div>
 
-            <section className="grid grid-cols-1 md:grid-cols-12 gap-8">
-                <div className="md:col-span-4 space-y-4 mt-20">
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div className="lg:col-span-4 space-y-4 mt-12">
                     <h2 className="text-5xl font-bold leading-tight">
                         Evinizde Profesyonel
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary/60 to-primary">
@@ -98,7 +111,7 @@ export default function SetsLandingPage() {
                         <li>Yeni başlayanlar için hızlı kurulum</li>
                     </ul>
                 </div>
-                <div className="md:col-span-8">
+                <div className="lg:col-span-8">
                     <Card>
                         <CardContent>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
@@ -139,125 +152,156 @@ export default function SetsLandingPage() {
                                             </span>
                                         )}
                                     </div>
-                                    <div className="text-xs text-muted-foreground">
-                                        Bu set kampanyasız olarak ₺
-                                        {(
-                                            (featured.oldPrice ||
-                                                featured.price) / 100
-                                        ).toFixed(2)}{' '}
-                                        tutmaktadır.
-                                    </div>
 
-                                    <div className="grid gap-2 pt-2">
-                                        <label
-                                            className="text-sm"
-                                            htmlFor="ellisanColor">
-                                            Numaranızı Seçiniz
-                                        </label>
-                                        <select
-                                            id="ellisanColor"
-                                            defaultValue=""
-                                            className="h-9 px-3 rounded-md border bg-white">
-                                            <option value="" disabled>
-                                                No selection
-                                            </option>
-                                            <option>000 (Rakı Beyazı)</option>
-                                            <option>001</option>
-                                            <option>002</option>
-                                            <option>003</option>
-                                            <option>004</option>
-                                            <option>005</option>
-                                            <option>006</option>
-                                            <option>007</option>
-                                            <option>009</option>
-                                            <option>010</option>
-                                            <option>011</option>
-                                            <option>013</option>
-                                            <option>014</option>
-                                            <option>015</option>
-                                            <option>016</option>
-                                            <option>017</option>
-                                            <option>018</option>
-                                            <option>019</option>
-                                            <option>
-                                                Milky White (Kemik Beyazı)
-                                            </option>
-                                            <option>Transparent</option>
-                                            <option>White</option>
-                                        </select>
-                                        <div className="flex items-center gap-2">
-                                            <label
-                                                className="text-sm"
-                                                htmlFor="qty">
-                                                Adet
-                                            </label>
-                                            <Input
-                                                id="qty"
-                                                type="number"
-                                                min={1}
-                                                defaultValue={1}
-                                                className="w-20"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="mt-2">
-                                        <AddToCartButton
-                                            productId={featured.id}
+                                    <div className="pt-2 space-y-2">
+                                        <ColorSelect
+                                            selectedColor={selectedColor}
+                                            onColorChange={setSelectedColor}
                                         />
+                                        <div className="w-full flex items-center justify-between gap-2">
+                                            <QuantityControl
+                                                quantity={quantity}
+                                                onIncrease={() => {
+                                                    if (cartItem) {
+                                                        updateQuantity(
+                                                            featured.id,
+                                                            quantity + 1
+                                                        )
+                                                    } else {
+                                                        addToCart(
+                                                            featured.id,
+                                                            2
+                                                        )
+                                                    }
+                                                }}
+                                                onDecrease={() => {
+                                                    if (
+                                                        cartItem &&
+                                                        quantity > 1
+                                                    ) {
+                                                        updateQuantity(
+                                                            featured.id,
+                                                            quantity - 1
+                                                        )
+                                                    }
+                                                }}
+                                            />
+
+                                            <Button
+                                                variant={
+                                                    cartItem
+                                                        ? 'destructive'
+                                                        : 'outline'
+                                                }
+                                                className="flex-1"
+                                                disabled={
+                                                    !selectedColor && !cartItem
+                                                }
+                                                onClick={() => {
+                                                    if (
+                                                        !selectedColor &&
+                                                        !cartItem
+                                                    ) {
+                                                        return // Renk seçilmeden işlem yapma
+                                                    }
+
+                                                    if (cartItem) {
+                                                        // Sepetten çıkar
+                                                        removeFromCart(
+                                                            featured.id
+                                                        )
+                                                    } else {
+                                                        // Sepete ekle
+                                                        addToCart(
+                                                            featured.id,
+                                                            quantity
+                                                        )
+                                                    }
+                                                }}>
+                                                {cartItem
+                                                    ? 'Sepetten Çıkar'
+                                                    : !selectedColor
+                                                    ? 'Önce Renk Seçin'
+                                                    : quantity > 1
+                                                    ? `${quantity} Adet Sepete Ekle`
+                                                    : 'Sepete Ekle'}
+                                            </Button>
+                                            <Button
+                                                variant="secondary"
+                                                size="icon">
+                                                <Heart className="w-4 h-4" />
+                                            </Button>
+                                        </div>
                                     </div>
-                                    <div className="text-xs text-muted-foreground space-y-1 pt-1">
-                                        <div>
-                                            ÜCRETSİZ KARGO (1500₺ üzerindeki
-                                            alışverişlerinizde)
-                                        </div>
-                                        <div>
-                                            Anında iade seçeneği (hatalı ya da
-                                            kusurlu ürünlerde)
-                                        </div>
-                                        <div>
-                                            14:00’a kadar gelen siparişler aynı
-                                            gün kargolanır
-                                        </div>
-                                        <div>
-                                            256bit SSL ile tamamen güvendesiniz!
+                                    <div className="mt-4 bg-gray-50 rounded-lg">
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 divide-x divide-gray-150 text-xs text-muted-foreground">
+                                            <div className="flex flex-col gap-2 p-3">
+                                                <Truck className="text-secondary size-5" />
+                                                1250₺ üzeri kargoya ücretsiz
+                                            </div>
+                                            <div className="flex flex-col gap-2 p-3">
+                                                <Clock className="text-primary size-5" />
+                                                14:00’a kadar siparişler kargoda
+                                            </div>
+                                            <div className="flex flex-col gap-2 p-3">
+                                                <ShieldHalf className="text-lime-500 size-5" />
+                                                256-bit SSL ile güvenli
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="sm:col-span-2 mt-4 text-center">
+                                    <Separator />
+                                    <Button
+                                        variant={'link'}
+                                        size={'sm'}
+                                        onClick={() =>
+                                            setShowDetails(!showDetails)
+                                        }>
+                                        {showDetails
+                                            ? 'Daha Az Göster'
+                                            : 'Devamını Oku...'}
+                                    </Button>
                                 </div>
                             </div>
                         </CardContent>
-                        <CardContent className="border-t-3 border-primary border-dotted">
-                            <div className="grid gap-2">
-                                <div className="grid grid-cols-[100px_1fr_auto] items-center text-sm font-medium text-foreground/80">
-                                    <div>Adet/Takım</div>
-                                    <div>Ürün Adı</div>
-                                    <div className="justify-self-end">
-                                        Fiyat
+                        {showDetails && (
+                            <CardContent className="border-t-3 border-primary border-dotted">
+                                <div className="grid gap-2">
+                                    <div className="grid grid-cols-[100px_1fr_auto] items-center text-sm font-medium text-foreground/80">
+                                        <div>Adet/Takım</div>
+                                        <div>Ürün Adı</div>
+                                        <div className="justify-self-end">
+                                            Fiyat
+                                        </div>
                                     </div>
-                                </div>
-                                {setItems.map((it, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="grid grid-cols-[100px_1fr_auto] items-center text-sm py-2 border-b border-foreground/10">
+                                    {setItems.map((it, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="grid grid-cols-[100px_1fr_auto] items-center text-sm py-2 border-b border-foreground/10">
+                                            <div className="text-foreground/70">
+                                                {it.qty}
+                                            </div>
+                                            <div>{it.name}</div>
+                                            <div className="justify-self-end font-medium">
+                                                {it.priceText}
+                                            </div>
+                                        </div>
+                                    ))}
+                                    <div className="grid grid-cols-[100px_1fr_auto] items-center text-sm pt-2">
                                         <div className="text-foreground/70">
-                                            {it.qty}
+                                            13 Parça
                                         </div>
-                                        <div>{it.name}</div>
-                                        <div className="justify-self-end font-medium">
-                                            {it.priceText}
+                                        <div className="font-semibold">
+                                            Toplam
                                         </div>
-                                    </div>
-                                ))}
-                                <div className="grid grid-cols-[100px_1fr_auto] items-center text-sm pt-2">
-                                    <div className="text-foreground/70">
-                                        13 Parça
-                                    </div>
-                                    <div className="font-semibold">Toplam</div>
-                                    <div className="justify-self-end font-bold">
-                                        ₺{(featured.price / 100).toFixed(2)}
+                                        <div className="justify-self-end font-bold">
+                                            ₺{(featured.price / 100).toFixed(2)}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </CardContent>
+                            </CardContent>
+                        )}
                     </Card>
                 </div>
             </section>

@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {Button} from '@/components/ui/button'
-import {Minus, Plus, Trash} from 'lucide-react'
-// no sheet-specific imports to keep this reusable outside dialogs
+import {Trash} from 'lucide-react'
+import QuantityControl from './QuantityControl'
 
 type Props = {
     slug: string
@@ -65,25 +65,12 @@ export default function CartItemRow({
                     )}
                 </div>
             </div>
-            <div className="flex items-center gap-2 bg-blue-100 p-1 rounded-xl">
-                <Button
-                    variant="outline"
-                    className="w-6 h-6"
-                    size="icon"
-                    aria-label={`Azalt: ${name}`}
-                    onClick={onDecrease}>
-                    <Minus className="w-4 h-4" />
-                </Button>
-                <span className="w-6 text-center">{quantity}</span>
-                <Button
-                    variant="outline"
-                    className="w-6 h-6"
-                    size="icon"
-                    aria-label={`Artır: ${name}`}
-                    onClick={onIncrease}>
-                    <Plus className="w-4 h-4" />
-                </Button>
-            </div>
+            <QuantityControl
+                quantity={quantity}
+                onIncrease={onIncrease}
+                onDecrease={onDecrease}
+            />
+
             <div className="min-w-20 text-end">
                 <span className="text-xl font-semibold">
                     {formatCents(priceCents * quantity)}

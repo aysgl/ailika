@@ -82,6 +82,8 @@ export function CartProvider({children}: {children: React.ReactNode}) {
             }
             return [...prev, {productId, quantity}]
         })
+        // Open cart sidebar when item is added
+        setIsCartOpen(true)
     }, [])
 
     const removeFromCart = useCallback((productId: string) => {
