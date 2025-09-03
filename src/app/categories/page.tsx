@@ -1,6 +1,5 @@
 import Breadcrumbs from '@/components/Breadcrumbs'
 import CategoryCard from '@/components/CategoryCard'
-import CategoriesSection from '@/components/sections/Categories'
 import TitleWave from '@/components/TitleWave'
 
 export const dynamic = 'force-static'
