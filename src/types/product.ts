@@ -9,6 +9,7 @@ export type Product = {
     colors?: string[]
     code?: string
     categories?: string[]
+    campaign?: string
 }
 
 export type CartItem = {

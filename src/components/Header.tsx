@@ -60,12 +60,12 @@ export default function Header() {
     }, [])
 
     return (
-        <header className="container-full fixed top-0 left-0 right-0 text-foreground-900 z-40">
+        <header className="container-full fixed left-0 right-0 text-foreground-900 z-40">
             <div
-                className={`container mx-auto my-1 px-0 flex items-center justify-between ${
+                className={`container mx-auto px-0 flex items-center justify-between ${
                     isScrolled
                         ? 'bg-white/60 backdrop-blur-xl py-3 rounded-xl shadow-xl transition-all duration-300 ease-out'
-                        : 'py-6 transition-all duration-300 ease-out'
+                        : 'py-4 transition-all duration-300 ease-out'
                 }`}>
                 <Link
                     href="/"

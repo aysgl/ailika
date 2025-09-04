@@ -9,9 +9,9 @@ import {products} from '@/lib/products'
 import {Clock, Heart, ShieldHalf, Truck} from 'lucide-react'
 import {Button} from '@/components/ui/button'
 import QuantityControl from '@/components/QuantityControl'
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import {useCart} from '@/context/CartContext'
-import ColorSelect, {ColorOption} from '@/components/ColorSelect'
+import ColorSelect from '@/components/ColorSelect'
 import {Separator} from '@radix-ui/react-dropdown-menu'
 
 export default function SetsLandingPage() {
@@ -70,7 +70,21 @@ export default function SetsLandingPage() {
     const quantity = cartItem?.quantity || 1
 
     // Renk seçimi state'i
-    const [selectedColor, setSelectedColor] = useState<ColorOption | null>(null)
+    const [selectedColor, setSelectedColor] = useState<string | null>(null)
+
+    // Featured ürünün renklerini kullan
+    const productColors = useMemo(() => {
+        return featured.colors && featured.colors.length > 0
+            ? featured.colors
+            : ['#FF6B6B'] // Fallback renk
+    }, [featured.colors])
+
+    // İlk rengi otomatik seç
+    React.useEffect(() => {
+        if (!selectedColor && productColors.length > 0) {
+            setSelectedColor(productColors[0])
+        }
+    }, [selectedColor, productColors])
     const [showDetails, setShowDetails] = useState(false)
 
     return (
@@ -154,10 +168,17 @@ export default function SetsLandingPage() {
                                     </div>
 
                                     <div className="pt-2 space-y-2">
-                                        <ColorSelect
-                                            selectedColor={selectedColor}
-                                            onColorChange={setSelectedColor}
-                                        />
+                                        <div className="space-y-3">
+                                            <h4 className="text-sm font-medium">
+                                                Renk Seçin
+                                            </h4>
+                                            <ColorSelect
+                                                colors={productColors}
+                                                selectedColor={selectedColor}
+                                                onColorChange={setSelectedColor}
+                                                size="md"
+                                            />
+                                        </div>
                                         <div className="w-full flex items-center justify-between gap-2">
                                             <QuantityControl
                                                 quantity={quantity}

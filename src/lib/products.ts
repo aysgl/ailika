@@ -10,9 +10,29 @@ export const products: Product[] = [
         description:
             'Evde protez tırnak uygulamaya başlamak için gerekli 13 parçalık başlangıç seti. Uygun fiyat, pratik kullanım.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
-        colors: [],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b',
+            '#fdf5e2',
+            '#fffdd2',
+            '#f3e5a2',
+            '#f5f5d2',
+            '#fffff2',
+            '#e6d5b2',
+            '#dbcbb2',
+            '#d2b482'
+        ],
         code: '#set-ellisan-13',
-        categories: ['Başlangıç Setleri']
+        categories: ['Başlangıç Setleri'],
+        campaign: '25% off'
     },
     {
         id: '1',
@@ -22,9 +42,21 @@ export const products: Product[] = [
         oldPrice: 1599,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
-        colors: ['#ffffff00'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#ailika',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '2',
@@ -35,9 +67,21 @@ export const products: Product[] = [
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/Cateye_Oje-768x768.webp',
-        colors: ['#990315'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#cateye',
-        categories: ['Kedigözü Oje']
+        categories: ['Kedigözü Oje'],
+        campaign: ''
     },
     {
         id: '4',
@@ -48,7 +92,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/001-768x768.webp',
         colors: ['#e5efea'],
         code: '#001',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '5',
@@ -60,7 +105,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/002-768x768.webp',
         colors: ['#f3efdd'],
         code: '#002',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '6',
@@ -70,9 +116,21 @@ export const products: Product[] = [
         oldPrice: 1699,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/003-768x768.webp',
-        colors: ['rgb(245 227 218)'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#003',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '7',
@@ -82,9 +140,21 @@ export const products: Product[] = [
         oldPrice: 1499,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/004-768x768.webp',
-        colors: ['rgb(243 178 178)'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#004',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '8',
@@ -96,7 +166,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/005-768x768.webp',
         colors: ['rgb(255 219 224)'],
         code: '#005',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '9',
@@ -107,7 +178,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/006-768x768.webp',
         colors: ['rgb(254 222 211)'],
         code: '#006',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '10',
@@ -116,9 +188,21 @@ export const products: Product[] = [
         price: 1299,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/007-768x768.webp',
-        colors: ['rgb(255 195 170)'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#007',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '11',
@@ -130,7 +214,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/008-768x768.webp',
         colors: ['rgb(254 199 179)'],
         code: '#008',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '12',
@@ -141,7 +226,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/009-768x768.webp',
         colors: ['rgb(251 184 159)'],
         code: '#009',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '3',
@@ -150,9 +236,21 @@ export const products: Product[] = [
         price: 1399,
         description: 'Doğal ve şık görünüm için nude bej ton.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/010-768x768.webp',
-        colors: ['rgb(250 168 134)'],
+        colors: [
+            '#fdf5e6',
+            '#fffdd0',
+            '#f3e5ab',
+            '#f5f5dc',
+            '#fffff0',
+            '#e6d5b8',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280',
+            '#c19a6b'
+        ],
         code: '#010',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '13',
@@ -161,9 +259,21 @@ export const products: Product[] = [
         price: 1299,
         description: 'Sıcak bej tonlarında günlük kullanıma uygun oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/001-768x768.webp',
-        colors: ['#d9b7a3'],
+        colors: [
+            '#f5deb3', // Buğday
+            '#ffe4c4', // Açık Bej
+            '#deb887', // Kumlu Kahve
+            '#e6d5b8', // Soft Beige
+            '#faf0e6', // Linen
+            '#c2b280', // Açık Kahve
+            '#d2b48c', // Ten Rengi
+            '#f3e5ab', // Vanilya
+            '#fff5ee', // Soft Nude
+            '#e3dac9' // Porselen
+        ],
         code: '#011',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '14',
@@ -172,9 +282,17 @@ export const products: Product[] = [
         price: 1299,
         description: 'Pastel lila ile yumuşak ve zarif bir görünüm.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/002-768x768.webp',
-        colors: ['#cdb6d9'],
+        colors: [
+            '#faf0e6',
+            '#f5f5dc',
+            '#e3dac9',
+            '#dbcbbd',
+            '#d2b48c',
+            '#c2b280'
+        ],
         code: '#012',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '15',
@@ -185,7 +303,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/003-768x768.webp',
         colors: ['#9aa1a7'],
         code: '#013',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '16',
@@ -196,7 +315,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/004-768x768.webp',
         colors: ['#f3bdc8'],
         code: '#014',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '17',
@@ -205,9 +325,19 @@ export const products: Product[] = [
         price: 1199,
         description: 'Sıcak şeftali tonlarında canlı görünüm.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/005-768x768.webp',
-        colors: ['#f4b59a'],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#015',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '18',
@@ -218,7 +348,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/006-768x768.webp',
         colors: ['#b8d9c4'],
         code: '#016',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '19',
@@ -229,7 +360,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/007-768x768.webp',
         colors: ['#1b2a4a'],
         code: '#017',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '20',
@@ -240,7 +372,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/008-768x768.webp',
         colors: ['#a7a0b3'],
         code: '#018',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '21',
@@ -251,7 +384,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/009-768x768.webp',
         colors: ['#9b9b9b'],
         code: '#019',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '22',
@@ -260,9 +394,19 @@ export const products: Product[] = [
         price: 1299,
         description: 'Sisli beyaz tonlarında zarif görünüm.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/001-768x768.webp',
-        colors: ['#f1f1f1'],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#020',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '23',
@@ -273,7 +417,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/002-768x768.webp',
         colors: ['#5e1b3a'],
         code: '#021',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '24',
@@ -284,7 +429,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/003-768x768.webp',
         colors: ['#f3d7dc'],
         code: '#022',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '25',
@@ -293,9 +439,19 @@ export const products: Product[] = [
         price: 1299,
         description: 'Adaçayı yeşili ile natürel bir hava.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/004-768x768.webp',
-        colors: ['#7a8f85'],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#023',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '26',
@@ -306,7 +462,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/005-768x768.webp',
         colors: ['#cfe3f4'],
         code: '#024',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '27',
@@ -317,7 +474,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/006-768x768.webp',
         colors: ['#111111'],
         code: '#025',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '28',
@@ -328,7 +486,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/007-768x768.webp',
         colors: ['#cbb8a0'],
         code: '#026',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     {
         id: '29',
@@ -337,9 +496,19 @@ export const products: Product[] = [
         price: 1299,
         description: 'Deniz mavisi ile canlı bir görünüm.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/008-768x768.webp',
-        colors: ['#2c6fa1'],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#027',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: ''
     },
     {
         id: '30',
@@ -350,7 +519,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/009-768x768.webp',
         colors: ['#8a79a6'],
         code: '#028',
-        categories: ['Kalıcı Oje']
+        categories: ['Kalıcı Oje'],
+        campaign: '25% off'
     },
     // Solüsyonlar kategorisi için örnek 3 ürün
     {
@@ -361,9 +531,19 @@ export const products: Product[] = [
         description:
             'Bitki özleri ile zenginleştirilmiş tırnak ve tırnak eti besleyici bakım yağı.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/07/borthe_nailOil-768x768.webp',
-        colors: [],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#sol-01',
-        categories: ['Solüsyonlar']
+        categories: ['Solüsyonlar'],
+        campaign: '25% off'
     },
     {
         id: 'sol-02',
@@ -373,9 +553,19 @@ export const products: Product[] = [
         description:
             'Kalıcı ojeyi nazikçe ve hızlı şekilde çözmek için profesyonel remover.',
         image: 'https://www.ellisan.com/wp-content/uploads/2023/12/Remover2-768x768.webp',
-        colors: [],
+        colors: [
+            '#fdf5e6', // Krem
+            '#fffdd0', // Açık Krem
+            '#f3e5ab', // Vanilya
+            '#f5f5dc', // Bej
+            '#fffff0', // Fildişi
+            '#e6d5b8', // Soft Beige
+            '#dbcbbd', // Nude Rose
+            '#d2b48c' // Ten Rengi
+        ],
         code: '#sol-02',
-        categories: ['Solüsyonlar']
+        categories: ['Solüsyonlar'],
+        campaign: ''
     },
     {
         id: 'sol-03',
@@ -387,7 +577,8 @@ export const products: Product[] = [
         image: 'https://www.ellisan.com/wp-content/uploads/2023/12/Borthe_cleanser_1-768x768.webp',
         colors: [],
         code: '#sol-03',
-        categories: ['Solüsyonlar']
+        categories: ['Solüsyonlar'],
+        campaign: '25% off'
     }
 ]
 

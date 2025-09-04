@@ -15,17 +15,6 @@ export default function FavoritesPage() {
     const products = allProducts.filter(p => favorites.includes(p.id))
     return (
         <div className="container mx-auto pb-16">
-            <div className="mb-8 space-y-2">
-                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
-                    <TitleWave title="Favoriler" bandClass="text-secondary" />
-                    <Breadcrumbs
-                        items={[
-                            {label: 'Anasayfa', href: '/'},
-                            {label: 'Favoriler'}
-                        ]}
-                    />
-                </div>
-            </div>
             {products.length === 0 ? (
                 <EmptyState
                     icon={<Heart className="w-10 h-10 text-secondary" />}
@@ -39,7 +28,23 @@ export default function FavoritesPage() {
                     className="bg-white/60 rounded-xl py-16"
                 />
             ) : (
-                <ProductGrid products={products} cols={4} />
+                <>
+                    <div className="mb-8 space-y-2">
+                        <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
+                            <TitleWave
+                                title="Favoriler"
+                                bandClass="text-secondary"
+                            />
+                            <Breadcrumbs
+                                items={[
+                                    {label: 'Anasayfa', href: '/'},
+                                    {label: 'Favoriler'}
+                                ]}
+                            />
+                        </div>
+                    </div>
+                    <ProductGrid products={products} cols={4} />
+                </>
             )}
         </div>
     )

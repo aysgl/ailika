@@ -66,7 +66,10 @@ export default function ProductCard({
                     } shadow-xl`}
                     sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute top-2 right-2 z-30">
+                <div className="absolute top-2 right-2 z-30 flex items-center gap-2">
+                    {product.campaign && (
+                        <Badge variant="secondary">{product.campaign}</Badge>
+                    )}
                     <Button
                         variant="ghost"
                         size="icon"
