@@ -34,16 +34,17 @@ export default function CartItemRow({
     onNavigate
 }: Props) {
     return (
-        <div className="flex gap-12 items-center justify-between p-4">
-            <div className="flex items-center gap-2 w-1/2">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-12 sm:items-center sm:justify-between p-3 sm:p-4">
+            {/* Mobile: Stacked layout, Desktop: Horizontal */}
+            <div className="flex items-center gap-2 sm:w-1/2">
                 <Button
                     variant="ghost"
                     size="icon"
                     onClick={onRemove}
-                    className="text-primary hover:text-foreground-900">
+                    className="text-primary hover:text-foreground-900 shrink-0">
                     <Trash className="w-4 h-4" />
                 </Button>
-                <div className="relative w-20 h-20 shrink-0 overflow-hidden rounded-xl bg-foreground-100 shadow-xl aspect-[1/1]">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden rounded-xl bg-foreground-100 shadow-xl aspect-square">
                     <Image
                         src={image || '/next.svg'}
                         alt={name}
@@ -51,30 +52,35 @@ export default function CartItemRow({
                         className="object-cover"
                     />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                     <Link
                         href={`/product/${slug}`}
                         onClick={onNavigate}
-                        className="font-medium hover:underline">
+                        className="font-medium hover:underline text-sm sm:text-base line-clamp-2 sm:line-clamp-1">
                         {name}
                     </Link>
                     {code && (
-                        <p className="text-sm text-foreground-500">
+                        <p className="text-xs sm:text-sm text-foreground-500">
                             Code: {code}
                         </p>
                     )}
                 </div>
             </div>
-            <QuantityControl
-                quantity={quantity}
-                onIncrease={onIncrease}
-                onDecrease={onDecrease}
-            />
 
-            <div className="min-w-20 text-end">
-                <span className="text-xl font-semibold">
-                    {formatCents(priceCents * quantity)}
-                </span>
+            {/* Mobile: Bottom row with quantity and price */}
+            <div className="flex items-center justify-end gap-3 sm:gap-4">
+                <QuantityControl
+                    size="sm"
+                    quantity={quantity}
+                    onIncrease={onIncrease}
+                    onDecrease={onDecrease}
+                />
+
+                <div className="min-w-20 text-end">
+                    <span className="text-lg sm:text-xl font-semibold">
+                        {formatCents(priceCents * quantity)}
+                    </span>
+                </div>
             </div>
         </div>
     )

@@ -47,12 +47,12 @@ export default function CartSidebar() {
             onOpenChange={open => (open ? undefined : closeCart())}>
             <SheetContent
                 side="right"
-                className="rounded-2xl w-full sm:w-[420px] md:w-[45%] h-[calc(100dvh-1rem)]">
+                className="rounded-2xl w-auto sm:w-[400px] md:w-[45%] h-[calc(100dvh-1rem)] p-0">
                 <SheetTitle className="sr-only">Cart</SheetTitle>
                 <Sidebar className="h-full min-h-0">
-                    <SidebarHeader>
+                    <SidebarHeader className="p-4">
                         <div className="flex items-center justify-between w-full">
-                            <h3 className="text-lg font-semibold">
+                            <h3 className="text-base sm:text-lg font-semibold">
                                 Your Bag (
                                 {items.reduce((s, it) => s + it.quantity, 0)})
                             </h3>
@@ -61,7 +61,7 @@ export default function CartSidebar() {
                                 size="icon"
                                 onClick={closeCart}
                                 aria-label="Kapat">
-                                <X className="w-5 h-5" />
+                                <X className="w-4 h-4 sm:w-5 sm:h-5" />
                             </Button>
                         </div>
                     </SidebarHeader>
@@ -114,23 +114,22 @@ export default function CartSidebar() {
                         </div>
                         {items.length > 0 && recommended.length > 0 && (
                             <div className="border-t">
-                                <h4 className="font-semibold p-4">
+                                <h4 className="font-semibold p-3 sm:p-4 text-sm sm:text-base">
                                     We Recommend ({recommended.length})
                                 </h4>
                                 <HorizontalSlider
                                     pad
                                     grid={{
-                                        base: 1.2,
-                                        sm: 2,
-                                        md: 3,
-                                        lg: 4
+                                        base: 1.1,
+                                        sm: 1.5,
+                                        md: 2,
+                                        lg: 3
                                     }}>
                                     {(recommended as Product[]).map(r => (
                                         <ProductCard
                                             small
                                             key={r.id}
                                             product={r}
-                                            imageAspectClass="aspect-[1/1]"
                                         />
                                     ))}
                                 </HorizontalSlider>
@@ -138,39 +137,53 @@ export default function CartSidebar() {
                         )}
                     </SidebarContent>
                     <SidebarFooter>
-                        <div className="p-4 space-y-2">
-                            <div className="flex items-center justify-between">
+                        <div className="p-3 sm:p-4 space-y-3">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                                 <div>
-                                    <span className="text-sm font-bold text-foreground-600">
+                                    <span className="text-xs sm:text-sm font-bold text-foreground-600">
                                         Subtotal
                                     </span>
-                                    <p className="text-sm text-foreground-500">
+                                    <p className="text-xs sm:text-sm text-foreground-500">
                                         Taxes and shipping calculated at
                                         checkout.
                                     </p>
                                 </div>
-                                <span className="font-semibold text-3xl">
+                                <span className="font-semibold text-xl sm:text-3xl">
                                     {formatCents(subtotalCents)}
                                 </span>
                             </div>
 
-                            <div className="flex justify-end gap-2 pt-2">
+                            {/* Mobile: Stacked buttons, Desktop: Horizontal */}
+                            <div className="flex flex-col sm:flex-row gap-2 pt-2">
                                 <SheetClose asChild>
-                                    <Link href="/cart">
+                                    <Link href="/cart" className="flex-1">
                                         <Button
                                             variant="outline"
-                                            className="w-full">
+                                            size="sm"
+                                            className="w-full text-xs sm:text-sm">
                                             Sepetim
                                         </Button>
                                     </Link>
                                 </SheetClose>
-                                <Link href="/#">
-                                    <Button variant="outline">
-                                        <Phone /> Whatsapp&apos;tan Sipariş
+                                <Link href="/#" className="flex-1">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="w-full text-xs sm:text-sm">
+                                        <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <span className="hidden sm:inline">
+                                            Whatsapp&apos;tan Sipariş
+                                        </span>
+                                        <span className="sm:hidden">
+                                            WhatsApp
+                                        </span>
                                     </Button>
                                 </Link>
-                                <Link href="/checkout">
-                                    <Button variant="secondary">
+                                <Link href="/checkout" className="flex-1">
+                                    <Button
+                                        variant="secondary"
+                                        size="sm"
+                                        className="w-full text-xs sm:text-sm">
                                         Hemen Öde
                                     </Button>
                                 </Link>
