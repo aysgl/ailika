@@ -26,16 +26,9 @@ export default function TrendingProducts() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider cols={5}>
+                <HorizontalSlider cols={6}>
                     {items.map((p, i) => (
-                        <div
-                            key={`${p.id}-${i}`}
-                            className="snap-center min-w-[80%] sm:min-w-[50%] md:min-w-[33.3333%] lg:min-w-[20%]">
-                            <ProductCard
-                                product={p}
-                                imageAspectClass="sm:aspect-[4/5] md:aspect-[1/1]"
-                            />
-                        </div>
+                        <ProductCard key={`${p.id}-${i}`} product={p} />
                     ))}
                 </HorizontalSlider>
             </div>

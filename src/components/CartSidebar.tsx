@@ -119,7 +119,12 @@ export default function CartSidebar() {
                                 </h4>
                                 <HorizontalSlider
                                     pad
-                                    grid={{base: 4, sm: 4, md: 4, lg: 4}}>
+                                    grid={{
+                                        base: 1.2,
+                                        sm: 2,
+                                        md: 3,
+                                        lg: 4
+                                    }}>
                                     {(recommended as Product[]).map(r => (
                                         <ProductCard
                                             small

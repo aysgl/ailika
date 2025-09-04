@@ -38,7 +38,7 @@ export default function RootLayout({
                     <FavoritesProvider>
                         <AuthProvider>
                             <ScrollingText
-                                text="$5 Gel Polish Sale Is Here! 25% off everything else. No code needed!"
+                                text="$5 Gel Polish Sale Is Here! 25% off everything else!"
                                 speed={25}
                                 className="text-xs font-medium"
                             />

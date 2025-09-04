@@ -76,9 +76,9 @@ export default function ColorPalette() {
             </div>
 
             <div className="relative mt-6">
-                {/* Left preview overlay when selected */}
+                {/* Preview overlay when selected - responsive */}
                 {selected && (
-                    <div className="absolute inset-y-0 left-0 z-20 w-full md:w-2/5 rounded-2xl overflow-hidden">
+                    <div className="absolute top-0 left-0 z-20 w-full h-1/2 sm:w-3/5 sm:inset-y-0 md:w-2/4 md:h-full rounded-2xl overflow-hidden">
                         <button
                             className="absolute top-3 right-4 z-10 text-white bg-black/40 rounded-full w-8 h-8 flex items-center justify-center"
                             aria-label="Close"
@@ -91,9 +91,9 @@ export default function ColorPalette() {
                                 style={{backgroundColor: selected.color}}
                             />
 
-                            <div className="absolute bottom-6 left-6 right-6 flex flex-col justify-start gap-6">
+                            <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 flex flex-col justify-start gap-3 sm:gap-6">
                                 {selectedProduct?.image && (
-                                    <div className="relative w-[150px] h-[150px] hidden sm:block ">
+                                    <div className="relative aspect-square w-1/4 sm:w-2/3 md:w-1/4">
                                         <Image
                                             src={selectedProduct.image}
                                             alt={selected.name}
@@ -103,17 +103,17 @@ export default function ColorPalette() {
                                     </div>
                                 )}
 
-                                <div className="text-white drop-shadow space-y-2">
-                                    <div className="text-xl font-semibold">
+                                <div className="text-white drop-shadow space-y-1 sm:space-y-2">
+                                    <div className="text-lg sm:text-xl font-semibold line-clamp-2">
                                         {selected.name}
                                     </div>
-                                    <div className="text-xl">
+                                    <div className="text-sm sm:text-xl">
                                         Renk Kodu: {selected.code}
                                     </div>
                                     {selectedProduct?.categories &&
                                         selectedProduct.categories.length >
                                             0 && (
-                                            <div className="text-sm">
+                                            <div className="text-xs sm:text-sm line-clamp-1">
                                                 Kategori:{' '}
                                                 {selectedProduct.categories.join(
                                                     ', '
@@ -121,10 +121,11 @@ export default function ColorPalette() {
                                             </div>
                                         )}
 
-                                    <div className="pt-2">
+                                    <div className="pt-1 sm:pt-2">
                                         <Button
                                             asChild
-                                            className="bg-white text-black hover:bg-white/90 rounded-full px-5">
+                                            size="sm"
+                                            className="bg-white text-black hover:bg-white/90 rounded-full px-3 sm:px-5 text-xs sm:text-sm">
                                             <Link
                                                 href={`/product/${selected.slug}`}>
                                                 Detay
@@ -137,9 +138,11 @@ export default function ColorPalette() {
                     </div>
                 )}
 
-                {/* The palette grid (always 3 rows, flows by columns) */}
+                {/* The palette grid - responsive */}
                 <div
-                    className={`grid grid-rows-3 grid-flow-col auto-cols-[minmax(72px,1fr)] gap-0`}>
+                    className={`grid gap-1 
+                        grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12
+                    `}>
                     {filteredEntries.map(e => {
                         const key = `${e.slug}-${e.color}`
                         const isSelected = key === selectedKey
@@ -147,10 +150,10 @@ export default function ColorPalette() {
                             <button
                                 key={key}
                                 aria-label={e.name}
-                                className={`relative w-full aspect-square rounded-2xl transition p-0 m-0 ${
+                                className={`relative w-full aspect-square rounded-lg sm:rounded-2xl transition-all duration-200 p-0 m-0 ${
                                     isSelected
-                                        ? 'scale-94 ring-4 ring-primary'
-                                        : ''
+                                        ? 'scale-95 ring-2 sm:ring-4 ring-primary shadow-lg'
+                                        : 'hover:shadow-md'
                                 }`}
                                 style={{backgroundColor: e.color}}
                                 onClick={() =>

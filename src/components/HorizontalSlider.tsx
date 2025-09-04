@@ -16,13 +16,7 @@ type GridSpec = {
     sm?: number
     md?: number
     lg?: number
-}
-
-type CSSVars = React.CSSProperties & {
-    ['--mw']?: string
-    ['--mw-sm']?: string
-    ['--mw-md']?: string
-    ['--mw-lg']?: string
+    xl?: number
 }
 
 type HorizontalSliderProps = {
@@ -56,7 +50,13 @@ export default function HorizontalSlider({
         () =>
             grid ||
             (typeof cols === 'number'
-                ? {base: cols, sm: cols, md: cols, lg: cols}
+                ? {
+                      base: 1, // Mobile: 1 sütun
+                      sm: 2, // Small: her zaman 2 sütun
+                      md: 3, // Medium: her zaman 3 sütun
+                      lg: cols, // Large: istenen değer
+                      xl: cols // XL: istenen değer
+                  }
                 : undefined),
         [grid, cols]
     )
@@ -198,77 +198,109 @@ export default function HorizontalSlider({
 
     // Optional grid wrapping for consistent slide widths
     const slides = useMemo(() => {
-        // If we can't loop (<3 items), force a 3-col grid to keep heights stable
-        const gridForWrap = canLoop
-            ? explicitGrid
-            : explicitGrid || {base: 5, sm: 5, md: 5, lg: 5}
+        // Always use explicit grid if provided, fallback to default only if no grid specified
+        const gridForWrap = explicitGrid || {
+            base: 5,
+            sm: 5,
+            md: 5,
+            lg: 5,
+            xl: 5
+        }
 
         if (!gridForWrap) return rendered
-        const toPct = (n: number) => `${(100 / n).toFixed(6)}%`
-        const mw = toPct(gridForWrap.base)
-        const mwSm = gridForWrap.sm ? toPct(gridForWrap.sm) : mw
-        const mwMd = gridForWrap.md ? toPct(gridForWrap.md) : mwSm
-        const mwLg = gridForWrap.lg ? toPct(gridForWrap.lg) : mwMd
+        // Artık CSS variables değil, direkt Tailwind class'ları kullanıyoruz
         return rendered.map((child, i) => (
             <div
                 key={(isValidElement(child) && child.key) || `grid-${i}`}
-                className="snap-center min-w-[var(--mw)] sm:min-w-[var(--mw-sm)] md:min-w-[var(--mw-md)] lg:min-w-[var(--mw-lg)]"
-                style={
-                    {
-                        '--mw': mw,
-                        '--mw-sm': mwSm,
-                        '--mw-md': mwMd,
-                        '--mw-lg': mwLg
-                    } as CSSVars
-                }>
+                className={`snap-center flex-shrink-0 h-full min-w-full w-full sm:min-w-[50%] sm:w-[50%] md:min-w-[33.33%] md:w-[33.33%] ${
+                    // Sadece LG/XL için dinamik - cols değerine göre (min-width + width)
+                    gridForWrap.lg === 4
+                        ? 'lg:min-w-[25%] lg:w-[25%] xl:min-w-[25%] xl:w-[25%]'
+                        : gridForWrap.lg === 5
+                        ? 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+                        : gridForWrap.lg === 6
+                        ? 'lg:min-w-[16.67%] lg:w-[16.67%] xl:min-w-[16.67%] xl:w-[16.67%]'
+                        : gridForWrap.lg === 7
+                        ? 'lg:min-w-[14.28%] lg:w-[14.28%] xl:min-w-[14.28%] xl:w-[14.28%]'
+                        : gridForWrap.lg === 8
+                        ? 'lg:min-w-[12.5%] lg:w-[12.5%] xl:min-w-[12.5%] xl:w-[12.5%]'
+                        : 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+                }`}>
                 {child}
             </div>
         ))
-    }, [explicitGrid, rendered, canLoop])
+    }, [explicitGrid, rendered])
 
     // Compute container paddings so first/last slide peek half visible on edges
     const containerVars = useMemo(() => {
-        const gridForWrap = canLoop
-            ? explicitGrid
-            : explicitGrid || {base: 5, sm: 5, md: 5, lg: 5}
+        const gridForWrap = explicitGrid || {
+            base: 5,
+            sm: 5,
+            md: 5,
+            lg: 5,
+            xl: 5
+        }
         if (!gridForWrap) return undefined as undefined | React.CSSProperties
         const toPct = (n: number) => `${(100 / n).toFixed(6)}%`
         const mw = toPct(gridForWrap.base)
         const mwSm = gridForWrap.sm ? toPct(gridForWrap.sm) : mw
         const mwMd = gridForWrap.md ? toPct(gridForWrap.md) : mwSm
         const mwLg = gridForWrap.lg ? toPct(gridForWrap.lg) : mwMd
+        const mwXl = gridForWrap.xl ? toPct(gridForWrap.xl) : mwLg
         return {
             ['--mw']: mw,
             ['--mw-sm']: mwSm,
             ['--mw-md']: mwMd,
             ['--mw-lg']: mwLg,
-            ['--pad']: `calc(${mw} / 2)`,
+            ['--mw-xl']: mwXl,
+            ['--pad']: `calc(${mw} / 6)`, // Mobilde daha az padding
             ['--pad-sm']: `calc(${mwSm} / 2)`,
             ['--pad-md']: `calc(${mwMd} / 2)`,
-            ['--pad-lg']: `calc(${mwLg} / 2)`
+            ['--pad-lg']: `calc(${mwLg} / 2)`,
+            ['--pad-xl']: `calc(${mwXl} / 2)`
         } as React.CSSProperties
-    }, [explicitGrid, canLoop])
+    }, [explicitGrid])
 
     return (
         <div className={`relative ${className || ''}`}>
             {baseItems.length > 1 && (
-                <div className="pointer-events-none absolute inset-y-0 left-2 right-2 z-20 container mx-auto">
-                    <div className="hidden md:flex w-full h-full items-center justify-between">
+                <div className="pointer-events-none absolute inset-y-0 left-1 sm:left-2 right-1 sm:right-2 z-20 container mx-auto">
+                    <div className="flex sm:hidden w-full h-full items-center justify-between px-2">
+                        {/* Mobile navigation buttons */}
                         <Button
                             variant="destructive"
                             size="icon"
-                            className="w-12 h-12 rounded-full pointer-events-auto z-[60]"
+                            className="w-8 h-8 rounded-full pointer-events-auto z-[60] opacity-80"
                             onClick={() => scrollByDir(-1)}
                             aria-label={prevAriaLabel}>
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="w-3 h-3" />
                         </Button>
                         <Button
                             variant="destructive"
                             size="icon"
-                            className="w-12 h-12 rounded-full pointer-events-auto z-[60]"
+                            className="w-8 h-8 rounded-full pointer-events-auto z-[60] opacity-80"
                             onClick={() => scrollByDir(1)}
                             aria-label={nextAriaLabel}>
-                            <ArrowRight className="w-4 h-4" />
+                            <ArrowRight className="w-3 h-3" />
+                        </Button>
+                    </div>
+                    <div className="hidden sm:flex w-full h-full items-center justify-between">
+                        {/* Desktop navigation buttons */}
+                        <Button
+                            variant="destructive"
+                            size="icon"
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full pointer-events-auto z-[60]"
+                            onClick={() => scrollByDir(-1)}
+                            aria-label={prevAriaLabel}>
+                            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            size="icon"
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full pointer-events-auto z-[60]"
+                            onClick={() => scrollByDir(1)}
+                            aria-label={nextAriaLabel}>
+                            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                         </Button>
                     </div>
                 </div>
@@ -279,7 +311,7 @@ export default function HorizontalSlider({
                 onMouseEnter={() => (pausedRef.current = true)}
                 onMouseLeave={() => (pausedRef.current = false)}
                 style={containerVars}
-                className={`relative z-10 flex gap-8 overflow-x-auto overflow-y-visible scroll-smooth pl-[var(--pad)] pr-[var(--pad)] sm:pl-[var(--pad-sm)] sm:pr-[var(--pad-sm)] md:pl-[var(--pad-md)] md:pr-[var(--pad-md)] lg:pl-[var(--pad-lg)] lg:pr-[var(--pad-lg)] py-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
+                className={`relative z-10 flex items-stretch gap-3 sm:gap-4 md:gap-6 lg:gap-8 overflow-x-auto overflow-y-visible scroll-smooth pl-[var(--pad)] pr-[var(--pad)] sm:pl-[var(--pad-sm)] sm:pr-[var(--pad-sm)] md:pl-[var(--pad-md)] md:pr-[var(--pad-md)] lg:pl-[var(--pad-lg)] lg:pr-[var(--pad-lg)] xl:pl-[var(--pad-xl)] xl:pr-[var(--pad-xl)] py-4 sm:py-3 md:py-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
                 {slides}
             </div>
         </div>

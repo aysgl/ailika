@@ -13,13 +13,11 @@ import {useFavorites} from '@/context/FavoritesContext'
 
 type ProductCardProps = {
     product: Product
-    imageAspectClass?: string
     small?: boolean
 }
 
 export default function ProductCard({
     product,
-    imageAspectClass = 'aspect-[1/1]',
     small = false
 }: ProductCardProps) {
     const {addToCart, removeFromCart, items, openCart} = useCart()
@@ -30,9 +28,9 @@ export default function ProductCard({
     const hasColors = (product.colors?.length ?? 0) > 0
 
     return (
-        <Card className="group transition-all py-0 bg-transparent shadow-none h-full">
+        <Card className="group transition-all py-0 bg-transparent shadow-none h-full flex flex-col">
             <div
-                className={`${imageAspectClass} relative rounded-3xl`}
+                className={`relative rounded-3xl flex-shrink-0 w-full aspect-square`}
                 style={
                     {
                         backgroundColor: hasColors ? swatch : ''
@@ -59,7 +57,7 @@ export default function ProductCard({
                     src={product.image || '/next.svg'}
                     alt={product.name}
                     fill
-                    className={`rounded-3xl object-cover transition-all duration-300 ease-out group-hover:-translate-y-1 ${
+                    className={`rounded-3xl object-cover object-center transition-all duration-300 ease-out ${
                         hasColors
                             ? 'group-hover:opacity-0'
                             : 'group-hover:shadow-none'
@@ -89,7 +87,7 @@ export default function ProductCard({
                 </div>
             </div>
             <CardContent
-                className={`flex-1 flex flex-col gap-2 text-center transition-all duration-300 ease-out group-hover:translate-y-1 ${
+                className={`flex-1 flex flex-col gap-2 text-center transition-all duration-300 ease-out ${
                     small ? 'text-xs px-0' : ''
                 }`}>
                 <Link
@@ -110,7 +108,7 @@ export default function ProductCard({
                 </div>
             </CardContent>
             <CardFooter
-                className={`p-4 pt-0 block text-center ${
+                className={`p-4 pt-0 block text-center mt-auto ${
                     small ? 'text-sm' : ''
                 }`}>
                 {product.oldPrice ? (
