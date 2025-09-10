@@ -1,25 +1,18 @@
-import {getCategoryBySlug} from '@/lib/categories'
-import {NextResponse} from 'next/server'
+import {NextRequest, NextResponse} from 'next/server'
 
 export async function GET(
-    request: Request,
+    request: NextRequest,
     {params}: {params: {slug: string}}
 ) {
     const {slug} = params
-    if (!slug) {
+
+    try {
+        return NextResponse.json({success: true, data: {slug}})
+    } catch (error) {
+        console.log(error)
         return NextResponse.json(
-            {success: false, error: 'Category slug is required'},
-            {status: 400}
+            {success: false, error: 'Something went wrong'},
+            {status: 500}
         )
     }
-
-    const category = getCategoryBySlug(slug)
-    if (!category) {
-        return NextResponse.json(
-            {success: false, error: 'Category not found'},
-            {status: 404}
-        )
-    }
-
-    return NextResponse.json({success: true, data: category})
 }
