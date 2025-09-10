@@ -50,7 +50,7 @@ export const api = {
             )
             return extractData(response)
         } catch (error) {
-            // Fallback to local data if API fails
+            console.error('Products fetch error:', error)
             return localProducts
         }
     },
@@ -62,7 +62,7 @@ export const api = {
             )
             return extractData(response)
         } catch (error) {
-            // Fallback to local data if API fails
+            console.error('Product fetch error:', error)
             const p = localGetProductBySlug(slug)
             if (!p) throw new Error('Product not found')
             return p
@@ -77,7 +77,7 @@ export const api = {
             )
             return extractData(response)
         } catch (error) {
-            // Fallback to local data if API fails
+            console.error('Hero slides fetch error:', error)
             return localHeroSlides
         }
     },

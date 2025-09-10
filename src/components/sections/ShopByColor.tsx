@@ -77,7 +77,8 @@ export default function ShopByColor() {
                         <div
                             className="h-46 w-40 rounded-b-[100%] rounded-t-2xl flex justify-center items-end mx-auto"
                             style={{
-                                backgroundColor: selectedColors[i],
+                                backgroundColor:
+                                    hoverColor ?? selectedColors[i],
                                 transition: 'background-color 0.3s ease'
                             }}>
                             <Image

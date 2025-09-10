@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import {ChevronDown, Globe} from 'lucide-react'
+import {ChevronDown} from 'lucide-react'
 
 interface Language {
     code: string

@@ -6,7 +6,7 @@ import MoreButton from '@/components/MoreButton'
 import {useCategories} from '../../hooks/useAPI'
 
 export default function Categories() {
-    const {data: categories = [], isLoading, error} = useCategories(true)
+    const {data: categories = [], isLoading} = useCategories(true)
 
     // Fallback categories for loading/error states
     const fallbackCategories = [

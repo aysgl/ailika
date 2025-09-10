@@ -74,7 +74,6 @@ const coupons: Coupon[] = [
 export async function GET(request: Request) {
     try {
         const {searchParams} = new URL(request.url)
-        const userId = searchParams.get('userId')
         const active = searchParams.get('active')
 
         let filteredCoupons = coupons
