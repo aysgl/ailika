@@ -60,7 +60,7 @@ export default function ShopPageClient({
             </div>
 
             {/* Filtre Alanı */}
-            <div className="flex items-center justify-between bg-white/40 rounded-xl p-4 mb-8">
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between bg-white/40 rounded-xl p-4 mb-8">
                 <div>
                     <Badge>{products.length}</Badge> ürün bulundu
                 </div>

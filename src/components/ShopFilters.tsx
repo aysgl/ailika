@@ -40,7 +40,7 @@ export default function ShopFilters({
     }
 
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex gap-2">
             {/* Kategori Seçici */}
             <Select
                 value={selectedCategory}
