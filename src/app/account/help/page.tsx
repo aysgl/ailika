@@ -24,7 +24,7 @@ export default function HelpPage() {
                 <div className="space-y-4">
                     {[1, 2, 3, 4].map(i => (
                         <div key={i} className="animate-pulse">
-                            <div className="h-12 bg-gray-200 rounded-lg mb-2"></div>
+                            <div className="h-12 bg-white/40 rounded-lg mb-2"></div>
                             <div className="h-20 bg-gray-100 rounded-lg"></div>
                         </div>
                     ))}

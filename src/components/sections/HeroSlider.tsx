@@ -9,9 +9,9 @@ export default function HeroSlider() {
 
     if (isLoading) {
         return (
-            <div className="container mx-auto min-h-[70vh] relative mb-16 px-4">
+            <div className="container mx-auto min-h-[90vh] relative mb-16 px-4">
                 <div className="flex flex-col justify-center items-center space-y-3">
-                    <Skeleton className="min-h-[70vh] w-full rounded-xl bg-primary/10 flex justify-between items-center p-14">
+                    <Skeleton className="min-h-[100vh] w-full rounded-xl bg-white/40 flex justify-between items-center p-14">
                         <div className="w-1/2">
                             <div className="space-y-4 justify-center items-center">
                                 <div className="mb-2 space-y-2">

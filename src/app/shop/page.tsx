@@ -1,9 +1,7 @@
-import TitleWave from '@/components/TitleWave'
-import Breadcrumbs from '@/components/Breadcrumbs'
+import {api} from '@/lib/api'
 import {getShopBreadcrumb} from '@/lib/breadcrumbs'
-import ProductGrid from '../../components/ProductGrid'
-import {api} from '../../lib/api'
-import type {Product} from '../../types/product'
+import ShopPageClient from '@/components/sections/ShopPageClient'
+import type {Product} from '@/types/product'
 
 export const metadata = {
     title: 'Mağaza | Ailika'
@@ -14,10 +12,14 @@ export default async function ShopPage({
 }: {
     searchParams: Promise<{category?: string; brand?: string}>
 }) {
-    const products = (await api.listProducts()) as Product[]
+    // önce await et
     const params = await searchParams
+
     const category = params?.category?.trim()
     const brand = params?.brand?.trim()
+
+    const products = (await api.listProducts()) as Product[]
+
     const normalized = (s: string) => s.toLocaleLowerCase('tr-TR')
     const trToAscii = (s: string) =>
         s
@@ -32,11 +34,13 @@ export default async function ShopPage({
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-+|-+$/g, '')
             .replace(/-{2,}/g, '-')
+
     const catSlug = category ? slugify(category) : undefined
-    // Handle simple Turkish plural suffixes ("-lar/-ler") and specific "ojeler" -> "oje"
     const catSlugBase = catSlug
         ? catSlug.replace(/-?(lar|ler)$/i, '').replace(/-?ojeler$/i, '-oje')
         : undefined
+
+    // --- ilk filtreleme burada ---
     const filtered = products.filter(p => {
         const okCategory = category
             ? (p.categories || []).some(c => {
@@ -50,13 +54,16 @@ export default async function ShopPage({
                   (slugify(p.slug).includes(catSlugBase) ||
                       slugify(p.name).includes(catSlugBase)))
             : true
+
         const okBrand = brand
             ? normalized(p.code || '') === normalized(brand) ||
               normalized(p.name).includes(normalized(brand))
             : true
+
         return okCategory && okBrand
     })
-    // Ensure at least one product appears for any category slug
+
+    // Eğer hiç ürün yoksa fallback mantığını uygula
     let display = filtered
     if ((category || '').length > 0 && display.length === 0) {
         const fallback = products.filter(p => {
@@ -87,22 +94,22 @@ export default async function ShopPage({
             display = [products[idx]]
         }
     }
+
     const bc = getShopBreadcrumb({category, brand})
-    const crumbs = bc
-        ? [{label: 'Anasayfa', href: '/'}, ...bc]
-        : [{label: 'Anasayfa', href: '/'}, {label: 'Mağaza'}]
+
+    const categories = Array.from(
+        new Set(products.flatMap(p => p.categories || []))
+    )
+    const brands = Array.from(
+        new Set(products.map(p => p.code).filter(Boolean))
+    ) as string[]
+
     return (
-        <div className="container mx-auto lg:px-0 px-2 pb-12">
-            <div className="mb-8 space-y-2">
-                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
-                    <TitleWave
-                        title={bc ? bc[bc.length - 1].label : 'Mağaza'}
-                        bandClass="text-secondary"
-                    />
-                    <Breadcrumbs items={crumbs} />
-                </div>
-            </div>
-            <ProductGrid products={display} cols={4} />
-        </div>
+        <ShopPageClient
+            products={display}
+            bc={bc ?? []}
+            categories={categories}
+            brands={brands || []}
+        />
     )
 }

@@ -10,11 +10,18 @@ import MoreButton from '../MoreButton'
 
 export default function FavoriteProducts() {
     const [items, setItems] = useState<Product[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         api.listProducts()
-            .then(ps => setItems(ps.slice(0, 12)))
-            .catch(() => setItems([]))
+            .then(ps => {
+                setItems(ps.slice(0, 12))
+                setIsLoading(false)
+            })
+            .catch(() => {
+                setItems([])
+                setIsLoading(false)
+            })
     }, [])
 
     const bannerIndex = 5
@@ -32,7 +39,7 @@ export default function FavoriteProducts() {
                     <div
                         key="banner"
                         className="flex-shrink-0 aspect-square bg-gradient-to-r from-primary to-primary/60 
-                     flex items-center justify-center rounded-3xl text-white font-bold">
+                         flex items-center justify-center rounded-3xl text-white font-bold">
                         Banner Alanı
                     </div>
                 )
@@ -43,6 +50,14 @@ export default function FavoriteProducts() {
         []
     )
 
+    // Skeleton array
+    const skeletonItems = Array.from({length: 6}).map((_, idx) => (
+        <div
+            key={`skeleton-${idx}`}
+            className="flex-shrink-0 aspect-square w-full bg-white/40 rounded-xl animate-pulse"
+        />
+    ))
+
     return (
         <section className="mx-auto px-0 py-12">
             <TitleWave
@@ -52,7 +67,9 @@ export default function FavoriteProducts() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider cols={6}>{sliderItems}</HorizontalSlider>
+                <HorizontalSlider cols={6}>
+                    {isLoading ? skeletonItems : sliderItems}
+                </HorizontalSlider>
             </div>
 
             <MoreButton href="/shop?view=favorites">Tüm Favoriler</MoreButton>

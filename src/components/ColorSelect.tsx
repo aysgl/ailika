@@ -100,7 +100,7 @@ export default function ColorSelect({
                             sizeClasses[size]
                         } rounded-lg transition-all duration-200 flex items-center justify-center relative ${
                             selectedColor === color
-                                ? 'scale-90 ring-4 ring-primary shadow-xl'
+                                ? 'scale-90 ring-2 ring-primary shadow-xl'
                                 : ''
                         }`}
                         style={{

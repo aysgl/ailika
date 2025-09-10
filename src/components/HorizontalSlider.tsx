@@ -1,6 +1,7 @@
+// src/components/HorizontalSlider.tsx
 'use client'
 
-import {
+import React, {
     useEffect,
     useMemo,
     useRef,
@@ -25,6 +26,7 @@ type HorizontalSliderProps = {
     grid?: GridSpec
     cols?: number
     pad?: boolean
+    isLoading?: boolean // <-- eklendi
 }
 
 export default function HorizontalSlider({
@@ -32,7 +34,8 @@ export default function HorizontalSlider({
     className,
     grid,
     cols,
-    pad = false
+    pad = false,
+    isLoading = false
 }: HorizontalSliderProps) {
     const listRef = useRef<HTMLDivElement>(null)
     const isAdjustingRef = useRef(false)
@@ -51,17 +54,17 @@ export default function HorizontalSlider({
             grid ||
             (typeof cols === 'number'
                 ? {
-                      base: 1, // Mobile: 1 sütun
-                      sm: 2, // Small: her zaman 2 sütun
-                      md: 3, // Medium: her zaman 3 sütun
-                      lg: cols, // Large: istenen değer
-                      xl: cols // XL: istenen değer
+                      base: 1,
+                      sm: 2,
+                      md: 3,
+                      lg: cols,
+                      xl: cols
                   }
                 : undefined),
         [grid, cols]
     )
 
-    // Optionally pad to the desired grid columns when not looping
+    // pad logic
     const itemsForRender = useMemo(() => {
         if (canLoop || !pad) return baseItems
         const desiredCols =
@@ -82,7 +85,7 @@ export default function HorizontalSlider({
         return [...baseItems, ...pads]
     }, [baseItems, canLoop, pad, explicitGrid])
 
-    // Duplicate items for seamless loop with unique keys (only if canLoop)
+    // looping duplication (kept as original)
     const rendered = useMemo(() => {
         if (!canLoop || !loopEnabled) return itemsForRender
         const sections = [0, 1, 2]
@@ -133,7 +136,6 @@ export default function HorizontalSlider({
         const children = Array.from(el.children) as HTMLElement[]
         if (children.length === 0) return
         const center = el.scrollLeft + el.clientWidth / 2
-        // Find index currently closest to center
         let currentIdx = 0
         let best = Number.POSITIVE_INFINITY
         children.forEach((node, idx) => {
@@ -157,9 +159,6 @@ export default function HorizontalSlider({
     const prevAriaLabel = 'Önceki'
     const nextAriaLabel = 'Sonraki'
 
-    // snapping disabled/removed by request
-
-    // Auto-advance every 2-3s ping-pong; pause on hover; center items
     useEffect(() => {
         const el = listRef.current
         if (!el) return
@@ -173,7 +172,6 @@ export default function HorizontalSlider({
             if (left <= 1) autoDirRef.current = 1
             if (left >= maxLeft - 2) autoDirRef.current = -1
             const center = left + el.clientWidth / 2
-            // current centered index
             let currentIdx = 0
             let best = Number.POSITIVE_INFINITY
             children.forEach((node, idx) => {
@@ -196,9 +194,8 @@ export default function HorizontalSlider({
         return () => window.clearInterval(id)
     }, [baseCount])
 
-    // Optional grid wrapping for consistent slide widths
+    // slides creation (same as before)
     const slides = useMemo(() => {
-        // Always use explicit grid if provided, fallback to default only if no grid specified
         const gridForWrap = explicitGrid || {
             base: 5,
             sm: 5,
@@ -208,30 +205,34 @@ export default function HorizontalSlider({
         }
 
         if (!gridForWrap) return rendered
-        // Artık CSS variables değil, direkt Tailwind class'ları kullanıyoruz
+
+        const lgClass =
+            gridForWrap.lg === 4
+                ? 'lg:min-w-[25%] lg:w-[25%] xl:min-w-[25%] xl:w-[25%]'
+                : gridForWrap.lg === 5
+                ? 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+                : gridForWrap.lg === 6
+                ? 'lg:min-w-[16.67%] lg:w-[16.67%] xl:min-w-[16.67%] xl:w-[16.67%]'
+                : gridForWrap.lg === 7
+                ? 'lg:min-w-[14.28%] lg:w-[14.28%] xl:min-w-[14.28%] xl:w-[14.28%]'
+                : gridForWrap.lg === 8
+                ? 'lg:min-w-[12.5%] lg:w-[12.5%] xl:min-w-[12.5%] xl:w-[12.5%]'
+                : 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+
+        const baseClass =
+            `snap-center flex-shrink-0 h-full min-w-full w-full sm:min-w-[50%] sm:w-[50%] md:min-w-[33.33%] md:w-[33.33%] ` +
+            lgClass
+
         return rendered.map((child, i) => (
             <div
                 key={(isValidElement(child) && child.key) || `grid-${i}`}
-                className={`snap-center flex-shrink-0 h-full min-w-full w-full sm:min-w-[50%] sm:w-[50%] md:min-w-[33.33%] md:w-[33.33%] ${
-                    // Sadece LG/XL için dinamik - cols değerine göre (min-width + width)
-                    gridForWrap.lg === 4
-                        ? 'lg:min-w-[25%] lg:w-[25%] xl:min-w-[25%] xl:w-[25%]'
-                        : gridForWrap.lg === 5
-                        ? 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
-                        : gridForWrap.lg === 6
-                        ? 'lg:min-w-[16.67%] lg:w-[16.67%] xl:min-w-[16.67%] xl:w-[16.67%]'
-                        : gridForWrap.lg === 7
-                        ? 'lg:min-w-[14.28%] lg:w-[14.28%] xl:min-w-[14.28%] xl:w-[14.28%]'
-                        : gridForWrap.lg === 8
-                        ? 'lg:min-w-[12.5%] lg:w-[12.5%] xl:min-w-[12.5%] xl:w-[12.5%]'
-                        : 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
-                }`}>
+                className={baseClass}>
                 {child}
             </div>
         ))
     }, [explicitGrid, rendered])
 
-    // Compute container paddings so first/last slide peek half visible on edges
+    // container CSS variables (as before)
     const containerVars = useMemo(() => {
         const gridForWrap = explicitGrid || {
             base: 5,
@@ -253,7 +254,7 @@ export default function HorizontalSlider({
             ['--mw-md']: mwMd,
             ['--mw-lg']: mwLg,
             ['--mw-xl']: mwXl,
-            ['--pad']: `calc(${mw} / 6)`, // Mobilde daha az padding
+            ['--pad']: `calc(${mw} / 6)`,
             ['--pad-sm']: `calc(${mwSm} / 2)`,
             ['--pad-md']: `calc(${mwMd} / 2)`,
             ['--pad-lg']: `calc(${mwLg} / 2)`,
@@ -261,12 +262,46 @@ export default function HorizontalSlider({
         } as React.CSSProperties
     }, [explicitGrid])
 
+    // --- SKELETON SLIDES (render when isLoading) ---
+    const skeletonSlides = useMemo(() => {
+        const gridForWrap = explicitGrid || {
+            base: 5,
+            sm: 5,
+            md: 5,
+            lg: 5,
+            xl: 5
+        }
+        const lgClass =
+            gridForWrap.lg === 4
+                ? 'lg:min-w-[25%] lg:w-[25%] xl:min-w-[25%] xl:w-[25%]'
+                : gridForWrap.lg === 5
+                ? 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+                : gridForWrap.lg === 6
+                ? 'lg:min-w-[16.67%] lg:w-[16.67%] xl:min-w-[16.67%] xl:w-[16.67%]'
+                : gridForWrap.lg === 7
+                ? 'lg:min-w-[14.28%] lg:w-[14.28%] xl:min-w-[14.28%] xl:w-[14.28%]'
+                : gridForWrap.lg === 8
+                ? 'lg:min-w-[12.5%] lg:w-[12.5%] xl:min-w-[12.5%] xl:w-[12.5%]'
+                : 'lg:min-w-[20%] lg:w-[20%] xl:min-w-[20%] xl:w-[20%]'
+
+        const baseClass =
+            `snap-center flex-shrink-0 h-full min-w-full w-full sm:min-w-[50%] sm:w-[50%] md:min-w-[33.33%] md:w-[33.33%] ` +
+            lgClass
+
+        const count = gridForWrap.lg || 5
+        return Array.from({length: count}).map((_, i) => (
+            <div key={`skeleton-${i}`} className={baseClass}>
+                <div className="w-full h-48 rounded-lg bg-white/40/70 animate-pulse" />
+            </div>
+        ))
+    }, [explicitGrid])
+
     return (
         <div className={`relative ${className || ''}`}>
             {baseItems.length > 1 && (
                 <div className="pointer-events-none absolute inset-y-0 left-1 sm:left-2 right-1 sm:right-2 z-20 container mx-auto">
                     <div className="flex sm:hidden w-full h-full items-center justify-between px-2">
-                        {/* Mobile navigation buttons */}
+                        {/* Mobile nav */}
                         <Button
                             variant="destructive"
                             size="icon"
@@ -285,7 +320,7 @@ export default function HorizontalSlider({
                         </Button>
                     </div>
                     <div className="hidden sm:flex w-full h-full items-center justify-between">
-                        {/* Desktop navigation buttons */}
+                        {/* Desktop nav */}
                         <Button
                             variant="destructive"
                             size="icon"
@@ -312,7 +347,7 @@ export default function HorizontalSlider({
                 onMouseLeave={() => (pausedRef.current = false)}
                 style={containerVars}
                 className={`relative z-10 flex items-stretch gap-3 sm:gap-4 md:gap-6 lg:gap-8 overflow-x-auto overflow-y-visible scroll-smooth pl-[var(--pad)] pr-[var(--pad)] sm:pl-[var(--pad-sm)] sm:pr-[var(--pad-sm)] md:pl-[var(--pad-md)] md:pr-[var(--pad-md)] lg:pl-[var(--pad-lg)] lg:pr-[var(--pad-lg)] xl:pl-[var(--pad-xl)] xl:pr-[var(--pad-xl)] py-4 sm:py-3 md:py-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}>
-                {slides}
+                {isLoading ? skeletonSlides : slides}
             </div>
         </div>
     )

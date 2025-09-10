@@ -75,7 +75,7 @@ export default function Categories() {
                             {[1, 2, 3, 4, 5].map(i => (
                                 <div
                                     key={i}
-                                    className="aspect-square bg-gray-200 rounded-xl"></div>
+                                    className="aspect-square bg-white/40 rounded-xl"></div>
                             ))}
                         </HorizontalSlider>
                     </div>

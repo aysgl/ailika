@@ -1,12 +1,13 @@
 'use client'
 
-import {useMemo, useState} from 'react'
+import {useEffect, useState} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {products, getProductBySlug} from '@/lib/products'
 import TitleWave from '@/components/TitleWave'
 import {Button} from '@/components/ui/button'
 import {Shuffle, XIcon} from 'lucide-react'
+import {Skeleton} from '@/components/ui/skeleton'
 
 type ColorEntry = {
     color: string
@@ -18,35 +19,40 @@ type ColorEntry = {
 
 export default function ColorPalette() {
     const [selectedKey, setSelectedKey] = useState<string | null>(null)
+    const [entries, setEntries] = useState<ColorEntry[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
-    const entries: ColorEntry[] = useMemo(() => {
-        const list: ColorEntry[] = []
-        for (const p of products) {
-            if (!p.colors || p.colors.length === 0) continue
-            for (const c of p.colors) {
-                if (!c) continue
-                list.push({
-                    color: c,
-                    slug: p.slug,
-                    name: p.name,
-                    code: p.code,
-                    categories: p.categories
-                })
+    useEffect(() => {
+        // Simulate API fetch
+        setTimeout(() => {
+            const list: ColorEntry[] = []
+            for (const p of products) {
+                if (!p.colors || p.colors.length === 0) continue
+                for (const c of p.colors) {
+                    if (!c) continue
+                    list.push({
+                        color: c,
+                        slug: p.slug,
+                        name: p.name,
+                        code: p.code,
+                        categories: p.categories
+                    })
+                }
             }
-        }
-        // Unique by color, keep first occurrence
-        const seen = new Set<string>()
-        const unique: ColorEntry[] = []
-        for (const e of list) {
-            const key = e.color.trim().toLowerCase()
-            if (seen.has(key)) continue
-            seen.add(key)
-            unique.push(e)
-        }
-        return unique
+            // Unique by color
+            const seen = new Set<string>()
+            const unique: ColorEntry[] = []
+            for (const e of list) {
+                const key = e.color.trim().toLowerCase()
+                if (seen.has(key)) continue
+                seen.add(key)
+                unique.push(e)
+            }
+            setEntries(unique)
+            setIsLoading(false)
+        }, 1000) // 1s delay for demo
     }, [])
 
-    // Şu an kategori filtresi yok; tüm girişleri kullan
     const filteredEntries = entries
 
     const onSurprise = () => {
@@ -64,10 +70,8 @@ export default function ColorPalette() {
         ? getProductBySlug(selected.slug)
         : undefined
 
-    if (entries.length === 0) return null
-
     return (
-        <section className="container mx-auto xl:px-0 px-2 py-12">
+        <section className="container mx-auto py-16">
             <div className="mb-4">
                 <TitleWave
                     title="Öne Çıkan Renk Paletleri"
@@ -76,7 +80,6 @@ export default function ColorPalette() {
             </div>
 
             <div className="relative mt-6">
-                {/* Preview overlay when selected - responsive */}
                 {selected && (
                     <div className="absolute top-0 left-0 z-20 w-full h-1/2 sm:w-3/5 sm:inset-y-0 md:w-2/4 md:h-full rounded-2xl overflow-hidden">
                         <button
@@ -90,7 +93,6 @@ export default function ColorPalette() {
                                 className="absolute inset-0"
                                 style={{backgroundColor: selected.color}}
                             />
-
                             <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 flex flex-col justify-start gap-3 sm:gap-6">
                                 {selectedProduct?.image && (
                                     <div className="relative aspect-square w-1/4 sm:w-2/3 md:w-1/4">
@@ -102,7 +104,6 @@ export default function ColorPalette() {
                                         />
                                     </div>
                                 )}
-
                                 <div className="text-white drop-shadow space-y-1 sm:space-y-2">
                                     <div className="text-lg sm:text-xl font-semibold line-clamp-2">
                                         {selected.name}
@@ -138,37 +139,47 @@ export default function ColorPalette() {
                     </div>
                 )}
 
-                {/* The palette grid - responsive */}
-                <div
-                    className={`grid gap-1 
-                        grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12
-                    `}>
-                    {filteredEntries.map(e => {
-                        const key = `${e.slug}-${e.color}`
-                        const isSelected = key === selectedKey
-                        return (
-                            <button
-                                key={key}
-                                aria-label={e.name}
-                                className={`relative w-full aspect-square rounded-lg sm:rounded-2xl transition-all duration-200 p-0 m-0 ${
-                                    isSelected
-                                        ? 'scale-95 ring-2 sm:ring-4 ring-primary shadow-lg'
-                                        : 'hover:shadow-md'
-                                }`}
-                                style={{backgroundColor: e.color}}
-                                onClick={() =>
-                                    setSelectedKey(isSelected ? null : key)
-                                }>
-                                <span className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm opacity-0 hover:opacity-100 transition text-foreground/70 whitespace-nowrap">
-                                    {e.code || e.color}
-                                </span>
-                            </button>
-                        )
-                    })}
+                {/* The palette grid */}
+                <div className="grid gap-1 grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12">
+                    {isLoading ? (
+                        Array.from({length: 12}).map((_, i) => (
+                            <Skeleton
+                                key={i}
+                                className="w-full aspect-square rounded-lg"
+                            />
+                        ))
+                    ) : filteredEntries.length > 0 ? (
+                        filteredEntries.map(e => {
+                            const key = `${e.slug}-${e.color}`
+                            const isSelected = key === selectedKey
+                            return (
+                                <button
+                                    key={key}
+                                    aria-label={e.name}
+                                    className={`relative w-full aspect-square rounded-lg sm:rounded-2xl transition-all duration-200 p-0 m-0 ${
+                                        isSelected
+                                            ? 'scale-95 ring-2 sm:ring-4 ring-primary shadow-lg'
+                                            : 'hover:shadow-md'
+                                    }`}
+                                    style={{backgroundColor: e.color}}
+                                    onClick={() =>
+                                        setSelectedKey(isSelected ? null : key)
+                                    }>
+                                    <span className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm opacity-0 hover:opacity-100 transition text-foreground/70 whitespace-nowrap">
+                                        {e.code || e.color}
+                                    </span>
+                                </button>
+                            )
+                        })
+                    ) : (
+                        <p className="col-span-12 text-muted-foreground text-center py-4">
+                            Henüz renk paleti bulunamadı.
+                        </p>
+                    )}
                 </div>
             </div>
-            {/* Surprise button */}
 
+            {/* Surprise button */}
             <div className="flex justify-center items-center mt-4">
                 <Button size={'lg'} variant="ghost" onClick={onSurprise}>
                     Beni Şaşırt

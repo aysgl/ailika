@@ -23,9 +23,9 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
         <div className="container mx-auto xl:px-0 px-2 min-h-[70vh] relative mb-12">
             <div className="bg-white/40 backdrop-blur-sm rounded-3xl relative overflow-hidden">
                 <div className="md:px-20 px-4 relative">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center min-h-[70vh]">
+                    <div className="lg:mt-0 mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center min-h-[70vh]">
                         <div className="space-y-6 lg:text-left text-center">
-                            <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight mt-12 lg:mt-24">
+                            <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                                 {current.title}
                             </h1>
                             {current.description && (
@@ -47,10 +47,10 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             )}
                         </div>
 
-                        <div className="flex justify-center relative mt-16">
+                        <div className="flex justify-center relative">
                             <div className="relative">
                                 {/* Image stage with crossfade/scale animation */}
-                                <div className="relative w-90 h-90 bg-white/40 rounded-t-[26%] rounded-br-[26%] shadow-2xl  flex items-center justify-center">
+                                <div className="mt-24 relative w-90 h-90 bg-white/40 rounded-t-[26%] rounded-br-[26%] shadow-2xl  flex items-center justify-center">
                                     {slides.map((s, i) => (
                                         <div
                                             key={s.id}
@@ -78,7 +78,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                 </div>
 
                                 {/* Reviews pill (md and up) */}
-                                <div className="hidden md:flex items-center space-x-4 mt-12 absolute bottom-16 -left-30 bg-white/40 backdrop-blur rounded-full p-4">
+                                <div className="hidden md:flex items-center space-x-4 absolute bottom-16 -left-30 bg-white/40 backdrop-blur rounded-full p-4">
                                     <div className="flex -space-x-4">
                                         <div className="w-12 h-12 rounded-full  border-2 border-white overflow-hidden">
                                             <Image
@@ -119,13 +119,13 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                 </div>
 
                                 {current.badgeImage && (
-                                    <div className="absolute top-2 right-2 w-20 h-20 rounded-full flex items-center justify-center bg-white/40 backdrop-blur-sm">
+                                    <div className="mt-18 absolute top-2 right-2 w-20 h-20 rounded-full flex items-center justify-center bg-white/40 backdrop-blur-sm">
                                         <div className="text-center">
                                             <Image
                                                 src={current.badgeImage}
                                                 alt="Badge"
-                                                width={100}
-                                                height={100}
+                                                width={120}
+                                                height={120}
                                                 className="object-contain"
                                             />
                                         </div>

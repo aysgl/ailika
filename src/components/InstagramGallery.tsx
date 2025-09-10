@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useMemo} from 'react'
 import Link from 'next/link'
 
 type IGItem = {
@@ -28,10 +28,6 @@ export default function InstagramGallery({
             .finally(() => setLoading(false))
     }, [limit])
 
-    if (loading)
-        return <div className="text-sm text-foreground-500">Yükleniyor…</div>
-    if (items.length === 0) return null
-
     const c = Math.min(6, Math.max(1, cols))
     const classMap: Record<number, string> = {
         1: 'grid-cols-1',
@@ -42,6 +38,26 @@ export default function InstagramGallery({
         6: 'grid-cols-2 md:grid-cols-6'
     }
     const gridClasses = classMap[c]
+
+    // --- SKELETON HAZIRLAMA ---
+    const skeletonItems = useMemo(
+        () =>
+            Array.from({length: limit}).map((_, i) => (
+                <div
+                    key={`skeleton-${i}`}
+                    className="w-full aspect-3/4 bg-white/40/70 rounded-xl animate-pulse"
+                />
+            )),
+        [limit]
+    )
+
+    if (loading) {
+        return (
+            <div className={`grid ${gridClasses} gap-3`}>{skeletonItems}</div>
+        )
+    }
+
+    if (items.length === 0) return null
 
     // Banner'ı rastgele bir pozisyona ekle
     const bannerIndex = Math.floor(Math.random() * items.length)
@@ -59,7 +75,7 @@ export default function InstagramGallery({
                     <img
                         src={item.url}
                         alt={item.caption || 'Instagram'}
-                        className="object-cover w-full h-auto"
+                        className="object-cover w-full h-full"
                         referrerPolicy="no-referrer"
                         crossOrigin="anonymous"
                     />
