@@ -1,4 +1,4 @@
-import HeroSlider from '../components/HeroSlider'
+import HeroSlider from '../components/sections/HeroSlider'
 import FavoriteProducts from '../components/sections/FavoriteProducts'
 import Categories from '../components/sections/Categories'
 import CtaBanner from '../components/sections/CtaBanner'

@@ -14,7 +14,7 @@ export default function FavoritesPage() {
     const {favorites} = useFavorites()
     const products = allProducts.filter(p => favorites.includes(p.id))
     return (
-        <div className="container mx-auto pb-16">
+        <div className="container mx-auto lg:px-0 px-2 pb-12">
             {products.length === 0 ? (
                 <EmptyState
                     icon={<Heart className="w-10 h-10 text-secondary" />}

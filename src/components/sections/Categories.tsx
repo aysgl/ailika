@@ -61,7 +61,7 @@ export default function Categories() {
         categories.length > 0 ? categories : fallbackCategories
 
     return (
-        <section className="px-0 py-12">
+        <section className="mx-auto px-0 py-12">
             <TitleWave
                 title="Categories"
                 headingLevel={2}

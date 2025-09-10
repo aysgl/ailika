@@ -1,15 +1,15 @@
 'use client'
 
 import HeroSliderClient from './HeroSliderClient'
-import {useHeroSlides} from '../hooks/useAPI'
-import {Skeleton} from './ui/skeleton'
+import {useHeroSlides} from '../../hooks/useAPI'
+import {Skeleton} from '../ui/skeleton'
 
 export default function HeroSlider() {
     const {data: slides, isLoading, error} = useHeroSlides()
 
     if (isLoading) {
         return (
-            <div className="container mx-auto min-h-[70vh] relative mb-16">
+            <div className="container mx-auto min-h-[70vh] relative mb-16 px-4">
                 <div className="flex flex-col justify-center items-center space-y-3">
                     <Skeleton className="min-h-[70vh] w-full rounded-xl bg-primary/10 flex justify-between items-center p-14">
                         <div className="w-1/2">

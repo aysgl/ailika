@@ -17,7 +17,7 @@ export const dynamic = 'force-static'
 
 export default function ContactPage() {
     return (
-        <div className="container mx-auto pb-16">
+        <div className="container mx-auto lg:px-0 px-2 pb-12">
             <div className="mb-8 space-y-2">
                 <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
                     <TitleWave title={'İletişim'} bandClass="text-secondary" />
@@ -30,7 +30,7 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:gap-8 gap-2 mb-12">
                 {[
                     {
                         icon: <Map className="w-8 h-8" />,
@@ -64,7 +64,7 @@ export default function ContactPage() {
                     <Card
                         key={index}
                         className="bg-transparent border border-primary/10 shadow-none transition-all duration-300 transform hover:-translate-y-2 py-0">
-                        <CardContent className="p-8 text-center">
+                        <CardContent className="lg:p-8 p-4 text-center">
                             <div
                                 className={`w-16 h-16 bg-gradient-to-r ${value.color} rounded-full flex items-center justify-center text-white mx-auto mb-6`}>
                                 {value.icon}
@@ -138,39 +138,36 @@ export default function ContactPage() {
                                 Sıkça sorulan soruların cevapları
                             </p>
                         </div>
-                        <div className="mt-4 bg-white/40 rounded-xl p-4">
-                            <Accordion type="single" collapsible>
-                                <AccordionItem value="q1">
-                                    <AccordionTrigger>
-                                        Kargo süresi ne kadar?
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        Siparişleriniz 1-3 iş günü içinde
-                                        kargoya verilir. Resmi tatillerde
-                                        gecikme olabilir.
-                                    </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="q2">
-                                    <AccordionTrigger>
-                                        İade koşulları nelerdir?
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        Ürünü teslim aldıktan sonra 14 gün
-                                        içinde kullanılmamış olması şartıyla
-                                        iade edebilirsiniz.
-                                    </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="q3">
-                                    <AccordionTrigger>
-                                        Destek saatleri nedir?
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        E-posta desteği 7/24, telefon desteği
-                                        hafta içi 09:00 - 18:00 arasıdır.
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
-                        </div>
+                        <Accordion className="mt-4" type="single" collapsible>
+                            <AccordionItem value="q1">
+                                <AccordionTrigger>
+                                    Kargo süresi ne kadar?
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    Siparişleriniz 1-3 iş günü içinde kargoya
+                                    verilir. Resmi tatillerde gecikme olabilir.
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="q2">
+                                <AccordionTrigger>
+                                    İade koşulları nelerdir?
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    Ürünü teslim aldıktan sonra 14 gün içinde
+                                    kullanılmamış olması şartıyla iade
+                                    edebilirsiniz.
+                                </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="q3">
+                                <AccordionTrigger>
+                                    Destek saatleri nedir?
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    E-posta desteği 7/24, telefon desteği hafta
+                                    içi 09:00 - 18:00 arasıdır.
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
                     </div>
                 </div>
             </div>

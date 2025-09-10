@@ -67,7 +67,7 @@ export default function ColorPalette() {
     if (entries.length === 0) return null
 
     return (
-        <section className="container mx-auto py-16">
+        <section className="container mx-auto xl:px-0 px-2 py-12">
             <div className="mb-4">
                 <TitleWave
                     title="Öne Çıkan Renk Paletleri"

@@ -92,7 +92,7 @@ export default async function ShopPage({
         ? [{label: 'Anasayfa', href: '/'}, ...bc]
         : [{label: 'Anasayfa', href: '/'}, {label: 'Mağaza'}]
     return (
-        <div className="container mx-auto pb-16">
+        <div className="container mx-auto lg:px-0 px-2 pb-12">
             <div className="mb-8 space-y-2">
                 <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
                     <TitleWave

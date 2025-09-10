@@ -27,8 +27,8 @@ export default function Newsletter() {
     }
 
     return (
-        <section className="container-full px-0 mx-auto pt-16">
-            <div className="flex flex-col items-center justify-center mx-auto gap-6 bg-gradient-to-r from-primary to-primary/80 py-24 text-white">
+        <section className="mx-auto px-0 pt-12">
+            <div className="flex flex-col items-center justify-center mx-auto gap-6 bg-gradient-to-r from-primary to-primary/80 py-24 text-white px-4">
                 <TitleWave
                     title="E-Bültenimize Abone Olun"
                     bandClass="text-secondary"

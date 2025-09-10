@@ -16,12 +16,12 @@ export default function ProductGrid({
     // Build a responsive grid up to max 6
     // Base 1 col, then progressively increase up to c
     const classMap: Record<number, string> = {
-        1: 'grid-cols-1',
-        2: 'grid-cols-1 sm:grid-cols-2',
-        3: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3',
-        4: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
-        5: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5',
-        6: 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'
+        1: 'grid-cols-2',
+        2: 'grid-cols-2',
+        3: 'grid-cols-2 md:grid-cols-3',
+        4: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
+        5: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5',
+        6: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'
     }
     const gridClasses = classMap[c]
 

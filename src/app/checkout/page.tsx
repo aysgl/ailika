@@ -208,12 +208,12 @@ export default function CheckoutPage() {
     }, [checkoutHtml])
 
     return (
-        <div className="container mx-auto pb-16">
+        <div className="container mx-auto lg:px-0 px-2 pb-12">
             {/* Checkout form alanı */}
             <div id="iyzico-container" ref={checkoutRef} />
 
             <div className="mb-8 space-y-2">
-                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-primary/40 p-12 rounded-lg">
+                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-primary/40 lg:p-12 p-4 rounded-lg">
                     <TitleWave title={'Ödeme'} bandClass="text-secondary" />
                     <Breadcrumbs
                         items={[
@@ -227,7 +227,7 @@ export default function CheckoutPage() {
 
             <form
                 onSubmit={onPlaceOrder}
-                className="grid grid-cols-1 md:grid-cols-[1fr_360px] gap-8">
+                className="grid grid-cols-1 md:grid-cols-[1fr_360px] lg:gap-8 gap-4">
                 <div className="space-y-6">
                     <Card>
                         <CardHeader>

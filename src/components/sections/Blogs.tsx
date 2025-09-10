@@ -18,7 +18,7 @@ interface BlogsProps {
 
 export default function Blogs({posts = []}: BlogsProps) {
     return (
-        <section className="container mx-auto py-16">
+        <section className="container mx-auto xl:px-0 px-2 py-12">
             <div className="flex flex-col items-center">
                 <TitleWave
                     title="Ailika'dan Haberler"

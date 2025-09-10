@@ -43,7 +43,7 @@ export default function TrendingProducts() {
     )
 
     return (
-        <section className="px-0 py-16">
+        <section className="mx-auto px-0 py-12">
             <TitleWave
                 title="Trending"
                 headingLevel={2}

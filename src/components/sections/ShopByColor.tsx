@@ -51,7 +51,7 @@ export default function ShopByColor() {
     }
 
     return (
-        <section className="container mx-auto py-16">
+        <section className="container mx-auto xl:px-0 px-2 py-12">
             <TitleWave
                 title="Renklere göre alışveriş yapın!"
                 headingLevel={2}
@@ -62,10 +62,12 @@ export default function ShopByColor() {
                 {colorCollections.map((c, i) => (
                     <div
                         key={i}
-                        className="transition text-center rounded-2xl p-1"
+                        className="transition text-center rounded-2xl p-1 mt-0 lg:mt-auto"
                         style={{
                             marginTop:
-                                i === 0 || i === 4
+                                window.innerWidth < 768 // 1024px altı = mobil
+                                    ? '0px'
+                                    : i === 0 || i === 4
                                     ? '100px'
                                     : i === 1 || i === 3
                                     ? '50px'
@@ -75,7 +77,7 @@ export default function ShopByColor() {
                         onMouseLeave={() => setHoverColor(null)}>
                         {/* Tırnak divi */}
                         <div
-                            className="h-46 w-40 rounded-b-[100%] rounded-t-2xl flex justify-center items-end mx-auto"
+                            className="lg:h-46 lg:w-40 h-38 w-30 rounded-b-[100%] rounded-t-2xl flex justify-center items-end mx-auto"
                             style={{
                                 backgroundColor:
                                     hoverColor ?? selectedColors[i],

@@ -52,7 +52,7 @@ export default function CartPage() {
     }
 
     return (
-        <div className="container mx-auto pb-16">
+        <div className="container mx-auto lg:px-0 px-2 pb-12">
             <div className="mb-8 space-y-2">
                 <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
                     <TitleWave title={'Sepetim'} bandClass="text-secondary" />
@@ -64,7 +64,7 @@ export default function CartPage() {
                     />
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_300px] gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_30%] lg:gap-8 gap-4">
                 <div className="bg-white/40 backdrop-blur-sm rounded-xl p-4 space-y-4 divide-y divide-primary/10">
                     {loading && (
                         <div className="text-sm text-foreground">

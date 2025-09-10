@@ -26,9 +26,9 @@ export default function CtaBanner() {
     }
 
     return (
-        <section className="container mx-auto py-26">
+        <section className="container mx-auto xl:px-0 px-2 py-12">
             <div
-                className="relative rounded-3xl text-white p-10 flex items-center justify-center gap-10 aspect-4/2 object-cover overflow-hidden"
+                className="relative rounded-3xl text-white p-10 flex items-center justify-center gap-10 lg:aspect-4/2 md:aspect-4/3 aspect-3/4 object-cover overflow-hidden"
                 style={{
                     backgroundImage: "url('/party.webp')",
                     backgroundSize: 'cover',

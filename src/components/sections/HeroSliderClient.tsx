@@ -2,10 +2,10 @@
 
 import {useEffect, useMemo, useState} from 'react'
 import Image from 'next/image'
-import {Button} from './ui/button'
+import {Button} from '../ui/button'
 import {ArrowLeft, ArrowRight} from 'lucide-react'
-import type {HeroSlide} from '../types/hero'
-import WavyTextBanner from './WavyTextBanner'
+import type {HeroSlide} from '../../types/hero'
+import WavyTextBanner from '../WavyTextBanner'
 
 export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     const [index, setIndex] = useState(0)
@@ -20,16 +20,16 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     const current = useMemo(() => slides[index], [slides, index])
 
     return (
-        <div className="container mx-auto min-h-[70vh] relative mb-16">
+        <div className="container mx-auto xl:px-0 px-2 min-h-[70vh] relative mb-12">
             <div className="bg-white/40 backdrop-blur-sm rounded-3xl relative overflow-hidden">
-                <div className="px-20 relative">
+                <div className="md:px-20 px-4 relative">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center min-h-[70vh]">
-                        <div className="space-y-6">
-                            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight mt-24">
+                        <div className="space-y-6 lg:text-left text-center">
+                            <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight mt-12 lg:mt-24">
                                 {current.title}
                             </h1>
                             {current.description && (
-                                <p className="text-foreground text-lg max-w-md">
+                                <p className="text-foreground text-lg">
                                     {current.description}
                                 </p>
                             )}

@@ -270,7 +270,7 @@ export default function OrdersPage() {
                                                         : order.id
                                                 )
                                             }>
-                                            Detayları Gör
+                                            Detaylar
                                         </Button>
                                     </div>
                                     {openOrderId === order.id && (

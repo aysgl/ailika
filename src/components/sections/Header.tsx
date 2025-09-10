@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import {useCart} from '../context/CartContext'
-import {Button} from './ui/button'
+import {useCart} from '../../context/CartContext'
+import {Button} from '../ui/button'
 import {
     Search,
     Menu,
@@ -23,9 +23,9 @@ import {
     SidebarGroup
 } from '@/components/ui/sidebar'
 import {useEffect, useState} from 'react'
-import Logo from './Logo'
-import MegaMenu from './Megamenu'
-import SearchModal from './SearchModal'
+import Logo from '../Logo'
+import MegaMenu from '../Megamenu'
+import SearchModal from '../SearchModal'
 import {
     Accordion,
     AccordionItem,
@@ -41,7 +41,7 @@ import {
 import {useFavorites} from '@/context/FavoritesContext'
 import {useAuth} from '@/context/AuthContext'
 import Image from 'next/image'
-import ThemeDropdown from './ThemeDropdown'
+import ThemeDropdown from '../ThemeDropdown'
 import {mainNavigationItems, additionalNavigationItems} from '@/lib/navigation'
 
 export default function Header() {

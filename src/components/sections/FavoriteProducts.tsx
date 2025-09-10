@@ -44,7 +44,7 @@ export default function FavoriteProducts() {
     )
 
     return (
-        <section className="px-0 py-16">
+        <section className="mx-auto px-0 py-12">
             <TitleWave
                 title="Favorite products"
                 headingLevel={2}

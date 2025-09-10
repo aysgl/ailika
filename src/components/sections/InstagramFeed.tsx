@@ -3,7 +3,7 @@ import TitleWave from '../TitleWave'
 
 export default function InstagramFeed() {
     return (
-        <section className="container mx-auto py-16">
+        <section className="container mx-auto xl:px-0 px-2 py-12">
             <TitleWave
                 title="Instagram'da #ailika"
                 headingLevel={2}

@@ -18,11 +18,13 @@ interface ReviewFormProps {
         productName: string
         date: Date
     }) => void
+    onCancel?: () => void
 }
 
 export default function ReviewForm({
     productId,
     productName,
+    onCancel,
     onReviewSubmitted
 }: ReviewFormProps) {
     const {user, isAuthenticated} = useAuth()
@@ -216,7 +218,13 @@ export default function ReviewForm({
 
                     {/* Submit Button */}
                     <div className="flex justify-end gap-2">
-                        <Button variant="outline">Vazgeç</Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                onCancel?.()
+                            }}>
+                            Vazgeç
+                        </Button>
                         <Button
                             type="submit"
                             variant="secondary"

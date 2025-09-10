@@ -140,7 +140,7 @@ export default function ProductPage({params}: Props) {
 
     return (
         <>
-            <div className="container mx-auto px-2 lg:px-0">
+            <div className="container mx-auto lg:px-0 px-2 pb-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-6 gap-2">
                     <div className="">
                         <ProductGallery
@@ -226,14 +226,14 @@ export default function ProductPage({params}: Props) {
                     </div>
 
                     {/* Açıklamalar ve Sepete Ekle */}
-                    <div className="flex flex-col gap-6 bg-white/40 rounded-xl p-8">
+                    <div className="flex flex-col gap-6 bg-white/40 rounded-xl lg:p-8 p-4">
                         <div className="flex flex-col lg:flex-row gap-6">
-                            <div className="w-4/5">
+                            <div className="md:w-4/5 w-full">
                                 <h1 className="text-3xl font-semibold">
                                     {product.name}
                                 </h1>
                             </div>
-                            <div className="w-1/5">
+                            <div className="md:w-1/5 w-full">
                                 <div className="text-4xl font-bold">
                                     {formatCentsServer(product.price)}
                                 </div>
@@ -359,11 +359,11 @@ export default function ProductPage({params}: Props) {
 
                         <Card className="shadow-none border border-primary/20 bg-transparent py-0">
                             <div className="grid grid-cols-2 text-muted-foreground border-b border-primary/20 mb-4 p-4 gap-4">
-                                <div className="flex flex-col gap-2 p-3 border-r border-primary/20">
+                                <div className="flex flex-col gap-2 md:p-3 p-0 border-r border-primary/20">
                                     <Truck className="text-secondary size-5" />
                                     1250₺ üzeri kargoya ücretsiz
                                 </div>
-                                <div className="flex flex-col gap-2 p-3">
+                                <div className="flex flex-col gap-2 md:p-3 p-0">
                                     <Clock className="text-primary size-5" />
                                     14:00’a kadar siparişler kargoda
                                 </div>
@@ -542,6 +542,7 @@ export default function ProductPage({params}: Props) {
                                     productId={product.id}
                                     productName={product.name}
                                     onReviewSubmitted={handleReviewSubmitted}
+                                    onCancel={() => setShowReviewForm(false)}
                                 />
                             )}
                         </div>

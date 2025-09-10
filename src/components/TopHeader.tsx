@@ -20,7 +20,7 @@ export default function TopHeader({text, className = ''}: TopHeaderProps) {
             </div>
 
             {/* Sağdaki language switcher */}
-            <div className="ml-auto mr-4 lg:mr-14">
+            <div className="ml-auto mr-2 lg:mr-14">
                 <LanguageSwitcher />
             </div>
         </div>

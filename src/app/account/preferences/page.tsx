@@ -64,7 +64,7 @@ export default function PreferencesPage() {
             ]}>
             <Card className="bg-transparent shadow-none p-0 m-0">
                 <CardContent className="p-0">
-                    <form onSubmit={onSave} className="space-y-6">
+                    <form onSubmit={onSave} className="lg:space-y-6 space-y-2">
                         {notificationSettings.map(setting => {
                             const IconComponent = setting.icon
                             return (

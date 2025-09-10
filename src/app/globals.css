@@ -215,8 +215,3 @@ html[data-theme='midnight'] * {
   0%, 100% { transform: translateY(20px); }
   50% { transform: translateY(-20px); }
 }
-
-.float:hover {
-  animation: float 3s ease-in-out infinite;
-  transition: transform 0.3s ease;
-}

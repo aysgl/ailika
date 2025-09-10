@@ -34,9 +34,9 @@ export default function CartItemRow({
     onNavigate
 }: Props) {
     return (
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-12 sm:items-center sm:justify-between p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row gap-2 lg:gap-12 sm:items-center sm:justify-between p-2 lg:p-4">
             {/* Mobile: Stacked layout, Desktop: Horizontal */}
-            <div className="flex items-center gap-2 sm:w-1/2">
+            <div className="flex items-center gap-2 lg:w-1/2 w-full">
                 <Button
                     variant="ghost"
                     size="icon"
@@ -56,7 +56,7 @@ export default function CartItemRow({
                     <Link
                         href={`/product/${slug}`}
                         onClick={onNavigate}
-                        className="font-medium hover:underline text-sm sm:text-base line-clamp-2 sm:line-clamp-1">
+                        className="font-medium hover:underline text-sm sm:text-base">
                         {name}
                     </Link>
                     {code && (
