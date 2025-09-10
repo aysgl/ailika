@@ -1,7 +1,6 @@
 'use client'
 
 import {useEffect, useRef, useState} from 'react'
-// import {useRouter} from 'next/navigation'
 import TitleWave from '@/components/TitleWave'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
@@ -11,11 +10,13 @@ import {Button} from '@/components/ui/button'
 import {useCart, formatCents} from '@/context/CartContext'
 import {useProducts} from '@/hooks/useProducts'
 import Image from 'next/image'
+import {Product} from '@/types'
+import {Coupon} from '@/types/account'
 
 export default function CheckoutPage() {
     // const router = useRouter()
     const {items, subtotalCents} = useCart()
-    const {products} = useProducts()
+    const {data: products} = useProducts()
     const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null)
 
     type Address = {
@@ -108,7 +109,9 @@ export default function CheckoutPage() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     items: items.map(it => {
-                        const p = products.find(pp => pp.id === it.productId)
+                        const p = products?.find(
+                            (pp: Product) => pp.id === it.productId
+                        )
                         if (!p) {
                             throw new Error(`Ürün bulunamadı: ${it.productId}`)
                         }
@@ -149,8 +152,8 @@ export default function CheckoutPage() {
                     })
                     const orderItems = items
                         .map(it => {
-                            const p = products.find(
-                                pp => pp.id === it.productId
+                            const p = products?.find(
+                                (pp: Product) => pp.id === it.productId
                             )
                             if (!p) return null
                             return {
@@ -377,8 +380,8 @@ export default function CheckoutPage() {
                     <div className="text-sm font-semibold">Sipariş Özeti</div>
                     <div className="grid gap-2 text-sm">
                         {items.map(it => {
-                            const p = products.find(
-                                pp => pp.id === it.productId
+                            const p = products?.find(
+                                (pp: Product) => pp.id === it.productId
                             )
                             if (!p) return null
                             return (
@@ -445,15 +448,6 @@ export default function CheckoutPage() {
             </form>
         </div>
     )
-}
-
-type Coupon = {
-    id: string
-    code: string
-    discountType: 'percent' | 'amount'
-    discountValue: number
-    expiresAt?: string
-    status?: 'active' | 'used' | 'expired'
 }
 
 function getDiscountCents(

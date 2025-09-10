@@ -12,11 +12,13 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import EmptyState from '@/components/EmptyState'
 import {ShoppingCart} from 'lucide-react'
 import * as React from 'react'
+import {Product} from '@/types'
+import {Coupon} from '@/types/account'
 
 export default function CartPage() {
     const {items, updateQuantity, removeFromCart, subtotalCents, clearCart} =
         useCart()
-    const {products, loading} = useProducts()
+    const {data: products, isLoading: loading} = useProducts()
     const [couponCode, setCouponCode] = React.useState('')
     const [availableCoupons, setAvailableCoupons] = React.useState<Coupon[]>([])
     const [appliedCoupon, setAppliedCoupon] = React.useState<Coupon | null>(
@@ -70,8 +72,8 @@ export default function CartPage() {
                         </div>
                     )}
                     {items.map(it => {
-                        const product = products.find(
-                            p => p.id === it.productId
+                        const product = products?.find(
+                            (p: Product) => p.id === it.productId
                         )
                         if (!product) return null
                         return (
@@ -193,16 +195,6 @@ export default function CartPage() {
             </div>
         </div>
     )
-}
-
-// Types
-type Coupon = {
-    id: string
-    code: string
-    discountType: 'percent' | 'amount'
-    discountValue: number
-    expiresAt?: string
-    status?: 'active' | 'used' | 'expired'
 }
 
 // Helpers

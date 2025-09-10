@@ -17,6 +17,31 @@ export default function TrendingProducts() {
             .catch(() => setItems([]))
     }, [])
 
+    const bannerIndex = 2 // banner hangi ürünün sonrasında görünecek
+    const sliderItems: React.ReactNode[] = items.reduce<React.ReactNode[]>(
+        (acc, p, i) => {
+            acc.push(
+                <div key={`product-${p.id}-${i}`} className="flex-shrink-0">
+                    <ProductCard product={p} />
+                </div>
+            )
+
+            if (i === bannerIndex) {
+                acc.push(
+                    <div
+                        key="banner"
+                        className="flex-shrink-0 aspect-square bg-gradient-to-r from-primary to-primary/60 
+                               flex items-center justify-center rounded-xl text-white font-bold">
+                        Banner Alanı
+                    </div>
+                )
+            }
+
+            return acc
+        },
+        []
+    )
+
     return (
         <section className="px-0 py-16">
             <TitleWave
@@ -26,11 +51,7 @@ export default function TrendingProducts() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider cols={6}>
-                    {items.map((p, i) => (
-                        <ProductCard key={`${p.id}-${i}`} product={p} />
-                    ))}
-                </HorizontalSlider>
+                <HorizontalSlider cols={6}>{sliderItems}</HorizontalSlider>
             </div>
             <MoreButton href="/shop?view=categories">Tüm Trendler</MoreButton>
         </section>

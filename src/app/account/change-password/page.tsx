@@ -6,6 +6,7 @@ import {Input} from '@/components/ui/input'
 import {Button} from '@/components/ui/button'
 import {useState} from 'react'
 import {useAuth} from '@/context/AuthContext'
+import LoginPage from '@/app/login/page'
 
 export default function ChangePasswordPage() {
     const {isAuthenticated} = useAuth()
@@ -14,11 +15,7 @@ export default function ChangePasswordPage() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     if (!isAuthenticated) {
-        return (
-            <div className="container mx-auto py-16 text-center">
-                Lütfen önce giriş yapın.
-            </div>
-        )
+        return <LoginPage />
     }
 
     const onSubmit = (e: React.FormEvent) => {

@@ -2,25 +2,16 @@
 
 import AccountLayout from '@/components/AccountLayout'
 import EmptyState from '@/components/EmptyState'
-//
 import CouponCard from '@/components/CouponCard'
 import {Tag} from 'lucide-react'
 import {useEffect, useState} from 'react'
-
-type Coupon = {
-    id: string
-    code: string
-    title: string
-    description?: string
-    discountType: 'percent' | 'amount'
-    discountValue: number
-    expiresAt?: string // ISO
-    minSpend?: number
-    status?: 'active' | 'used' | 'expired'
-}
+import LoginPage from '@/app/login/page'
+import {useAuth} from '@/context/AuthContext'
+import {Coupon} from '@/types/account'
 
 export default function CouponsPage() {
     const [coupons, setCoupons] = useState<Coupon[]>([])
+    const {isAuthenticated} = useAuth()
 
     useEffect(() => {
         try {
@@ -65,7 +56,9 @@ export default function CouponsPage() {
         }
     }, [])
 
-    //
+    if (!isAuthenticated) {
+        return <LoginPage />
+    }
 
     return (
         <AccountLayout
@@ -110,8 +103,6 @@ function resolveStatus(c: Coupon): Coupon['status'] {
         return 'expired'
     return 'active'
 }
-
-//
 
 function futureDaysIso(days: number) {
     const d = new Date()

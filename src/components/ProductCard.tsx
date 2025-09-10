@@ -57,7 +57,7 @@ export default function ProductCard({
                     src={product.image || '/next.svg'}
                     alt={product.name}
                     fill
-                    className={`rounded-3xl object-cover object-center transition-all duration-300 ease-out ${
+                    className={`rounded-3xl object-cover object-center transition-all duration-300 ease-out group-hover:translate-y-[-2px] ${
                         hasColors
                             ? 'group-hover:opacity-0'
                             : 'group-hover:shadow-none'
@@ -87,12 +87,12 @@ export default function ProductCard({
                 </div>
             </div>
             <CardContent
-                className={`flex-1 flex flex-col gap-2 text-center transition-all duration-300 ease-out ${
+                className={`flex-1 flex flex-col gap-2 text-center transition-all duration-300 ease-out group-hover:translate-y-[2px] ${
                     small ? 'text-xs px-0' : ''
                 }`}>
                 <Link
                     href={`/product/${product.slug}`}
-                    className={`font-bold text-foreground hover:underline ${
+                    className={`font-bold text-foreground ${
                         small ? 'text-sm' : 'text-base'
                     }`}>
                     {product.name}

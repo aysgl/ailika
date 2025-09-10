@@ -22,7 +22,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     return (
         <div className="container mx-auto min-h-[70vh] relative mb-16">
             <div className="bg-white/40 backdrop-blur-sm rounded-3xl relative overflow-hidden">
-                <main className="px-20 relative">
+                <div className="px-20 relative">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-center min-h-[70vh]">
                         <div className="space-y-6">
                             <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight mt-24">
@@ -155,7 +155,7 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                             </Button>
                         </div>
                     )}
-                </main>
+                </div>
                 <div className="mt-8">
                     <WavyTextBanner
                         texts={[current.description || current.title]}

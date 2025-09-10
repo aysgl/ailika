@@ -7,21 +7,16 @@ import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
 import {Trash2, Plus} from 'lucide-react'
 import {Courier_Prime} from 'next/font/google'
+import LoginPage from '@/app/login/page'
+import {useAuth} from '@/context/AuthContext'
+import {SavedCard} from '@/types/account'
 
 const cardMono = Courier_Prime({subsets: ['latin'], weight: ['400', '700']})
-
-type SavedCard = {
-    id: string
-    holderName: string
-    last4: string
-    brand?: string
-    expMonth: string
-    expYear: string
-}
 
 const STORAGE_KEY = 'ailika_cards_v1'
 
 export default function SavedCardsPage() {
+    const {isAuthenticated} = useAuth()
     const [cards, setCards] = useState<SavedCard[]>([])
     const [showForm, setShowForm] = useState(false)
     const [holderNameInput, setHolderNameInput] = useState('')
@@ -45,6 +40,10 @@ export default function SavedCardsPage() {
             })
         }
     }, [showForm])
+
+    if (!isAuthenticated) {
+        return <LoginPage />
+    }
 
     const onAdd = (e: React.FormEvent) => {
         e.preventDefault()

@@ -3,9 +3,13 @@ import TitleWave from '../TitleWave'
 import HorizontalSlider from '@/components/HorizontalSlider'
 import CategoryCard from '@/components/CategoryCard'
 import MoreButton from '@/components/MoreButton'
+import {useCategories} from '../../hooks/useAPI'
 
 export default function Categories() {
-    const categories = [
+    const {data: categories = [], isLoading, error} = useCategories(true)
+
+    // Fallback categories for loading/error states
+    const fallbackCategories = [
         {
             name: 'Kalıcı Oje Koleksiyonu',
             image: 'https://www.dndgel.com/cdn/shop/collections/DIVA-COQUETTE-PROD_ef60f23a-8e20-4860-98e2-a0332dd60578.jpg?v=1741820965&width=1500'
@@ -52,6 +56,10 @@ export default function Categories() {
         }
     ]
 
+    // Use API data if available, fallback to static data
+    const displayCategories =
+        categories.length > 0 ? categories : fallbackCategories
+
     return (
         <section className="px-0 py-12">
             <TitleWave
@@ -61,18 +69,30 @@ export default function Categories() {
             />
 
             <div className="mt-6">
-                <HorizontalSlider cols={5}>
-                    {categories.map(c => (
-                        <CategoryCard
-                            key={c.name}
-                            name={c.name}
-                            image={c.image}
-                            href={`/shop?category=${encodeURIComponent(
-                                c.name
-                            )}`}
-                        />
-                    ))}
-                </HorizontalSlider>
+                {isLoading ? (
+                    <div className="animate-pulse">
+                        <HorizontalSlider cols={5}>
+                            {[1, 2, 3, 4, 5].map(i => (
+                                <div
+                                    key={i}
+                                    className="aspect-square bg-gray-200 rounded-xl"></div>
+                            ))}
+                        </HorizontalSlider>
+                    </div>
+                ) : (
+                    <HorizontalSlider cols={5}>
+                        {displayCategories.map(c => (
+                            <CategoryCard
+                                key={c.name}
+                                name={c.name}
+                                image={c.image || ''}
+                                href={`/shop?category=${encodeURIComponent(
+                                    c.name
+                                )}`}
+                            />
+                        ))}
+                    </HorizontalSlider>
+                )}
             </div>
 
             <MoreButton href="/shop?view=categories">

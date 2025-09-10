@@ -1,7 +1,6 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-// Using native img to avoid remote host whitelist issues for Instagram CDN
 import Link from 'next/link'
 
 type IGItem = {
@@ -33,7 +32,6 @@ export default function InstagramGallery({
         return <div className="text-sm text-foreground-500">Yükleniyor…</div>
     if (items.length === 0) return null
 
-    // Build responsive grid classes based on requested columns (1..6)
     const c = Math.min(6, Math.max(1, cols))
     const classMap: Record<number, string> = {
         1: 'grid-cols-1',
@@ -45,9 +43,12 @@ export default function InstagramGallery({
     }
     const gridClasses = classMap[c]
 
-    return (
-        <div className={`grid ${gridClasses} gap-3`}>
-            {items.map(item => (
+    // Banner'ı rastgele bir pozisyona ekle
+    const bannerIndex = Math.floor(Math.random() * items.length)
+
+    const galleryItems: React.ReactNode[] = items.reduce<React.ReactNode[]>(
+        (acc, item, i) => {
+            acc.push(
                 <Link
                     key={item.id}
                     href={item.link}
@@ -63,7 +64,23 @@ export default function InstagramGallery({
                         crossOrigin="anonymous"
                     />
                 </Link>
-            ))}
-        </div>
+            )
+
+            if (i === bannerIndex) {
+                acc.push(
+                    <div
+                        key="banner"
+                        className="w-full h-full bg-gradient-to-r from-primary to-primary/60 
+                               flex items-center justify-center rounded-xl text-white font-bold text-lg">
+                        Banner Alanı
+                    </div>
+                )
+            }
+
+            return acc
+        },
+        []
     )
+
+    return <div className={`grid ${gridClasses} gap-3`}>{galleryItems}</div>
 }

@@ -8,6 +8,7 @@ import {Button} from '@/components/ui/button'
 import Image from 'next/image'
 import AccountLayout from '@/components/AccountLayout'
 import {useDropzone} from 'react-dropzone'
+import LoginPage from '@/app/login/page'
 
 export default function AccountInfoPage() {
     const {user, isAuthenticated, updateUser} = useAuth()
@@ -34,11 +35,7 @@ export default function AccountInfoPage() {
     })
 
     if (!isAuthenticated) {
-        return (
-            <div className="container mx-auto py-16 text-center">
-                Lütfen önce giriş yapın.
-            </div>
-        )
+        return <LoginPage />
     }
 
     const onSave = (e: React.FormEvent) => {
@@ -48,11 +45,11 @@ export default function AccountInfoPage() {
 
     return (
         <AccountLayout
-            title="Kullanıcı Bilgileri"
+            title="Kullanıcı Bilgilerim"
             breadcrumb={[
                 {label: 'Anasayfa', href: '/'},
                 {label: 'Hesabım', href: '/account'},
-                {label: 'Kullanıcı Bilgileri'}
+                {label: 'Kullanıcı Bilgilerim'}
             ]}>
             <Card>
                 <CardContent>

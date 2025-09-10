@@ -6,16 +6,23 @@ import TrendingProducts from '../components/sections/TrendingProducts'
 import InstagramFeed from '@/components/sections/InstagramFeed'
 import ColorPalette from '@/components/sections/ColorPalette'
 import Newsletter from '@/components/sections/Newsletter'
+import ShopByColor from '@/components/sections/ShopByColor'
+import PopularColor from '@/components/sections/PopularColor'
+import Blogs from '@/components/sections/Blogs'
+import {blogs} from '@/lib/blogs'
 
 export default function Home() {
     return (
         <>
             <HeroSlider />
             <FavoriteProducts />
+            <ShopByColor />
+            <PopularColor />
             <Categories />
             <CtaBanner />
             <TrendingProducts />
             <InstagramFeed />
+            <Blogs posts={blogs} />
             <ColorPalette />
             <Newsletter />
         </>

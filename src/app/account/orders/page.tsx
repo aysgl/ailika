@@ -11,22 +11,8 @@ import {Badge} from '@/components/ui/badge'
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import {Separator} from '@/components/ui/separator'
-
-type OrderItemUI = {
-    name: string
-    quantity: number
-    price: string
-    image?: string
-}
-type OrderUI = {
-    id: string
-    date: string
-    status: 'processing' | 'shipped' | 'delivered' | string
-    total: string
-    items: OrderItemUI[]
-    shippingAddress: string
-    trackingNumber: string | null
-}
+import LoginPage from '@/app/login/page'
+import {OrderItemUI, OrderUI} from '@/types/account'
 
 export default function OrdersPage() {
     const [openOrderId, setOpenOrderId] = useState<string | null>(null)
@@ -119,6 +105,10 @@ export default function OrdersPage() {
         setOrdersState([...saved, ...mock])
     }, [clearCart])
 
+    if (!isAuthenticated) {
+        return <LoginPage />
+    }
+
     const orders = ordersState
 
     const getStatusBadge = (status: string) => {
@@ -205,11 +195,7 @@ export default function OrdersPage() {
                 {label: 'Hesabım', href: '/account'},
                 {label: 'Siparişlerim'}
             ]}>
-            {!isAuthenticated ? (
-                <div className="container mx-auto py-16 text-center">
-                    Lütfen önce giriş yapın.
-                </div>
-            ) : orders.length === 0 ? (
+            {orders.length === 0 ? (
                 <EmptyState
                     icon={<ShoppingBag className="w-10 h-10 text-primary" />}
                     title="Henüz siparişiniz yok"

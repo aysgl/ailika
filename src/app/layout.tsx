@@ -7,7 +7,8 @@ import {CartProvider} from '../context/CartContext'
 import {FavoritesProvider} from '../context/FavoritesContext'
 import {AuthProvider} from '../context/AuthContext'
 import CartSidebar from '../components/CartSidebar'
-import ScrollingText from '@/components/ScrollingText'
+import TopHeader from '@/components/TopHeader'
+import QueryProvider from '../providers/QueryProvider'
 
 const outfit = Outfit({
     variable: '--font-outfit-sans',
@@ -34,23 +35,21 @@ export default function RootLayout({
         <html lang="tr">
             <body
                 className={`${outfit.variable} ${roboto_slab.variable} antialiased`}>
-                <CartProvider>
-                    <FavoritesProvider>
-                        <AuthProvider>
-                            <ScrollingText
-                                text="$5 Gel Polish Sale Is Here! 25% off everything else!"
-                                speed={25}
-                                className="text-xs font-medium"
-                            />
-                            <Header />
-                            <main className="container-full mx-auto mt-18">
-                                {children}
-                            </main>
-                            <CartSidebar />
-                            <Footer />
-                        </AuthProvider>
-                    </FavoritesProvider>
-                </CartProvider>
+                <QueryProvider>
+                    <CartProvider>
+                        <FavoritesProvider>
+                            <AuthProvider>
+                                <TopHeader text="$5 Gel Polish Sale Is Here! 25% off everything else!" />
+                                <Header />
+                                <main className="container-full mx-auto mt-18">
+                                    {children}
+                                </main>
+                                <CartSidebar />
+                                <Footer />
+                            </AuthProvider>
+                        </FavoritesProvider>
+                    </CartProvider>
+                </QueryProvider>
             </body>
         </html>
     )

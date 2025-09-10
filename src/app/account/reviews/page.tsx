@@ -7,10 +7,15 @@ import {MessageCircle} from 'lucide-react'
 import Link from 'next/link'
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
+import StarRating from '@/components/StarRating'
+import LoginPage from '@/app/login/page'
+import {useAuth} from '@/context/AuthContext'
+import {ReviewUI} from '@/types/account'
 
 export default function ReviewsPage() {
     const [loading, setLoading] = useState(true)
     const [reviews, setReviews] = useState<ReviewUI[]>([])
+    const {isAuthenticated} = useAuth()
 
     useEffect(() => {
         ;(async () => {
@@ -33,6 +38,10 @@ export default function ReviewsPage() {
             setLoading(false)
         })()
     }, [])
+
+    if (!isAuthenticated) {
+        return <LoginPage />
+    }
 
     return (
         <AccountLayout
@@ -85,7 +94,7 @@ export default function ReviewsPage() {
                                         {r.date.toLocaleDateString('tr-TR')}
                                     </div>
                                 </div>
-                                <Stars rating={r.rating} />
+                                <StarRating rating={r.rating} />
                                 <div className="text-sm text-foreground/80 mt-1 whitespace-pre-line">
                                     {r.comment}
                                 </div>
@@ -95,23 +104,5 @@ export default function ReviewsPage() {
                 </div>
             )}
         </AccountLayout>
-    )
-}
-
-type ReviewUI = {
-    id: string
-    productName: string
-    productImage?: string
-    rating: number
-    comment: string
-    date: Date
-}
-
-function Stars({rating}: {rating: number}) {
-    const r = Math.max(0, Math.min(5, Math.round(rating)))
-    return (
-        <div className="text-amber-500 text-sm" aria-label={`Puan: ${r}/5`}>
-            {'★★★★★☆☆☆☆☆'.slice(5 - r, 10 - r)}
-        </div>
     )
 }

@@ -212,7 +212,7 @@ export default function Header() {
                         aria-label={`Sepet (${totalItems})`}>
                         <Link href="/cart">
                             <ShoppingBag className="w-5 h-5" />
-                            <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-2xl text-xs text-white flex items-center justify-center">
+                            <span className="absolute -top-1 -right-1 w-auto min-w-4 px-1 h-4 bg-primary rounded-2xl text-xs text-white flex items-center justify-center">
                                 {totalItems}
                             </span>
                         </Link>
@@ -262,7 +262,7 @@ export default function Header() {
                                         <AccordionItem
                                             key={navItem.key}
                                             value={navItem.key}>
-                                            <AccordionTrigger>
+                                            <AccordionTrigger className="p-0 mb-6">
                                                 {navItem.label}
                                             </AccordionTrigger>
                                             <AccordionContent>
@@ -271,20 +271,18 @@ export default function Header() {
                                                         cat => (
                                                             <div
                                                                 key={cat.title}>
-                                                                <h5 className="text-sm font-semibold mb-1">
-                                                                    <SheetClose
-                                                                        asChild>
-                                                                        <Link
-                                                                            href={
-                                                                                cat.href
-                                                                            }
-                                                                            className="hover:underline">
-                                                                            {
-                                                                                cat.title
-                                                                            }
-                                                                        </Link>
-                                                                    </SheetClose>
-                                                                </h5>
+                                                                <SheetClose
+                                                                    asChild>
+                                                                    <Link
+                                                                        href={
+                                                                            cat.href
+                                                                        }
+                                                                        className="hover:underline">
+                                                                        {
+                                                                            cat.title
+                                                                        }
+                                                                    </Link>
+                                                                </SheetClose>
                                                                 <div className="grid grid-cols-1">
                                                                     {cat.items.map(
                                                                         item => (
@@ -297,7 +295,7 @@ export default function Header() {
                                                                                     href={
                                                                                         item.href
                                                                                     }
-                                                                                    className="py-1.5 text-sm hover:underline">
+                                                                                    className="py-2 text-sm hover:underline">
                                                                                     {
                                                                                         item.name
                                                                                     }

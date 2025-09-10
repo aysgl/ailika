@@ -5,18 +5,7 @@ import {Badge} from '@/components/ui/badge'
 import {Button} from '@/components/ui/button'
 import {Copy, Check} from 'lucide-react'
 import {useState} from 'react'
-
-type CouponCardProps = {
-    title: string
-    code: string
-    description?: string
-    discountType: 'percent' | 'amount'
-    discountValue: number
-    expiresAt?: string
-    minSpend?: number
-    status?: 'active' | 'used' | 'expired'
-    className?: string
-}
+import {CouponCardProps} from '@/types/account'
 
 export default function CouponCard({
     title,
@@ -79,21 +68,21 @@ export default function CouponCard({
             className={`relative overflow-hidden ${
                 status === 'expired' ? 'opacity-50' : 'bg-white'
             } ${className}`}>
-            <CardHeader className="pb-6">
+            <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                     <CardTitle className="font-semibold">{title}</CardTitle>
                     {getStatusBadge()}
                 </div>
                 {description && (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                         {description}
                     </p>
                 )}
             </CardHeader>
 
-            <CardContent className="pt-0">
+            <CardContent className="pt-0 pb-0">
                 <div className="relative flex flex-col md:flex-row items-stretch gap-4">
-                    <div className="flex items-center justify-between gap-4 mt-6 w-full">
+                    <div className="grid grid-cols-2 items-center justify-between mt-4 w-full">
                         {/* Discount Details */}
                         <div className="text-sm text-muted-foreground">
                             <div className="text-foreground">
@@ -122,30 +111,26 @@ export default function CouponCard({
                         </div>
 
                         {/* Coupon Code Section */}
-                        <div className="md:w-46">
-                            <div className="flex justify-center border-2 border-dashed border-muted rounded-lg py-2 mb-2 bg-muted/10">
-                                <Button
-                                    size="lg"
-                                    variant="ghost"
-                                    onClick={handleCopy}
-                                    disabled={
-                                        status === 'expired' ||
-                                        status === 'used'
-                                    }
-                                    className="h-10 bg-transparent">
-                                    {copied ? (
-                                        <>
-                                            {code}
-                                            <Check className="w-3 h-3 mr-1" />
-                                        </>
-                                    ) : (
-                                        <>
-                                            {code}
-                                            <Copy className="w-3 h-3 mr-1" />
-                                        </>
-                                    )}
-                                </Button>
-                            </div>
+                        <div className="flex justify-center border-2 border-dashed border-muted rounded-lg py-2 mb-2 bg-muted/10">
+                            <Button
+                                variant="ghost"
+                                onClick={handleCopy}
+                                disabled={
+                                    status === 'expired' || status === 'used'
+                                }
+                                className="h-8 bg-transparent">
+                                {copied ? (
+                                    <>
+                                        {code}
+                                        <Check className="w-3 h-3" />
+                                    </>
+                                ) : (
+                                    <>
+                                        {code}
+                                        <Copy className="w-3 h-3" />
+                                    </>
+                                )}
+                            </Button>
                         </div>
                     </div>
 

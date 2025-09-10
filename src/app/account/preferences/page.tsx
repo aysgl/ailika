@@ -7,6 +7,7 @@ import {useAuth} from '@/context/AuthContext'
 import {useState} from 'react'
 import {Switch} from '@/components/ui/switch'
 import {Bell, Mail, MessageSquare} from 'lucide-react'
+import LoginPage from '@/app/login/page'
 
 export default function PreferencesPage() {
     const {user, isAuthenticated, updateUser} = useAuth()
@@ -43,11 +44,7 @@ export default function PreferencesPage() {
     ]
 
     if (!isAuthenticated) {
-        return (
-            <div className="container mx-auto py-16 text-center">
-                Lütfen önce giriş yapın.
-            </div>
-        )
+        return <LoginPage />
     }
 
     const onSave = (e: React.FormEvent) => {

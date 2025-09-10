@@ -14,18 +14,9 @@ import {
     AccordionTrigger
 } from '@/components/ui/accordion'
 import {MapPin, Plus} from 'lucide-react'
-
-type Address = {
-    id: string
-    title: string
-    fullName: string
-    email: string
-    phone: string
-    address: string
-    city: string
-    postalCode: string
-    country: string
-}
+import {useAuth} from '@/context/AuthContext'
+import LoginPage from '@/app/login/page'
+import {Address} from '@/types/account'
 
 const STORAGE_KEY = 'ailika_addresses_v1'
 
@@ -33,6 +24,7 @@ export default function MyAddressPage() {
     const [addresses, setAddresses] = useState<Address[]>([])
     const [editing, setEditing] = useState<Address | null>(null)
     const [showForm, setShowForm] = useState(false)
+    const {isAuthenticated} = useAuth()
 
     useEffect(() => {
         try {
@@ -71,6 +63,10 @@ export default function MyAddressPage() {
             setAddresses(initial)
         } catch {}
     }, [])
+
+    if (!isAuthenticated) {
+        return <LoginPage />
+    }
 
     const onSave = (e: React.FormEvent) => {
         e.preventDefault()

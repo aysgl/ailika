@@ -9,26 +9,7 @@ import {
     useState
 } from 'react'
 
-export type User = {
-    name: string
-    email: string
-    image?: string
-    phone?: string
-    birthDate?: string
-    preferences?: {
-        email: boolean
-        sms: boolean
-        push: boolean
-    }
-}
-
-type AuthContextValue = {
-    user: User | null
-    isAuthenticated: boolean
-    login: (user: User) => void
-    logout: () => void
-    updateUser: (updates: Partial<User>) => void
-}
+import type {User, AuthContextValue} from '@/types'
 
 const STORAGE_KEY = 'ailika_auth_user_v1'
 

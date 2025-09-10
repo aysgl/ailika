@@ -10,7 +10,7 @@ export default function InstagramFeed() {
                 bandClass="text-secondary"
             />
             <div className="mt-6">
-                <InstagramGallery cols={4} limit={8} />
+                <InstagramGallery cols={4} limit={7} />
             </div>
         </section>
     )

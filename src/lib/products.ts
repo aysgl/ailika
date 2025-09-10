@@ -10,6 +10,34 @@ export const products: Product[] = [
         description:
             'Evde protez tırnak uygulamaya başlamak için gerekli 13 parçalık başlangıç seti. Uygun fiyat, pratik kullanım.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
+        gallery: [
+            'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
+            'https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1000&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1000&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1619220365955-4d5a2b0b2d7b?q=80&w=1000&auto=format&fit=crop'
+        ],
+        media: [
+            {
+                type: 'image',
+                url: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp'
+            },
+            {
+                type: 'video',
+                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                thumbnail:
+                    'https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1000&auto=format&fit=crop'
+            },
+            {
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=1000&auto=format&fit=crop'
+            },
+            {
+                type: 'video',
+                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                thumbnail:
+                    'https://images.unsplash.com/photo-1619220365955-4d5a2b0b2d7b?q=80&w=1000&auto=format&fit=crop'
+            }
+        ],
         colors: [
             '#fdf5e6',
             '#fffdd0',
@@ -37,11 +65,16 @@ export const products: Product[] = [
     {
         id: '1',
         name: 'Ailika Premium Kalıcı Oje 15ml',
-        slug: 'klasik-kirmizi-oje',
+        slug: 'ailika-premium-kalici-oje-15ml',
         price: 1299,
         oldPrice: 1599,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
+        gallery: [
+            'https://www.ellisan.com/wp-content/uploads/2025/04/AilikaKaliciOje-768x768.webp',
+            'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1000&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1000&auto=format&fit=crop'
+        ],
         colors: [
             '#fdf5e6',
             '#fffdd0',
@@ -61,7 +94,7 @@ export const products: Product[] = [
     {
         id: '2',
         name: 'Ailika Premium Kedigözü Oje 15ml CatEye',
-        slug: 'pastel-pembe-oje',
+        slug: 'ailika-premium-kedigozu-oje-cateye',
         price: 1199,
         oldPrice: 1499,
         description:
@@ -86,7 +119,7 @@ export const products: Product[] = [
     {
         id: '4',
         name: 'Borthe Premium Kalıcı Oje 12ml No:001',
-        slug: 'klasik-kirmizi-oje',
+        slug: 'borthe-premium-kalici-oje-001',
         price: 1299,
         description: 'Parlak bitişli, hızlı kuruyan klasik kırmızı oje.',
         image: 'https://www.ellisan.com/wp-content/uploads/2024/02/001-768x768.webp',
@@ -98,7 +131,7 @@ export const products: Product[] = [
     {
         id: '5',
         name: 'Borthe Premium Kalıcı Oje 12ml No:002',
-        slug: 'pastel-pembe-oje',
+        slug: 'borthe-premium-kalici-oje-002',
         price: 1199,
         description:
             'Yumuşak tonlarda günlük kullanım için ideal pastel pembe.',
