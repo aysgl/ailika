@@ -62,17 +62,17 @@ export default function ShopByColor() {
                 {colorCollections.map((c, i) => (
                     <div
                         key={i}
-                        className="transition text-center rounded-2xl p-1 mt-0 lg:mt-auto"
-                        style={{
-                            marginTop:
-                                window.innerWidth < 768 // 1024px altı = mobil
-                                    ? '0px'
-                                    : i === 0 || i === 4
-                                    ? '100px'
-                                    : i === 1 || i === 3
-                                    ? '50px'
-                                    : '0px'
-                        }}
+                        className={`
+        transition text-center rounded-2xl p-1 
+        mt-0       /* mobilde margin-top 0 */
+        ${
+            i === 0 || i === 4
+                ? 'lg:mt-[100px]'
+                : i === 1 || i === 3
+                ? 'lg:mt-[50px]'
+                : 'lg:mt-0'
+        }
+    `}
                         onMouseEnter={() => setHoverColor(selectedColors[i])}
                         onMouseLeave={() => setHoverColor(null)}>
                         {/* Tırnak divi */}
