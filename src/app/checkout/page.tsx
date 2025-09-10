@@ -213,7 +213,7 @@ export default function CheckoutPage() {
             <div id="iyzico-container" ref={checkoutRef} />
 
             <div className="mb-8 space-y-2">
-                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-primary/40 lg:p-12 p-4 rounded-lg">
+                <div className="flex flex-col items-center justify-center mx-auto gap-2 bg-white/40 p-12 rounded-lg">
                     <TitleWave title={'Ödeme'} bandClass="text-secondary" />
                     <Breadcrumbs
                         items={[
