@@ -5,7 +5,6 @@ import type {
     HeroSlide,
     Category,
     FAQ,
-    Coupon,
     Order,
     Review,
     ApiResponse,
@@ -16,6 +15,7 @@ import {
     getProductBySlug as localGetProductBySlug
 } from './products'
 import {heroSlides as localHeroSlides} from './heroSlides'
+import {Coupon} from '@/types/account'
 
 async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
     const url = `${API_BASE_URL}${path}`
