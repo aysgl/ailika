@@ -4,6 +4,10 @@ import ProductGrid from '@/components/ProductGrid'
 import {api} from '@/lib/api'
 import type {Product} from '@/types/product'
 
+interface PageProps {
+    params: Promise<{section: string}>
+}
+
 function mapSectionToShopSlug(section: string): {
     label: string
     category?: string
@@ -15,12 +19,9 @@ function mapSectionToShopSlug(section: string): {
     return {label: section}
 }
 
-export default async function SectionPage({
-    params
-}: {
-    params: {section: string}
-}) {
-    const {label, category} = mapSectionToShopSlug(params.section)
+export default async function SectionPage({params}: PageProps) {
+    const resolvedParams = await params
+    const {label, category} = mapSectionToShopSlug(resolvedParams.section)
     const products = (await api.listProducts()) as Product[]
     const normalized = (s: string) => s.toLocaleLowerCase('tr-TR')
     const trToAscii = (s: string) =>

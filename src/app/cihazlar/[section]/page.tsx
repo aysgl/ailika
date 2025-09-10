@@ -4,6 +4,10 @@ import ProductGrid from '@/components/ProductGrid'
 import {api} from '@/lib/api'
 import type {Product} from '@/types/product'
 
+interface PageProps {
+    params: Promise<{section: string}>
+}
+
 function mapSection(section: string): {label: string; category?: string} {
     const s = section.toLowerCase()
     if (s === 'freze-makineleri')
@@ -13,12 +17,9 @@ function mapSection(section: string): {label: string; category?: string} {
     return {label: section}
 }
 
-export default async function SectionPage({
-    params
-}: {
-    params: {section: string}
-}) {
-    const {label, category} = mapSection(params.section)
+export default async function SectionPage({params}: PageProps) {
+    const resolvedParams = await params
+    const {label, category} = mapSection(resolvedParams.section)
     const products = (await api.listProducts()) as Product[]
 
     const normalized = (s: string) => s.toLocaleLowerCase('tr-TR')
