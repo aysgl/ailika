@@ -165,13 +165,13 @@ export default function ProductPage({params}: Props) {
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent className="grid grid-cols-9 items-center gap-2">
-                                    <div className="col-span-4 flex items-center gap-2 border rounded-xl p-2">
+                                    <div className="col-span-4 flex flex-col lg:flex-row items-center gap-2 border rounded-xl p-2">
                                         <Image
                                             src={product.image || '/next.svg'}
                                             alt="Birlikte Al, 20 TL Daha Az Öde!"
                                             width={100}
                                             height={100}
-                                            className="shadow-xl rounded-xl md:w-10 md:h-10"
+                                            className="shadow-xl rounded-xl w-20 h-20"
                                         />
                                         <div>
                                             <div className="text-sm text-muted-foreground">
@@ -185,13 +185,13 @@ export default function ProductPage({params}: Props) {
                                     <div className="flex items-center justify-center gap-2 col-span-1">
                                         <Plus className="w-10 h-10 text-muted-foreground" />
                                     </div>
-                                    <div className="col-span-4 flex items-center gap-2 border rounded-xl p-2">
+                                    <div className="col-span-4 flex flex-col lg:flex-row items-center gap-2 border rounded-xl p-2">
                                         <Image
                                             src={product.image || '/next.svg'}
                                             alt="Birlikte Al, 20 TL Daha Az Öde!"
                                             width={100}
                                             height={100}
-                                            className="shadow-xl rounded-xl md:w-10 md:h-10"
+                                            className="shadow-xl rounded-xl w-20 h-20"
                                         />
                                         <div>
                                             <div className="text-sm text-muted-foreground">
