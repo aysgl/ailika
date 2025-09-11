@@ -10,10 +10,12 @@ import ShopByColor from '@/components/sections/ShopByColor'
 import PopularColor from '@/components/sections/PopularColor'
 import Blogs from '@/components/sections/Blogs'
 import {blogs} from '@/lib/blogs'
+import {DiscountBanner} from '@/components/DiscountBanner'
 
 export default function Home() {
     return (
         <>
+            <DiscountBanner />
             <HeroSlider />
             <FavoriteProducts />
             <ShopByColor />
