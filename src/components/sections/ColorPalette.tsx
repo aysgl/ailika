@@ -198,20 +198,12 @@ export default function ColorPalette() {
         <section className="min-h-screen">
             <div className="container mx-auto px-4 py-16">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-3 py-2 bg-primary/10 rounded-full mb-4">
-                        <Palette className="w-3 h-3 text-primary" />
-                        <span className="text-xs font-medium text-primary">
-                            Renk Koleksiyonu
-                        </span>
-                    </div>
                     <TitleWave
                         title="Öne Çıkan Renk Paletleri"
                         bandClass="text-primary"
+                        subtitle="Renk Koleksiyonu"
+                        description="Ürünlerimizden özenle seçilmiş renk paletlerini keşfedin ve projeleriniz için mükemmel rengi bulun."
                     />
-                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto text-balance">
-                        Ürünlerimizden özenle seçilmiş renk paletlerini keşfedin
-                        ve projeleriniz için mükemmel rengi bulun.
-                    </p>
                 </div>
 
                 <div className="relative">

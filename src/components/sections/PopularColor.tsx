@@ -84,6 +84,7 @@ export default function PopularColor() {
                     title="Popüler Renkler!"
                     headingLevel={2}
                     bandClass="text-secondary"
+                    subtitle="Popüler"
                 />
 
                 <div className="flex flex-wrap justify-center mt-6 gap-4">

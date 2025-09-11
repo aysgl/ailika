@@ -75,6 +75,7 @@ export default function ShopByColor() {
                 title="Renklere göre alışveriş yapın!"
                 headingLevel={2}
                 bandClass="text-secondary"
+                subtitle="Renkler"
             />
 
             <div className="flex flex-wrap justify-center mt-6 gap-4">

@@ -60,8 +60,10 @@ export default function Blogs({posts = []}: BlogsProps) {
             <div className="flex flex-col items-center">
                 <TitleWave
                     title="Ailika'dan Haberler"
+                    subtitle="Haberler"
                     headingLevel={2}
                     bandClass="text-secondary"
+                    description="Ailika'dan en son haberleri takip edin."
                 />
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full mt-6">
