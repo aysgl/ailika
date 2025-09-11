@@ -13,7 +13,8 @@ import {
     Star,
     Gift,
     User,
-    LogOut
+    LogOut,
+    Earth
 } from 'lucide-react'
 import {Sheet, SheetContent, SheetClose} from '@/components/ui/sheet'
 import {
@@ -43,6 +44,7 @@ import {useAuth} from '@/context/AuthContext'
 import Image from 'next/image'
 import ThemeDropdown from '../ThemeDropdown'
 import {mainNavigationItems, additionalNavigationItems} from '@/lib/navigation'
+import {usePathname} from 'next/navigation'
 
 export default function Header() {
     const {totalItems} = useCart()
@@ -51,6 +53,15 @@ export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const pathname = usePathname()
+
+    const languages = [
+        {href: '/tr', name: 'Türkçe', flag: '🇹🇷'},
+        {href: '/en', name: 'English', flag: '🇺🇸'},
+        {href: '/de', name: 'Deutsch', flag: '🇩🇪'},
+        {href: '/fr', name: 'Français', flag: '🇫🇷'},
+        {href: '/es', name: 'Español', flag: '🇪🇸'}
+    ]
 
     useEffect(() => {
         const onScroll = () => setIsScrolled(window.scrollY > 0)
@@ -234,15 +245,15 @@ export default function Header() {
                 <SheetContent
                     side="left"
                     title="Menü"
-                    className="w-full sm:w-[420px] h-[calc(100dvh-1rem)]">
-                    <Sidebar className="h-full min-h-0">
+                    className="h-screen overflow-y-auto w-[360px] md:w-[50%]">
+                    <Sidebar>
                         <SidebarHeader>
                             <div className="flex items-center justify-between w-full">
                                 <Link
                                     href="/"
                                     className="text-xl font-semibold tracking-wide">
                                     <span className="text-primary">
-                                        <Logo className="h-10 w-auto" />
+                                        <Logo className="h-8 w-auto my-3" />
                                     </span>
                                 </Link>
                                 <SheetClose asChild>
@@ -257,12 +268,33 @@ export default function Header() {
                         </SidebarHeader>
                         <SidebarContent>
                             <SidebarGroup className="pb-0">
+                                {isAuthenticated && (
+                                    <SheetClose asChild>
+                                        <Link
+                                            href="/account"
+                                            className="block mb-4 bg-primary/10 p-4 rounded-xl">
+                                            <div className="flex items-center gap-2">
+                                                <Image
+                                                    src={user?.image || ''}
+                                                    alt={user?.name || ''}
+                                                    width={24}
+                                                    height={24}
+                                                    className="rounded-full w-8 h-8 ratio-1/1 object-cover"
+                                                />
+                                                <span className="font-medium">
+                                                    Hoşgeldin {user?.name}
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </SheetClose>
+                                )}
+
                                 <Accordion type="single" collapsible>
                                     {mainNavigationItems.map(navItem => (
                                         <AccordionItem
                                             key={navItem.key}
                                             value={navItem.key}>
-                                            <AccordionTrigger className="p-0 mb-6">
+                                            <AccordionTrigger className="p-0 mb-4">
                                                 {navItem.label}
                                             </AccordionTrigger>
                                             <AccordionContent>
@@ -272,6 +304,16 @@ export default function Header() {
                                                             <div
                                                                 key={cat.title}>
                                                                 <SheetClose
+                                                                    onClick={() => {
+                                                                        if (
+                                                                            pathname ===
+                                                                            cat.href
+                                                                        ) {
+                                                                            setMobileMenuOpen(
+                                                                                false
+                                                                            ) // aynı sayfadaysa da kapat
+                                                                        }
+                                                                    }}
                                                                     asChild>
                                                                     <Link
                                                                         href={
@@ -313,8 +355,9 @@ export default function Header() {
                                     ))}
                                 </Accordion>
                             </SidebarGroup>
+
                             <SidebarGroup className="pt-0">
-                                <div className="grid grid-cols-1 gap-1">
+                                <div className="grid grid-cols-1 gap-1 mb-4">
                                     {additionalNavigationItems.map(item => (
                                         <SheetClose asChild key={item.href}>
                                             <Link
@@ -325,6 +368,31 @@ export default function Header() {
                                         </SheetClose>
                                     ))}
                                 </div>
+                                <Accordion type="single" collapsible>
+                                    <AccordionItem value="languages">
+                                        <AccordionTrigger className="p-0 mb-4">
+                                            <div className="flex items-center gap-2">
+                                                <Earth className="text-primary w-5 h-5" />
+                                                Diller
+                                            </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent>
+                                            <div className="grid grid-cols-1">
+                                                {languages.map(item => (
+                                                    <SheetClose
+                                                        asChild
+                                                        key={item.href}>
+                                                        <Link
+                                                            href={item.href}
+                                                            className="py-2 text-sm hover:underline">
+                                                            {item.name}
+                                                        </Link>
+                                                    </SheetClose>
+                                                ))}
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </Accordion>
                             </SidebarGroup>
                         </SidebarContent>
                     </Sidebar>

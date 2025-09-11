@@ -57,7 +57,7 @@ export function DiscountBanner() {
                         </p>
 
                         {/* Kupon Kodu */}
-                        <div className="flex flex-col sm:flex-row gap-4 items-center">
+                        <div className="flex flex-row gap-4 items-center justify-center">
                             <div className="px-6 py-2 rounded-lg border border-dashed border-white/70">
                                 <span className="font-mono text-2xl font-bold tracking-wider">
                                     {couponCode}
