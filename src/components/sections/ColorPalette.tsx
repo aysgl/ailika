@@ -195,12 +195,12 @@ export default function ColorPalette() {
         : undefined
 
     return (
-        <section className="min-h-screen bg-gradient-to-br from-background via-card/30 to-muted/20">
+        <section className="min-h-screen">
             <div className="container mx-auto px-4 py-16">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
-                        <Palette className="w-5 h-5 text-primary" />
-                        <span className="text-sm font-medium text-primary">
+                    <div className="inline-flex items-center gap-2 px-3 py-2 bg-primary/10 rounded-full mb-4">
+                        <Palette className="w-3 h-3 text-primary" />
+                        <span className="text-xs font-medium text-primary">
                             Renk Koleksiyonu
                         </span>
                     </div>
@@ -208,7 +208,7 @@ export default function ColorPalette() {
                         title="Öne Çıkan Renk Paletleri"
                         bandClass="text-primary"
                     />
-                    <p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto text-balance">
+                    <p className="text-muted-foreground text-lg max-w-3xl mx-auto text-balance">
                         Ürünlerimizden özenle seçilmiş renk paletlerini keşfedin
                         ve projeleriniz için mükemmel rengi bulun.
                     </p>
@@ -222,9 +222,9 @@ export default function ColorPalette() {
                                 top: `${popoverPosition.top}px`,
                                 left: `${popoverPosition.left}px`
                             }}>
-                            <Card className="relative overflow-hidden shadow-2xl border-2 border-white bg-card/95 backdrop-blur-sm py-0">
+                            <Card className="relative overflow-hidden shadow-2xl border-2 border-white backdrop-blur-sm py-0">
                                 <button
-                                    className="absolute top-3 right-3 z-10 bg-black/20 hover:bg-black/40 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center transition-all duration-200 group"
+                                    className="absolute top-3 right-3 z-10 backdrop-blur-sm rounded-full w-8 h-8 flex items-center justify-center transition-all duration-200 group"
                                     aria-label="Kapat"
                                     onClick={() => {
                                         setSelectedKey(null)
@@ -372,7 +372,6 @@ export default function ColorPalette() {
                         <Button
                             size="lg"
                             onClick={onSurprise}
-                            className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl transition-all duration-300 group"
                             disabled={filteredEntries.length === 0}>
                             <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                             Beni Şaşırt

@@ -77,7 +77,7 @@ export default function ColorSelect({
                         />
                     </div>
                     {showLabel && (
-                        <div className="text-sm text-muted-foreground">
+                        <div className="text-sm text-muted-foreground ms-2">
                             Bu ürün tek renktedir
                         </div>
                     )}
