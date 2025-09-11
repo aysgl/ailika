@@ -291,7 +291,7 @@ export default function ColorPalette() {
                                                                                 key={
                                                                                     idx
                                                                                 }
-                                                                                className="text-sm text-muted-foreground">
+                                                                                className="text-sm">
                                                                                 {
                                                                                     category
                                                                                 }
