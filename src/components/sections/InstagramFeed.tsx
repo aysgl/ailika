@@ -6,6 +6,7 @@ export default function InstagramFeed() {
         <section className="container mx-auto xl:px-0 px-2 py-12">
             <TitleWave
                 title="Instagram'da #ailika"
+                subtitle="Instagram"
                 headingLevel={2}
                 bandClass="text-secondary"
             />

@@ -33,7 +33,7 @@ export default function TrendingProducts() {
               i === bannerIndex ? (
                   <div
                       key={`banner-skeleton-${i}`}
-                      className="flex-shrink-0 w-36 h-48 mx-1 rounded-xl bg-gradient-to-r from-primary/30 to-primary/10 animate-pulse flex items-center justify-center text-white font-bold">
+                      className="w-full aspect-square rounded-xl bg-gradient-to-r from-primary/30 to-primary/10 text-white font-bold">
                       Banner
                   </div>
               ) : (
@@ -57,7 +57,7 @@ export default function TrendingProducts() {
                   acc.push(
                       <div
                           key="banner"
-                          className="flex-shrink-0 w-36 h-48 mx-1 rounded-xl bg-gradient-to-r from-primary to-primary/60 flex items-center justify-center text-white font-bold">
+                          className="aspect-square rounded-3xl bg-gradient-to-r from-primary to-primary/60 flex items-center justify-center text-white font-bold mx-1">
                           Banner Alanı
                       </div>
                   )

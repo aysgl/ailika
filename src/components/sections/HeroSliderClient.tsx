@@ -6,6 +6,7 @@ import {Button} from '../ui/button'
 import {ArrowLeft, ArrowRight} from 'lucide-react'
 import type {HeroSlide} from '../../types/hero'
 import WavyTextBanner from '../WavyTextBanner'
+import {BestsellerBadge} from '../BestsellerBadge'
 
 export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
     const [index, setIndex] = useState(0)
@@ -119,16 +120,8 @@ export default function HeroSliderClient({slides}: {slides: HeroSlide[]}) {
                                 </div>
 
                                 {current.badgeImage && (
-                                    <div className="mt-18 absolute top-2 right-2 w-20 h-20 rounded-full flex items-center justify-center bg-white/40 backdrop-blur-sm">
-                                        <div className="text-center">
-                                            <Image
-                                                src={current.badgeImage}
-                                                alt="Badge"
-                                                width={120}
-                                                height={120}
-                                                className="object-contain"
-                                            />
-                                        </div>
+                                    <div className="mt-18 absolute top-2 right-2">
+                                        <BestsellerBadge />
                                     </div>
                                 )}
                             </div>
