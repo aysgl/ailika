@@ -365,7 +365,6 @@ export default function ColorPalette() {
                             size="lg"
                             onClick={onSurprise}
                             disabled={filteredEntries.length === 0}>
-                            <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                             Beni Şaşırt
                             <Shuffle className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" />
                         </Button>

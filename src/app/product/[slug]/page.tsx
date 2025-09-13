@@ -33,6 +33,7 @@ import ReviewForm from '@/components/ReviewForm'
 import RelatedProducts from '@/components/sections/RelatedProducts'
 import {Badge} from '@/components/ui/badge'
 import CouponCard from '@/components/CouponCard'
+import {QuantityOptions} from '@/components/QuantityOptions'
 
 type Props = {params: Promise<{slug: string}>}
 
@@ -356,6 +357,24 @@ export default function ProductPage({params}: Props) {
                                 <span>Favorilerime Ekle</span>
                             </Button>
                         </div>
+
+                        <Card className="bg-primary/10 shadow-none">
+                            <CardHeader>
+                                <CardTitle>Kurumsal Müşterilere Özel</CardTitle>
+                            </CardHeader>
+                            <CardContent className="pb-0">
+                                <QuantityOptions
+                                    value={quantity}
+                                    onChange={val => {
+                                        if (cartItem) {
+                                            updateQuantity(product.id, val)
+                                        } else {
+                                            addToCart(product.id, val)
+                                        }
+                                    }}
+                                />
+                            </CardContent>
+                        </Card>
 
                         <Card className="shadow-none border border-primary/20 bg-transparent py-0">
                             <div className="grid grid-cols-2 text-muted-foreground border-b border-primary/20 mb-4 p-4 gap-4">
